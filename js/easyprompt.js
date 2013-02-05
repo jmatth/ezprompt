@@ -1,6 +1,13 @@
 function add_prompt_element ()
 {
 	selected_option = $("#elements-available").children(".ui-selected").text().trim();
+
+	//Make sure we actually have something to add
+	if(!selected_option)
+	{
+		return;
+	}
+
 	$("#elements").children("ul").append(generate_element(selected_option));
 	toggle_list_selectable($("#reorderable").is(":checked"));
 }
