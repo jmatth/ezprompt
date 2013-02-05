@@ -1,0 +1,82 @@
+body {
+	background-color: #222;
+	color: white;
+}
+
+div.main_section {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #555;
+	border-radius: 5px;
+	min-height: 60px;
+}
+
+div#controls {
+}
+
+span.prompt_option {
+	font-size: 26;
+	display: inline-block;
+	cursor: pointer;
+	color: white;
+	background-color: #666;
+	border-radius: 7px;
+	padding: 2px 5px 2px 5px;
+}
+
+div#controls button {
+	float: left;
+}
+
+ul#elements_list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul#elements_list li {
+	background: transparent;
+	position: relative;
+	line-height: 57px;
+	margin: 3px 3px 3px 0;
+	padding: 1px;
+	float: left;
+	width: auto;
+	height: 40px;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+div.handle {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 18px;
+	margin-left: -2px;
+	margin-top: -2px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-width: 1px;
+	border-color: #555;
+	background-color: rgb(106, 143, 61);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+li.element-preview {
+	border-width: 0px;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
+
+li.element-preview div.handle {
+	display: none;
+}
+
+ul#elements_list li span {
+	position: absolute;
+	width: 100%;
+	bottom: 2px;
+	left: 0px
+}

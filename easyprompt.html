@@ -1,0 +1,58 @@
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<title>Easy Zsh and Bash Promt Generator</title>
+
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/custom-theme/jquery-ui-1.10.0.custom.css" />
+
+	<!-- jquery base, jquery ui, custom javascritp -->	
+	<script src="js/jquery-1.9.0.js"></script>
+	<script src="js/jquery-ui-1.10.0.custom.js"></script>
+	<script src="js/easyprompt.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+	<div class="main_section" id="elements_available">
+		<span class="prompt_option"
+			id="option_username">
+			Username
+			
+		</span>
+
+		<span class="prompt_option"
+			id="option_hostname">
+			Hostname
+		</span>
+
+		<span class="prompt_option"
+			id="option_absolutepath">
+			Absolute Path
+		</span>
+
+		<br />
+
+		<button type="button" style="display:block;" onclick="add_prompt_element()">Add Element</button>
+	</div>
+
+	<br />
+
+	<div class="main_section" id="elements">
+		<ul class="sortable" id="elements_list">
+		<li class="ui-state-default">Item 1</li>
+		<li class="ui-state-default">Item 2</li>
+		<li class="ui-state-default">Item 3</li>
+		<li class="ui-state-default">Item 4</li>
+		<li class="ui-state-default">Item 5</li>
+		<li class="ui-state-default">Item 6</li>
+		<li class="ui-state-default">Bigger line here</li>
+		</ul>
+	</div>
+
+	<br />
+
+	<div class="main_section" id="preview">
+		preview here
+	</div>
+</body>
