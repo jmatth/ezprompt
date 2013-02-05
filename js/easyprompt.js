@@ -1,8 +1,8 @@
 function add_prompt_element ()
 {
-	selected_option = $(".prompt_option_selected").text().trim();
-	alert(selected_option);
-	$("#elements").append(generate_element(selected_option));
+	selected_option = $("#elements_available").children(".ui-selected").text().trim();
+	$("#elements").children("ul").append(generate_element(selected_option));
+	make_list_selectable();
 }
 
 function change_option_selection(option_id)
@@ -13,8 +13,33 @@ function change_option_selection(option_id)
 
 function generate_element(option_name)
 {
-	return "<span class=\"prompt_element\">x <span class=\"element_internal\">"+
-		option_name + "</span>";
+	return "<li class=\"ui-state-default\">" + option_name + "</li>";
+}
+
+function make_list_selectable()
+{
+	//FIXME: probably a more effecient way to do this
+	try{
+		$("#elements_list")
+		.sortable("destroy")
+		.selectable("destroy")
+		.children("li")
+		.children(".handle")
+		.remove();
+	}catch(err){}
+
+	$("#elements_list")
+	.sortable({ handle: ".handle" })
+	.selectable()
+	.find("li")
+	.addClass("ui-corner-all")
+	.prepend("<div class='handle'><span class='ui-icon ui-icon-carat-2-e-w'></span></div>");
+}
+
+function make_available_selectable()
+{
+	$("#elements_available")
+	.selectable()
 }
 
 function reset_page()
@@ -22,18 +47,8 @@ function reset_page()
 	alert("DERP");
 }
 
-//Create sortable handles on load.
-$(function() {
-	$("#elements_list")
-	.sortable({ handle: ".handle" })
-	.selectable()
-	.find("li")
-	.addClass("ui-corner-all")
-	.prepend("<div class='handle'><span class='ui-icon ui-icon-carat-2-e-w'></span></div>");
-});
-
-//Make the element options selectable
-$(function() {
-	$("#controls")
-	.selectable()
+$(document).ready(function()
+{
+	make_list_selectable();
+	make_available_selectable();
 });
