@@ -1,44 +1,54 @@
 function add_prompt_element ()
 {
-	selected_option = $("#elements_available").children(".ui-selected").text().trim();
+	selected_option = $("#elements-available").children(".ui-selected").text().trim();
 	$("#elements").children("ul").append(generate_element(selected_option));
-	make_list_selectable();
+	toggle_list_selectable($("#reorderable").is(":checked"));
 }
 
 function change_option_selection(option_id)
 {
-	$(".prompt_option_selected").removeClass("prompt_option_selected");
-	$("#" + option_id).addClass("prompt_option_selected");
+	$(".prompt-option-selected").removeClass("prompt-option-selected");
+	$("#" + option_id).addClass("prompt-option-selected");
+}
+
+function toggle_reorderable(toggle)
+{
+		toggle_list_selectable(toggle);
 }
 
 function generate_element(option_name)
 {
-	return "<li class=\"ui-state-default\">" + option_name + "</li>";
+	return "<li class=\"ui-state-default border-hidden\">" + option_name + "</li>";
 }
 
-function make_list_selectable()
+function toggle_list_selectable(selectable)
 {
 	//FIXME: probably a more effecient way to do this
 	try{
-		$("#elements_list")
+		$("#elements-list")
 		.sortable("destroy")
 		.selectable("destroy")
 		.children("li")
+		.addClass("border-hidden")
 		.children(".handle")
 		.remove();
 	}catch(err){}
 
-	$("#elements_list")
-	.sortable({ handle: ".handle" })
-	.selectable()
-	.find("li")
-	.addClass("ui-corner-all")
-	.prepend("<div class='handle'><span class='ui-icon ui-icon-carat-2-e-w'></span></div>");
+	if (selectable)
+	{
+		$("#elements-list")
+		.sortable({ handle: ".handle" })
+		.selectable()
+		.find("li")
+		.addClass("ui-corner-all")
+		.removeClass("border-hidden")
+		.prepend("<div class='handle'><span class='ui-icon ui-icon-carat-2-e-w'></span></div>");
+	}
 }
 
 function make_available_selectable()
 {
-	$("#elements_available")
+	$("#elements-available")
 	.selectable()
 }
 
@@ -49,6 +59,6 @@ function reset_page()
 
 $(document).ready(function()
 {
-	make_list_selectable();
+	toggle_list_selectable(false);
 	make_available_selectable();
 });
