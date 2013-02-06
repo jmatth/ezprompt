@@ -13,8 +13,13 @@ div.main-section {
 	margin: 10px 0px 0px 10px;
 }
 
+div.left-section{
+	width: 50%;
+	float: left;
+}
+
 div.row {
-	width: 900px;
+	width: 1200px;
 	min-height: 100px;
 	margin-left: auto;
 	margin-right: auto;
@@ -26,16 +31,6 @@ div.swatches {
 	margin: 10px 10px 10px 75px;
 }
 
-div#elements-available {
-	width: 50%;
-	float: left;
-}
-
-div#elements{
-	min-width: 50%;
-	float: left;
-}
-
 div#swatches-fg {
 }
 
@@ -45,14 +40,19 @@ li.border-hidden {
 	margin-right: 0 !important;
 }
 
-span.prompt-option {
+li.prompt-option {
 	font-size: 26;
 	display: inline-block;
 	cursor: pointer;
 	color: white;
 	background-color: #666;
 	border-radius: 7px;
-	padding: 2px 5px 2px 5px;
+	padding: 2px 10px 2px 10px;
+	margin: 5px;
+}
+
+li.prompt-option.ui-selected {
+	background-color: rgb(78, 109, 63);
 }
 
 div#elements-available button {

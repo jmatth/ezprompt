@@ -15,22 +15,28 @@
 
 <body>
 	<div class="row">
-		<div class="main-section" id="elements-available">
-			<span class="prompt-option"
-				id="option-username">
-				Username
+		<div class="main-section left-section">
+			<ul id="elements-available">
+				<li class="prompt-option" id="option-username">
+					Username 
+				</li>
 
-			</span>
+				<li class="prompt-option" id="option-hostname">
+					Hostname
+				</li>
 
-			<span class="prompt-option"
-				id="option-hostname">
-				Hostname
-			</span>
+				<li class="prompt-option" id="option-absolutepath">
+					Absolute Path
+				</li>
 
-			<span class="prompt-option"
-				id="option-absolutepath">
-				Absolute Path
-			</span>
+				<li class="prompt-option" id="option-abbreviatedpath">
+					Abbreviated Path
+				</li>
+
+				<li class="prompt-option" id="option-currentdirectory">
+					Current Directory
+				</li>
+			</ul>
 
 			<br />
 
@@ -41,13 +47,15 @@
 		</div>
 	</div>
 
+	<br />
+
 	<div class="row">
 
 		<span style="margin-left: 10px">Reorder: <input type="checkbox" id="reorderable" onclick="toggle_reorderable(this.checked)"/></span>
 
 		<br />
 
-		<div class="main-section" id="elements">
+		<div class="main-section left-section" id="elements">
 			<ul class="sortable" id="elements-list">
 			</ul>
 		</div>
@@ -55,6 +63,8 @@
 		<div class="main-section swatches" id="swatches-bg">
 		</div>
 	</div>
+
+	<br />
 
 	<div class="row">
 		<div class="main-section" id="preview">
