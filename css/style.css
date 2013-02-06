@@ -9,6 +9,34 @@ div.main-section {
 	border-color: #555;
 	border-radius: 5px;
 	min-height: 60px;
+	float: left;
+	margin: 10px 0px 0px 10px;
+}
+
+div.row {
+	width: 900px;
+	min-height: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.swatches {
+	width: 250px;
+	float: left;
+	margin: 10px 10px 10px 75px;
+}
+
+div#elements-available {
+	width: 50%;
+	float: left;
+}
+
+div#elements{
+	min-width: 50%;
+	float: left;
+}
+
+div#swatches-fg {
 }
 
 li.border-hidden {

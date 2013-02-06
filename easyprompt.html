@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="css/custom-theme/jquery-ui-1.10.0.custom.css" />
 
-	<!-- jquery base, jquery ui, custom javascritp -->	
+	<!-- jquery base, jquery ui, custom javascritp -->
 	<script src="js/jquery-1.9.0.js"></script>
 	<script src="js/jquery-ui-1.10.0.custom.js"></script>
 	<script src="js/easyprompt.js" type="text/javascript" charset="utf-8"></script>
@@ -14,39 +14,51 @@
 </head>
 
 <body>
-	<div class="main-section" id="elements-available">
-		<span class="prompt-option"
-			id="option-username">
-			Username
-			
-		</span>
+	<div class="row">
+		<div class="main-section" id="elements-available">
+			<span class="prompt-option"
+				id="option-username">
+				Username
 
-		<span class="prompt-option"
-			id="option-hostname">
-			Hostname
-		</span>
+			</span>
 
-		<span class="prompt-option"
-			id="option-absolutepath">
-			Absolute Path
-		</span>
+			<span class="prompt-option"
+				id="option-hostname">
+				Hostname
+			</span>
+
+			<span class="prompt-option"
+				id="option-absolutepath">
+				Absolute Path
+			</span>
+
+			<br />
+
+			<button type="button" style="display:block;" onclick="add_prompt_element()">Add Element</button>
+		</div>
+
+		<div class="main-section swatches" id="swatches-fg">
+		</div>
+	</div>
+
+	<div class="row">
+
+		<span style="margin-left: 10px">Reorder: <input type="checkbox" id="reorderable" onclick="toggle_reorderable(this.checked)"/></span>
 
 		<br />
 
-		<button type="button" style="display:block;" onclick="add_prompt_element()">Add Element</button>
+		<div class="main-section" id="elements">
+			<ul class="sortable" id="elements-list">
+			</ul>
+		</div>
+
+		<div class="main-section swatches" id="swatches-bg">
+		</div>
 	</div>
 
-	<br />
-
-	Reorder: <input type="checkbox" id="reorderable" onclick="toggle_reorderable(this.checked)"/>
-	<div class="main-section" id="elements">
-		<ul class="sortable" id="elements-list">
-		</ul>
-	</div>
-
-	<br />
-
-	<div class="main-section" id="preview">
-		preview here
+	<div class="row">
+		<div class="main-section" id="preview">
+			preview here
+		</div>
 	</div>
 </body>
