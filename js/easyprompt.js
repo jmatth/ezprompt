@@ -82,6 +82,25 @@ function make_available_selectable()
 	.selectable()
 }
 
+function create_palette(container_id)
+{
+	disabled = true;
+
+	palette = [
+		'black', 'white', 'red', 'green', 'blue', 'yellow', 'magenta', 'cyan'
+		];
+
+	$('#'+container_id).spectrum({
+		showPaletteOnly: true,
+		showPalette: true,
+		color: 'blanchedalmond',
+		palette: palette,
+		disabled: true,
+		flat: true,
+		move: function(color) { change_prompt_fg(color.toHexString()); }
+	});
+}
+
 function reset_page()
 {
 	alert("DERP");
@@ -91,4 +110,5 @@ $(document).ready(function()
 {
 	toggle_list_selectable(false);
 	make_available_selectable();
+	create_palette("swatches-fg");
 });

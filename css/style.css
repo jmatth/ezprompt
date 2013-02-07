@@ -25,9 +25,14 @@ div.row {
 	margin-right: auto;
 }
 
-div.swatches {
-	width: 250px;
+div.right-section {
 	float: left;
+	margin: 10px 10px 10px 75px;
+}
+
+div.swatches {
+	float: left;
+	border-width: 0px;
 	margin: 10px 10px 10px 75px;
 }
 
@@ -45,6 +50,10 @@ li.prompt-option {
 	cursor: pointer;
 	padding: 2px 10px 2px 10px;
 	margin: 5px;
+}
+
+ul.ui-selectable li.ui-selected {
+	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
 }
 
 li.prompt-option.ui-selected {
