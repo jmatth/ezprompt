@@ -4,41 +4,46 @@
 	<title>Easy Zsh and Bash Promt Generator</title>
 
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/spectrum.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="css/custom-theme/jquery-ui-1.10.0.custom.css" />
 
 	<!-- jquery base, jquery ui, custom javascritp -->
 	<script src="js/jquery-1.9.0.js"></script>
 	<script src="js/jquery-ui-1.10.0.custom.js"></script>
+	<script src="js/spectrum-min.js"></script>
 	<script src="js/easyprompt.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
 
 <body>
 	<div class="row">
-		<div class="main-section left-section">
-			<ul id="elements-available">
-				<li class="prompt-option" id="option-username">
-					Username 
-				</li>
-
-				<li class="prompt-option" id="option-hostname">
-					Hostname
-				</li>
-
-				<li class="prompt-option" id="option-absolutepath">
-					Absolute Path
-				</li>
-
-				<li class="prompt-option" id="option-abbreviatedpath">
-					Abbreviated Path
-				</li>
-
-				<li class="prompt-option" id="option-currentdirectory">
-					Current Directory
-				</li>
+		<div class="main-section left-section" id="elements-options">
+			<ul id="elements-options-tabs">
+				<li><a href="#elements-tab-basic">Basic Elements</a></li>
+				<li><a href="#elements-tab-advanced">Advanced Elements</a></li>
 			</ul>
 
-			<br />
+			<div id="elements-tab-basic">
+				<ul id="elements-basic">
+					<li class="ui-state-default prompt-option" id="option-username">Username</li>
+
+					<li class="ui-state-default prompt-option" id="option-hostname">Hostname</li>
+
+					<li class="ui-state-default prompt-option" id="option-absolutepath">Absolute Path</li>
+
+					<li class="ui-state-default prompt-option" id="option-abbreviatedpath">Abbreviated Path</li>
+
+					<li class="ui-state-default prompt-option" id="option-currentdirectory">Current Directory</li>
+				</ul>
+			</div>
+
+			<div id="elements-tab-advanced">
+				<ul id="elements-advanced">
+					<li class="ui-state-default prompt-option" id="option-git">Git Info</li>
+				</ul>
+			</div>
+
+				<br />
 
 			<button type="button" style="display:block;" onclick="add_prompt_element()">Add Element</button>
 		</div>

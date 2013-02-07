@@ -1,6 +1,9 @@
 function add_prompt_element ()
 {
-	selected_option = $("#elements-available").children(".ui-selected").text().trim();
+	selected_option = $("#elements-options")
+	.children('div[aria-expanded="true"]')
+	.children('ul')
+	.children(".ui-selected").attr("id");
 
 	//Make sure we actually have something to add
 	if(!selected_option)
@@ -25,7 +28,23 @@ function toggle_reorderable(toggle)
 
 function generate_element(option_name)
 {
-	return "<li class=\"ui-state-default border-hidden\">" + option_name + "</li>";
+	preview_text = {
+		'option-username': 'user',
+		'option-hostname': 'host',
+		'option-fqdn': 'host.domain.com',
+		'option-absolutepath': '/home/user/dir',
+		'option-abbreviatedpath': '~/dir',
+		'option-currentdirectory': 'dir'
+	}
+
+	if(!preview_text.hasOwnProperty(option_name))
+	{
+		console.log("Option " + option_name + " not found.");
+		return;
+	}
+	
+	return "<li class=\"ui-state-default border-hidden\" element_id=\"" + option_name + "\">" + preview_text[option_name] + "</li>";
+
 }
 
 function toggle_list_selectable(selectable)
@@ -55,7 +74,11 @@ function toggle_list_selectable(selectable)
 
 function make_available_selectable()
 {
-	$("#elements-available")
+	$("#elements-options")
+	.tabs();
+	$("#elements-basic")
+	.selectable()
+	$("#elements-advanced")
 	.selectable()
 }
 

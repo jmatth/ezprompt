@@ -41,12 +41,8 @@ li.border-hidden {
 }
 
 li.prompt-option {
-	font-size: 20;
 	display: inline-block;
 	cursor: pointer;
-	color: white;
-	background-color: #666;
-	border-radius: 7px;
 	padding: 2px 10px 2px 10px;
 	margin: 5px;
 }
