@@ -105,18 +105,9 @@ function change_prompt_fg(hex_color, attribute)
 	} catch (e){}
 }
 
-function create_palette(container_id, attribute)
-{
-	disabled = true;
-
-	palette = [ 'black', 'white', 'red', 'green', 'blue', 'yellow', 'magenta', 'cyan' ];
-
-	$('#'+container_id).spectrum({
-		showPaletteOnly: true,
-		showPalette: true,
-		palette: palette,
-		flat: true,
-		move: function(color) { change_prompt_fg(color.toHexString(), attribute); }
+function make_spectrum(element_id) {
+	$(element_id).spectrum({
+		color: "#F00",
 	});
 }
 
@@ -129,6 +120,7 @@ $(document).ready(function()
 {
 	make_list_sortable();
 	make_available_selectable();
-	create_palette("swatches-fg", 'fg');
-	create_palette("swatches-bg", 'bg');
+
+	make_spectrum("#input-spectrum-fg");
+	make_spectrum("#input-spectrum-bg");
 });

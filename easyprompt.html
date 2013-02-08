@@ -16,14 +16,14 @@
 </head>
 
 <body>
-	<div class="row">
+	<div class="main-container">
 		<div class="main-section left-section" id="elements-options">
 			<ul id="elements-options-tabs">
 				<li><a href="#elements-tab-basic">Basic Elements</a></li>
 				<li><a href="#elements-tab-advanced">Advanced Elements</a></li>
 			</ul>
 
-			<div id="elements-tab-basic">
+			<div class="elements-tab" id="elements-tab-basic">
 				<ul id="elements-basic">
 					<li class="ui-state-default prompt-option" id="option-username">Username</li>
 
@@ -37,44 +37,37 @@
 				</ul>
 			</div>
 
-			<div id="elements-tab-advanced">
+			<div class="elements-tab" id="elements-tab-advanced">
 				<ul id="elements-advanced">
 					<li class="ui-state-default prompt-option" id="option-git">Git Info</li>
 				</ul>
 			</div>
 
-			<br />
-
-			<button type="button" style="display:block;" onclick="add_prompt_element()">Add Element</button>
+			<button type="button" id="button-add-element" onclick="add_prompt_element()">Add Element</button>
 
 		</div>
 
-		<div class="main-section right-section swatches">
-			<div id="swatches-fg">
+
+		<div class="main-section left-section" id="elements-sortable">
+
+			<div id="container-spectrum-fg">
+				<input type="text" id="input-spectrum-fg"/> FG
 			</div>
-			<br />
-			<div id="swatches-bg">
+
+			<div id="container-spectrum-bg">
+				<input type="text" id="input-spectrum-bg"/> BG
 			</div>
+
+			<ul class="sortable" id="elements-list">
+			</ul>
+
 		</div>
-	</div>
-
-	<br />
-
-	<div class="row">
 
 		<br />
 
-		<div class="main-section left-section" id="elements-sortable">
-			<ul class="sortable" id="elements-list">
-			</ul>
-		</div>
-
-	</div>
-
-	<br />
-
-	<div class="row">
-		<div class="main-section left-section" id="preview" style="background: black;">
+		<div class="row">
+			<div class="main-section left-section" id="preview" style="background: black;">
+			</div>
 		</div>
 	</div>
 </body>
