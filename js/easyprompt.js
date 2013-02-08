@@ -1,9 +1,13 @@
 function add_prompt_element ()
 {
+	// get the id
 	selected_option = $("#elements-options")
 	.children('div[aria-expanded="true"]')
 	.children('ul')
-	.children(".ui-selected").attr("id");
+	.children(".single-selected").attr("id");
+
+	//append a copy to the list
+	$("#"+selected_option).clone().removeClass("single-selected").appendTo("#elements-list");
 
 	//Make sure we actually have something to add
 	if(!selected_option)
@@ -11,19 +15,15 @@ function add_prompt_element ()
 		return;
 	}
 
-	$("#elements").children("ul").append(generate_element(selected_option));
-	toggle_list_selectable($("#reorderable").is(":checked"));
+	//$("#elements").children("ul").append(generate_element(selected_option));
+	make_list_sortable();
+	generate_preview();
 }
 
 function change_option_selection(option_id)
 {
 	$(".prompt-option-selected").removeClass("prompt-option-selected");
 	$("#" + option_id).addClass("prompt-option-selected");
-}
-
-function toggle_reorderable(toggle)
-{
-		toggle_list_selectable(toggle);
 }
 
 function generate_element(option_name)
@@ -40,64 +40,83 @@ function generate_element(option_name)
 	if(!preview_text.hasOwnProperty(option_name))
 	{
 		console.log("Option " + option_name + " not found.");
-		return;
+		return false;
 	}
 	
-	return "<li class=\"ui-state-default border-hidden\" element_id=\"" + option_name + "\">" + preview_text[option_name] + "</li>";
+	return '<li class="ui-state-default border-hidden" element_id="' + option_name + '">' +
+		'<span class="preview-text">' + preview_text[option_name] + '</span></li>';
 
 }
 
-function toggle_list_selectable(selectable)
+function make_list_sortable()
 {
 	//FIXME: probably a more effecient way to do this
 	try{
 		$("#elements-list")
 		.sortable("destroy")
-		.selectable("destroy")
-		.children("li")
-		.addClass("border-hidden")
-		.children(".handle")
-		.remove();
 	}catch(err){}
 
-	if (selectable)
-	{
-		$("#elements-list")
-		.sortable({ handle: ".handle" })
-		.selectable()
-		.find("li")
-		.addClass("ui-corner-all")
-		.removeClass("border-hidden")
-		.prepend("<div class='handle'><span class='ui-icon ui-icon-carat-2-e-w'></span></div>");
-	}
+	$("#elements-list")
+	.sortable({delay: 300})
+	.children("li")
+	.off("click.single-select")
+	.on("click.single-select", function(){
+		if ($(this).hasClass("single-selected"))
+		{
+			$(this).removeClass('single-selected').siblings().removeClass('single-selected');
+		}
+		else
+		{
+			$(this).addClass('single-selected').siblings().removeClass('single-selected');
+		}
+	});
 }
 
+//make the available prompt opttions selectable one at a time.
+//also use tabs to divide the sections.
 function make_available_selectable()
 {
-	$("#elements-options")
-	.tabs();
-	$("#elements-basic")
-	.selectable()
-	$("#elements-advanced")
-	.selectable()
+	$("#elements-options").tabs();
+
+	$("li.prompt-option").click(function(){
+		$(this).addClass('single-selected').siblings().removeClass('single-selected');
+	});
 }
 
-function create_palette(container_id)
+function change_prompt_fg(hex_color, attribute)
+{
+	try
+	{
+		if (attribute == 'fg')
+		{
+			$("#elements")
+			.children(".ui-sortable")
+			.children(".single-selected")
+			.css("color", hex_color);
+		}
+		else
+		{
+			$("#elements")
+			.children(".ui-sortable")
+			.children(".single-selected")
+			.children("span")
+			.css("background-color", hex_color);
+		}
+	} catch (e){}
+}
+
+function create_palette(container_id, attribute)
 {
 	disabled = true;
 
-	palette = [
-		'black', 'white', 'red', 'green', 'blue', 'yellow', 'magenta', 'cyan'
-		];
+	palette = [ 'black', 'white', 'red', 'green', 'blue', 'yellow', 'magenta', 'cyan' ];
 
 	$('#'+container_id).spectrum({
 		showPaletteOnly: true,
 		showPalette: true,
-		color: 'blanchedalmond',
 		palette: palette,
-		disabled: true,
 		flat: true,
-		move: function(color) { change_prompt_fg(color.toHexString()); }
+		move: function(color) { change_prompt_fg(color.toHexString(), attribute); }
 	});
 }
 
@@ -108,7 +127,8 @@ function reset_page()
 
 $(document).ready(function()
 {
-	toggle_list_selectable(false);
+	make_list_sortable();
 	make_available_selectable();
-	create_palette("swatches-fg");
+	create_palette("swatches-fg", 'fg');
+	create_palette("swatches-bg", 'bg');
 });

@@ -5,7 +5,7 @@
 
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="css/spectrum.css" type="text/css" media="all" />
-	<link rel="stylesheet" href="css/custom-theme/jquery-ui-1.10.0.custom.css" />
+	<link rel="stylesheet" href="css/start/jquery-ui-1.10.0.custom.css" />
 
 	<!-- jquery base, jquery ui, custom javascritp -->
 	<script src="js/jquery-1.9.0.js"></script>
@@ -43,14 +43,17 @@
 				</ul>
 			</div>
 
-				<br />
+			<br />
 
 			<button type="button" style="display:block;" onclick="add_prompt_element()">Add Element</button>
+
 		</div>
 
 		<div class="main-section right-section swatches">
 			<div id="swatches-fg">
-
+			</div>
+			<br />
+			<div id="swatches-bg">
 			</div>
 		</div>
 	</div>
@@ -59,24 +62,19 @@
 
 	<div class="row">
 
-		<span style="margin-left: 10px">Reorder: <input type="checkbox" id="reorderable" onclick="toggle_reorderable(this.checked)"/></span>
-
 		<br />
 
-		<div class="main-section left-section" id="elements">
+		<div class="main-section left-section" id="elements-sortable">
 			<ul class="sortable" id="elements-list">
 			</ul>
 		</div>
 
-		<div class="main-section swatches" id="swatches-bg">
-		</div>
 	</div>
 
 	<br />
 
 	<div class="row">
-		<div class="main-section" id="preview">
-			preview here
+		<div class="main-section left-section" id="preview" style="background: black;">
 		</div>
 	</div>
 </body>
