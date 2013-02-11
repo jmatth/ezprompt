@@ -1,3 +1,12 @@
+preview_text = {
+	'option-username': 'user',
+	'option-hostname': 'host',
+	'option-fqdn': 'host.domain.com',
+	'option-absolutepath': '/home/user/dir',
+	'option-abbreviatedpath': '~/dir',
+	'option-currentdirectory': 'dir'
+}
+
 function add_prompt_element ()
 {
 	// get the id
@@ -7,7 +16,10 @@ function add_prompt_element ()
 	.children(".single-selected").attr("id");
 
 	//append a copy to the list
-	$("#"+selected_option).clone().removeClass("single-selected").appendTo("#elements-list");
+	$("#"+selected_option)
+	.clone()
+	.removeClass("single-selected")
+	.appendTo("#elements-list");
 
 	//Make sure we actually have something to add
 	if(!selected_option)
@@ -17,7 +29,7 @@ function add_prompt_element ()
 
 	//$("#elements").children("ul").append(generate_element(selected_option));
 	make_list_sortable();
-	generate_preview();
+	refresh_preview();
 }
 
 function change_option_selection(option_id)
@@ -28,22 +40,15 @@ function change_option_selection(option_id)
 
 function generate_element(option_name)
 {
-	preview_text = {
-		'option-username': 'user',
-		'option-hostname': 'host',
-		'option-fqdn': 'host.domain.com',
-		'option-absolutepath': '/home/user/dir',
-		'option-abbreviatedpath': '~/dir',
-		'option-currentdirectory': 'dir'
-	}
-
 	if(!preview_text.hasOwnProperty(option_name))
 	{
 		console.log("Option " + option_name + " not found.");
 		return false;
 	}
+
+	console.log(option_name);
 	
-	return '<li class="ui-state-default border-hidden" element_id="' + option_name + '">' +
+	return '<li class="element-preview" element_id="' + option_name + '">' +
 		'<span class="preview-text">' + preview_text[option_name] + '</span></li>';
 
 }
@@ -57,7 +62,7 @@ function make_list_sortable()
 	}catch(err){}
 
 	$("#elements-list")
-	.sortable({delay: 300})
+	.sortable({delay: 300, update: function(){refresh_preview()}})
 	.children("li")
 	.off("click.single-select")
 	.on("click.single-select", function(){
@@ -103,6 +108,14 @@ function change_prompt_fg(hex_color, attribute)
 			.css("background-color", hex_color);
 		}
 	} catch (e){}
+}
+
+function refresh_preview()
+{
+	$("#preview-list").empty();
+	$("#elements-list").children("li").each(function(index) {
+		$("#preview-list").append(generate_element($(this).attr("id")));
+	});
 }
 
 function make_spectrum(element_id) {

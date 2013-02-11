@@ -11,12 +11,10 @@ div.main-container {
 }
 
 div#elements-options {
-	width: 800px;
 }
 
 div#elements-sortable {
-	width: 800px;
-	height: 135px;
+	height: 60px;
 	position: relative;
 	margin-top: 20px;
 }
@@ -71,7 +69,7 @@ div.main-section {
 }
 
 div.left-section{
-	width: 50%;
+	width: 800px;
 	float: left;
 }
 
@@ -138,7 +136,12 @@ ul#elements-list li.single-selected span{
 	box-shadow: 0px -5px 2px grey;
 }
 
+ul#preview-list {
+	list-style: none;
+}
+
 li.element-preview {
+	display: inline;
 	border-width: 0px;
 	margin-left: 0px !important;
 	margin-right: 0px !important;
