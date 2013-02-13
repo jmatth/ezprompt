@@ -200,6 +200,7 @@ function activate_buttons()
 
 		if (succ_fist || succ_second)
 		{
+			match_spectrums(null);
 			refresh_preview();
 		}
 	});
@@ -213,6 +214,7 @@ function activate_buttons()
 
 		if(succ)
 		{
+			match_spectrums(null);
 			refresh_preview();
 		}
 	});
@@ -228,6 +230,7 @@ function activate_buttons()
 
 		if (succ_fist || succ_second)
 		{
+			match_spectrums(null);
 			refresh_preview();
 		}
 	});
@@ -240,6 +243,7 @@ function activate_buttons()
 
 		if(succ)
 		{
+			match_spectrums(null);
 			refresh_preview();
 		}
 	});
