@@ -38,7 +38,7 @@ function change_option_selection(option_id)
 	$("#" + option_id).addClass("prompt-option-selected");
 }
 
-function generate_element(option_name)
+function generate_element(option_name, color_fg, color_bg)
 {
 	if(!preview_text.hasOwnProperty(option_name))
 	{
@@ -46,10 +46,12 @@ function generate_element(option_name)
 		return false;
 	}
 
-	console.log(option_name);
-	
-	return '<li class="element-preview" element_id="' + option_name + '">' +
-		'<span class="preview-text">' + preview_text[option_name] + '</span></li>';
+	return '<li class="element-preview" element_id="' +
+		option_name + '">' + '<span class="preview-text" style="' +
+		(typeof(color_fg) === 'undefined' ? '' : 'color:' + color_fg + ';') + 
+		(typeof(color_bg) === 'undefined' ? '' : 'background-color:' + color_bg + ';') + 
+		'">' +
+		preview_text[option_name] + '</span></li>';
 
 }
 
@@ -114,14 +116,40 @@ function refresh_preview()
 {
 	$("#preview-list").empty();
 	$("#elements-list").children("li").each(function(index) {
-		$("#preview-list").append(generate_element($(this).attr("id")));
+		$("#preview-list").append(generate_element(
+				$(this).attr("id"),
+				$(this).attr("option-fg"),
+				$(this).attr("option-bg")));
 	});
 }
 
 function make_spectrum(element_id) {
+
+	var element_suffix = element_id.split("-");
+	element_suffix = element_suffix[element_suffix.length-1];
+
 	$(element_id).spectrum({
-		color: "#F00",
+		showPaletteOnly: true,
+		showPalette: true,
+		palette: [
+			['red', 'green', 'blue', 'yellow'],	
+			['cyan', 'magenta', 'black', 'white']
+		],
+		move: function(color) {
+			update_element_color(color.toHexString(), element_suffix);
+			refresh_preview();
+		}
 	});
+}
+
+function update_element_color(color, spectrum_id)
+{
+	//selected_element = $("#elements-list").children("li.single-selected");
+	try{
+		$("#elements-list")
+		.children("li.single-selected")
+		.attr(spectrum_id == "fg" ? "option-fg" : "option-bg", color);
+	}catch(e){}
 }
 
 function reset_page()
@@ -134,6 +162,6 @@ $(document).ready(function()
 	make_list_sortable();
 	make_available_selectable();
 
-	make_spectrum("#input-spectrum-fg");
 	make_spectrum("#input-spectrum-bg");
+	make_spectrum("#input-spectrum-fg");
 });
