@@ -3,6 +3,16 @@ body {
 	color: white;
 }
 
+button {
+	border-style: none;
+	border-radius: 5px;
+	background-color: #dfdfdf;
+}
+
+button:active {
+	background-color: #b5b5b5;
+}
+
 div.main-container {
 	position: relative;
 	margin-left: auto;
@@ -29,24 +39,23 @@ div#elements-control-buttons button {
 	top: 10px;
 	height: 33px;
 	width: 100px;
-	border-radius: 3px;
 	font-size: 16px;
 }
 
 div#elements-control-buttons button#button-element-reset-selected {
-	left: 10px;
-}
-
-div#elements-control-buttons button#button-element-delete-selected {
-	left: 130px;
-}
-
-div#elements-control-buttons button#button-element-reset-all {
 	left: 495px;
 }
 
-div#elements-control-buttons button#button-element-delete-all {
+div#elements-control-buttons button#button-element-delete-selected {
 	left: 617px;
+}
+
+div#elements-control-buttons button#button-element-reset-all {
+	left: 10px;
+}
+
+div#elements-control-buttons button#button-element-delete-all {
+	left: 130px;
 }
 
 div#spectrum-wrapper {
@@ -69,12 +78,6 @@ div#container-spectrum-bg {
 	top: 40px;
 	left: 720px;
 	font-size: 26px;
-}
-
-button#button-add-element {
-	position: absolute;
-	bottom: 12px;
-	left: 12px;
 }
 
 div.main-section {
