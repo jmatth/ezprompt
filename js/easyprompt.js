@@ -152,6 +152,65 @@ function update_element_color(color, spectrum_id)
 	}catch(e){}
 }
 
+//attach event listeners to the buttons.
+function activate_buttons()
+{
+	$("#button-element-reset-selected").on("click", function() {
+		var succ_fist=true, succ_second=true;
+		try{
+			$("#elements-list").children("li.single-selected").removeAttr("option-fg");
+		}catch(e){succ_fist = false}
+		try{
+			$("#elements-list").children("li.single-selected").removeAttr("option-bg");
+		}catch(e){succ_second = false}
+
+		if (succ_fist || succ_second)
+		{
+			refresh_preview();
+		}
+	});
+
+	$("#button-element-delete-selected").on("click", function() {
+		var succ = true;
+		try
+		{
+			$("#elements-list").children("li.single-selected").remove();
+		}catch(e){succ=false;}
+
+		if(succ)
+		{
+			refresh_preview();
+		}
+	});
+
+	$("#button-element-reset-all").on("click", function() {
+		var succ_fist=true, succ_second=true;
+		try{
+			$("#elements-list").children("li").removeAttr("option-fg");
+		}catch(e){succ_fist = false}
+		try{
+			$("#elements-list").children("li").removeAttr("option-bg");
+		}catch(e){succ_second = false}
+
+		if (succ_fist || succ_second)
+		{
+			refresh_preview();
+		}
+	});
+	$("#button-element-delete-all").on("click", function() {
+		var succ = true;
+		try
+		{
+			$("#elements-list").children("li").remove();
+		}catch(e){succ=false;}
+
+		if(succ)
+		{
+			refresh_preview();
+		}
+	});
+}
+
 function reset_page()
 {
 	alert("DERP");
@@ -164,4 +223,6 @@ $(document).ready(function()
 
 	make_spectrum("#input-spectrum-bg");
 	make_spectrum("#input-spectrum-fg");
+
+	activate_buttons();
 });

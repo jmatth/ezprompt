@@ -19,11 +19,33 @@ div#elements-sortable {
 	margin-top: 20px;
 }
 
-div#elements-sortable div button {
+div#elements-control-buttons {
+	position: relative;
+}
+
+div#elements-control-buttons button {
+	position: absolute;
+	top: 10px;
 	height: 33px;
 	width: 100px;
 	border-radius: 3px;
 	font-size: 16px;
+}
+
+div#elements-control-buttons button#button-element-reset-selected {
+	left: 10px;
+}
+
+div#elements-control-buttons button#button-element-delete-selected {
+	left: 130px;
+}
+
+div#elements-control-buttons button#button-element-reset-all {
+	left: 495px;
+}
+
+div#elements-control-buttons button#button-element-delete-all {
+	left: 617px;
 }
 
 div#container-spectrum-fg {
@@ -42,20 +64,6 @@ div#container-spectrum-bg {
 	font-size: 26px;
 }
 
-div#container-button-element-reset {
-	position: absolute;
-	top: 0px;
-	left: 830px;
-	font-size: 26px;
-}
-
-div#container-button-element-delete {
-	position: absolute;
-	top: 41px;
-	left: 830px;
-	font-size: 26px;
-}
-
 div.elements-tab {
 	margin-bottom: 30px;
 }
@@ -71,17 +79,17 @@ div.main-section {
 	background-color: white;
 	border-radius: 5px;
 	min-height: 60px;
-	float: left;
+	float: none;
 	margin: 10px 0px 0px 10px;
 }
 
 div.left-section{
 	width: 700px;
-	float: left;
+	float: none;
 }
 
 div.row {
-	float: left;
+	float: none;
 	width: 1200px;
 	min-height: 100px;
 	margin-left: auto;
@@ -89,12 +97,12 @@ div.row {
 }
 
 div.right-section {
-	float: left;
+	float: none;
 	margin: 10px 10px 10px 75px;
 }
 
 div.swatches {
-	float: left;
+	float: none;
 	border-width: 0px;
 	margin: 10px 10px 10px 75px;
 }
@@ -125,7 +133,7 @@ div#elements {
 }
 
 div#elements-available button {
-	float: left;
+	float: none;
 }
 
 ul#elements-list {
@@ -141,6 +149,11 @@ ul#elements-list li {
 
 ul#elements-list li.single-selected span{
 	box-shadow: 0px -5px 2px grey;
+}
+
+div#preview {
+	position: relative;
+	top: 45px;
 }
 
 ul#preview-list {
