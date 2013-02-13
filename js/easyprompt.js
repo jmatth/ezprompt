@@ -11,6 +11,10 @@ preview_text = {
 	'element-space': ' '
 }
 
+//Keep track of the sortable elements to assign unique ids
+//FIXME: place this somewhere nicer
+element_counter = 0;
+
 function add_prompt_element (source_id)
 {
 	//Make sure we actually have something to add
@@ -22,7 +26,8 @@ function add_prompt_element (source_id)
 	//append a copy to the list
 	$("#"+source_id)
 	.clone()
-	.attr("id", "element-" + source_id.split("-")[1])
+	.attr("id", "element-number-" + String(element_counter++))
+	.attr("element-identifier", "element-" + source_id.split("-")[1])
 	.on("click.single-select", function(){
 		if ($(this).hasClass("single-selected"))
 		{
@@ -32,6 +37,8 @@ function add_prompt_element (source_id)
 		{
 			$(this).addClass('single-selected').siblings().removeClass('single-selected');
 		}
+
+		match_spectrums($(this).attr("id"));
 	})
 	.appendTo("#elements-list");
 
@@ -121,7 +128,7 @@ function refresh_preview()
 	$("#preview-list").empty();
 	$("#elements-list").children("li").each(function(index) {
 		$("#preview-list").append(generate_element(
-				$(this).attr("id"),
+				$(this).attr("element-identifier"),
 				$(this).attr("option-fg"),
 				$(this).attr("option-bg")));
 	});
@@ -145,6 +152,12 @@ function make_spectrum(element_id) {
 			refresh_preview();
 		}
 	});
+}
+
+function match_spectrums(element_id)
+{
+	//FIXME: write code.
+	return;
 }
 
 function update_element_color(color, spectrum_id)
