@@ -64,10 +64,6 @@ div#container-spectrum-bg {
 	font-size: 26px;
 }
 
-div.elements-tab {
-	margin-bottom: 30px;
-}
-
 button#button-add-element {
 	position: absolute;
 	bottom: 12px;
@@ -132,19 +128,16 @@ div#elements {
 	background: black;
 }
 
-div#elements-available button {
-	float: none;
-}
-
 ul#elements-list {
 	list-style-type: none;
-	margin: 0;
+	margin-top: 24px;
+	margin-left: 24px;
 	padding: 0;
 }
 
 ul#elements-list li {
 	position: relative;
-	margin: 15px 3px 3px 0;
+	margin: 0px 3px 3px 0;
 }
 
 ul#elements-list li.single-selected span{
@@ -158,6 +151,7 @@ div#preview {
 
 ul#preview-list {
 	list-style: none;
+	padding-left: 24px;
 }
 
 li.element-preview {
