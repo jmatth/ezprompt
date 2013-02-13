@@ -79,18 +79,6 @@ function make_list_sortable()
 
 	$("#elements-list")
 	.sortable({delay: 300, update: function(){refresh_preview()}})
-	.children("li")
-	.off("click.single-select")
-	.on("click.single-select", function(){
-		if ($(this).hasClass("single-selected"))
-		{
-			$(this).removeClass('single-selected').siblings().removeClass('single-selected');
-		}
-		else
-		{
-			$(this).addClass('single-selected').siblings().removeClass('single-selected');
-		}
-	});
 }
 
 //make the available prompt opttions selectable one at a time.
@@ -154,10 +142,30 @@ function make_spectrum(element_id) {
 	});
 }
 
+//update the spectrum colors to match the selected element
 function match_spectrums(element_id)
 {
-	//FIXME: write code.
-	return;
+	var fg_value = $("#" + element_id).attr("option-fg");
+	var bg_value = $("#" + element_id).attr("option-bg");
+
+	if(fg_value)
+	{
+		$("#input-spectrum-fg").spectrum("set", fg_value);
+	}
+	else
+	{
+		$("#input-spectrum-fg").spectrum("set", "white");
+	}
+
+	if(bg_value)
+	{
+		$("#input-spectrum-bg").spectrum("set", bg_value);
+	}
+	else
+	{
+		$("#input-spectrum-bg").spectrum("set", "black");
+	}
+
 }
 
 function update_element_color(color, spectrum_id)
