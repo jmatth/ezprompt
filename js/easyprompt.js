@@ -1,14 +1,14 @@
 preview_text = {
-	'option-username': 'user',
-	'option-hostname': 'host',
-	'option-fqdn': 'host.domain.com',
-	'option-absolutepath': '/home/user/dir',
-	'option-abbreviatedpath': '~/dir',
-	'option-currentdirectory': 'dir',
-	'option-atsymbol': '@',
-	'option-colon': ':',
-	'option-promptchar': '$',
-	'option-space': ' '
+	'element-username': 'user',
+	'element-hostname': 'host',
+	'element-fqdn': 'host.domain.com',
+	'element-absolutepath': '/home/user/dir',
+	'element-abbreviatedpath': '~/dir',
+	'element-currentdirectory': 'dir',
+	'element-atsymbol': '@',
+	'element-colon': ':',
+	'element-promptchar': '$',
+	'element-space': ' '
 }
 
 function add_prompt_element (source_id)
@@ -22,6 +22,7 @@ function add_prompt_element (source_id)
 	//append a copy to the list
 	$("#"+source_id)
 	.clone()
+	.attr("id", "element-" + source_id.split("-")[1])
 	.on("click.single-select", function(){
 		if ($(this).hasClass("single-selected"))
 		{
@@ -134,6 +135,7 @@ function make_spectrum(element_id) {
 	$(element_id).spectrum({
 		showPaletteOnly: true,
 		showPalette: true,
+		color: element_suffix === "fg" ? "white" : "black",
 		palette: [
 			['red', 'green', 'blue', 'yellow'],	
 			['cyan', 'magenta', 'black', 'white']
