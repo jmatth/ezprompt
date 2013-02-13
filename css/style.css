@@ -14,16 +14,23 @@ div#elements-options {
 }
 
 div#elements-sortable {
-	height: 60px;
+	height: 73px;
 	position: relative;
 	margin-top: 20px;
+}
+
+div#elements-sortable div button {
+	height: 33px;
+	width: 100px;
+	border-radius: 3px;
+	font-size: 16px;
 }
 
 div#container-spectrum-fg {
 	position: absolute;
 	width: 100px;
 	top:0px;
-	left: 810px;
+	left: 720px;
 	font-size: 26px;
 }
 
@@ -31,21 +38,21 @@ div#container-spectrum-bg {
 	position: absolute;
 	width: 100px;
 	top: 40px;
-	left: 810px;
+	left: 720px;
 	font-size: 26px;
 }
 
 div#container-button-element-reset {
 	position: absolute;
-	top: 80px;
-	left: 810px;
+	top: 0px;
+	left: 830px;
 	font-size: 26px;
 }
 
 div#container-button-element-delete {
 	position: absolute;
-	top: 108px;
-	left: 810px;
+	top: 41px;
+	left: 830px;
 	font-size: 26px;
 }
 
@@ -69,7 +76,7 @@ div.main-section {
 }
 
 div.left-section{
-	width: 800px;
+	width: 700px;
 	float: left;
 }
 
