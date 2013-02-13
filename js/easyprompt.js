@@ -11,27 +11,29 @@ preview_text = {
 	'option-space': ' '
 }
 
-function add_prompt_element ()
+function add_prompt_element (source_id)
 {
-	// get the id
-	selected_option = $("#elements-options")
-	.children('div[aria-expanded="true"]')
-	.children('ul')
-	.children(".single-selected").attr("id");
-
-	//append a copy to the list
-	$("#"+selected_option)
-	.clone()
-	.removeClass("single-selected")
-	.appendTo("#elements-list");
-
 	//Make sure we actually have something to add
-	if(!selected_option)
+	if(!source_id)
 	{
 		return;
 	}
 
-	//$("#elements").children("ul").append(generate_element(selected_option));
+	//append a copy to the list
+	$("#"+source_id)
+	.clone()
+	.on("click.single-select", function(){
+		if ($(this).hasClass("single-selected"))
+		{
+			$(this).removeClass('single-selected').siblings().removeClass('single-selected');
+		}
+		else
+		{
+			$(this).addClass('single-selected').siblings().removeClass('single-selected');
+		}
+	})
+	.appendTo("#elements-list");
+
 	make_list_sortable();
 	refresh_preview();
 }
@@ -89,9 +91,6 @@ function make_available_selectable()
 {
 	$("#elements-options").tabs();
 
-	$("li.prompt-option").click(function(){
-		$(this).addClass('single-selected').siblings().removeClass('single-selected');
-	});
 }
 
 function change_prompt_fg(hex_color, attribute)
@@ -154,6 +153,14 @@ function update_element_color(color, spectrum_id)
 		.children("li.single-selected")
 		.attr(spectrum_id == "fg" ? "option-fg" : "option-bg", color);
 	}catch(e){}
+}
+
+//attach event listeners to available options.
+function activate_element_options()
+{
+	$("li.prompt-option").click(function(){
+		add_prompt_element($(this).attr("id"));
+	});
 }
 
 //attach event listeners to the buttons.
@@ -228,5 +235,6 @@ $(document).ready(function()
 	make_spectrum("#input-spectrum-bg");
 	make_spectrum("#input-spectrum-fg");
 
+	activate_element_options();
 	activate_buttons();
 });

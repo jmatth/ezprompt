@@ -11,6 +11,7 @@ div.main-container {
 }
 
 div#elements-options {
+	border-width: 0px;
 }
 
 div#elements-sortable {
@@ -46,6 +47,12 @@ div#elements-control-buttons button#button-element-reset-all {
 
 div#elements-control-buttons button#button-element-delete-all {
 	left: 617px;
+}
+
+div#spectrum-wrapper {
+	position: relative;
+	top: -75px;
+	left: 5px;
 }
 
 div#container-spectrum-fg {
