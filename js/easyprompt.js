@@ -4,7 +4,11 @@ preview_text = {
 	'option-fqdn': 'host.domain.com',
 	'option-absolutepath': '/home/user/dir',
 	'option-abbreviatedpath': '~/dir',
-	'option-currentdirectory': 'dir'
+	'option-currentdirectory': 'dir',
+	'option-atsymbol': '@',
+	'option-colon': ':',
+	'option-promptchar': '$',
+	'option-space': ' '
 }
 
 function add_prompt_element ()
