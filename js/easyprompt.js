@@ -10,7 +10,7 @@ preview_text = {
 	'element-space': ' '
 }
 
-code_output = {
+code_output_text = {
 	'element-username': '\\u',
 	'element-hostname': '\\h',
 	'element-fqdn': '\\H',
@@ -18,8 +18,30 @@ code_output = {
 	'element-currentdirectory': '\\W',
 	'element-atsymbol': '@',
 	'element-colon': ':',
-	'element-promptchar': '$',
+	'element-promptchar': '\\\\$',
 	'element-space': ' '
+}
+
+term_fg_color_codes = {
+	'#000':    '30',
+	'#f00':    '31',
+	'#008000': '32',
+	'#ff0':    '33',
+	'#00f':    '34',
+	'#f0f':    '35',
+	'#0ff':    '36',
+	'#fff':    '37'
+}
+
+term_bg_color_codes = {
+	'#000':    '40',
+	'#f00':    '41',
+	'#008000': '42',
+	'#ff0':    '43',
+	'#00f':    '44',
+	'#f0f':    '45',
+	'#0ff':    '46',
+	'#fff':    '47'
 }
 
 //Keep track of the sortable elements to assign unique ids
@@ -141,21 +163,51 @@ function refresh_code()
 
 	$("#elements-list").children("li").each(function(index) {
 		$("#code-output-text").text($("#code-output-text").text() +
-			generate_code($(this).attr("element-identifier")));
+			generate_code(
+				$(this).attr("element-identifier"),
+				$(this).attr("option-fg"),
+				$(this).attr("option-bg")
+				)
+			);
 	});
 
 	$("#code-output-text").text($("#code-output-text").text() + '"');
 
-	function generate_code(element_id)
+	function generate_code(element_id, fg_code, bg_code)
 	{
-		output = code_output[element_id];
-		if(output)
+		var output_text = code_output_text[element_id];
+
+		var color_before = '', color_after = '';
+
+		if (fg_code || bg_code)
 		{
-			return output
+			color_before = "\\[\\e[";
+			color_after = "\\[\\e[m\\]"
+			if (fg_code && bg_code)
+			{
+				color_before = color_before +
+					term_fg_color_codes[fg_code] + ";" +
+					term_bg_color_codes[bg_code] + "m\\]";
+			}
+			else if(fg_code)
+			{
+				color_before = color_before +
+					term_fg_color_codes[fg_code] + "m\\]";
+			}
+			else if(bg_code)
+			{
+				color_before = color_before +
+					term_bg_color_codes[bg_code] + "m\\]";
+			}
+		}
+		
+		if(output_text)
+		{
+			return color_before + output_text + color_after;
 		}
 		else
 		{
-			console.log("Output for " + element_id + " not found.");
+			console.log("output_text for " + element_id + " not found.");
 			return '';
 		}
 	}
