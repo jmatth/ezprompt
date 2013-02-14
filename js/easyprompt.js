@@ -63,11 +63,7 @@ function add_prompt_element (source_id)
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
 	.addClass("single-selected")
 	.on("click.single-select", function(){
-		if ($(this).hasClass("single-selected"))
-		{
-			$(this).removeClass('single-selected').siblings().removeClass('single-selected');
-		}
-		else
+		if (!$(this).hasClass("single-selected"))
 		{
 			$(this).addClass('single-selected').siblings().removeClass('single-selected');
 		}
