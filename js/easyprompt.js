@@ -2,9 +2,20 @@ preview_text = {
 	'element-username': 'user',
 	'element-hostname': 'host',
 	'element-fqdn': 'host.domain.com',
-	'element-absolutepath': '/home/user/dir',
 	'element-abbreviatedpath': '~/dir',
 	'element-currentdirectory': 'dir',
+	'element-atsymbol': '@',
+	'element-colon': ':',
+	'element-promptchar': '$',
+	'element-space': ' '
+}
+
+code_output = {
+	'element-username': '\\u',
+	'element-hostname': '\\h',
+	'element-fqdn': '\\H',
+	'element-abbreviatedpath': '\\w',
+	'element-currentdirectory': '\\W',
 	'element-atsymbol': '@',
 	'element-colon': ':',
 	'element-promptchar': '$',
@@ -43,7 +54,7 @@ function add_prompt_element (source_id)
 	.appendTo("#elements-list");
 
 	make_list_sortable();
-	refresh_preview();
+	refresh_page();
 }
 
 function change_option_selection(option_id)
@@ -78,7 +89,7 @@ function make_list_sortable()
 	}catch(err){}
 
 	$("#elements-list")
-	.sortable({delay: 300, update: function(){refresh_preview()}})
+	.sortable({delay: 300, update: function(){refresh_page()}})
 }
 
 //make the available prompt opttions selectable one at a time.
@@ -111,6 +122,7 @@ function change_prompt_fg(hex_color, attribute)
 	} catch (e){}
 }
 
+//generate the preview list
 function refresh_preview()
 {
 	$("#preview-list").empty();
@@ -120,6 +132,33 @@ function refresh_preview()
 				$(this).attr("option-fg"),
 				$(this).attr("option-bg")));
 	});
+}
+
+//generate the code for bashrc
+function refresh_code()
+{
+	$("#code-output-text").text('PS1="');
+
+	$("#elements-list").children("li").each(function(index) {
+		$("#code-output-text").text($("#code-output-text").text() +
+			generate_code($(this).attr("element-identifier")));
+	});
+
+	$("#code-output-text").text($("#code-output-text").text() + '"');
+
+	function generate_code(element_id)
+	{
+		output = code_output[element_id];
+		if(output)
+		{
+			return output
+		}
+		else
+		{
+			console.log("Output for " + element_id + " not found.");
+			return '';
+		}
+	}
 }
 
 function make_spectrum(element_id) {
@@ -137,7 +176,7 @@ function make_spectrum(element_id) {
 		],
 		move: function(color) {
 			update_element_color(color.toHexString(), element_suffix);
-			refresh_preview();
+			refresh_page();
 		}
 	});
 }
@@ -201,7 +240,7 @@ function activate_buttons()
 		if (succ_fist || succ_second)
 		{
 			match_spectrums(null);
-			refresh_preview();
+			refresh_page();
 		}
 	});
 
@@ -215,7 +254,7 @@ function activate_buttons()
 		if(succ)
 		{
 			match_spectrums(null);
-			refresh_preview();
+			refresh_page();
 		}
 	});
 
@@ -231,7 +270,7 @@ function activate_buttons()
 		if (succ_fist || succ_second)
 		{
 			match_spectrums(null);
-			refresh_preview();
+			refresh_page();
 		}
 	});
 	$("#button-element-delete-all").on("click", function() {
@@ -244,9 +283,14 @@ function activate_buttons()
 		if(succ)
 		{
 			match_spectrums(null);
-			refresh_preview();
+			refresh_page();
 		}
 	});
+}
+
+function refresh_page() {
+	refresh_preview();
+	refresh_code();
 }
 
 function reset_page()
@@ -264,4 +308,6 @@ $(document).ready(function()
 
 	activate_element_options();
 	activate_buttons();
+
+	refresh_page();
 });
