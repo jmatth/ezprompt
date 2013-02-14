@@ -81,6 +81,7 @@ div#container-spectrum-bg {
 }
 
 div.main-section {
+	position: relative;
 	border-style: solid;
 	background-color: white;
 	border-radius: 5px;
@@ -174,4 +175,13 @@ li.element-preview {
 
 li.element-preview div.handle {
 	display: none;
+}
+
+div#code-output-wrapper {
+	top: 70px;
+}
+
+textarea#code-output-text {
+	width: 100%;
+	height: 100px;
 }
