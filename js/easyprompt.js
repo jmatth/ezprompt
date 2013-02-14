@@ -61,6 +61,7 @@ function add_prompt_element (source_id)
 	.clone()
 	.attr("id", "element-number-" + String(element_counter++))
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
+	.addClass("single-selected")
 	.on("click.single-select", function(){
 		if ($(this).hasClass("single-selected"))
 		{
@@ -73,8 +74,10 @@ function add_prompt_element (source_id)
 
 		match_spectrums($(this).attr("id"));
 	})
-	.appendTo("#elements-list");
+	.appendTo("#elements-list")
+	.siblings().removeClass('single-selected');
 
+	update_spectrums();
 	make_list_sortable();
 	refresh_page();
 }
@@ -257,6 +260,11 @@ function match_spectrums(element_id)
 		$("#input-spectrum-bg").spectrum("set", "black");
 	}
 
+}
+
+//Wrapper to match the spectrums to the currently selected element
+function update_spectrums(){
+	match_spectrums($("#elements-list").children("li.single-selected").attr("id"));
 }
 
 function update_element_color(color, spectrum_id)
