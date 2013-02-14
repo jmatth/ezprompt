@@ -162,7 +162,7 @@ function refresh_preview()
 //generate the code for bashrc
 function refresh_code()
 {
-	$("#code-output-text").text('PS1="');
+	$("#code-output-text").text('export PS1="');
 
 	$("#elements-list").children("li").each(function(index) {
 		$("#code-output-text").text($("#code-output-text").text() +
