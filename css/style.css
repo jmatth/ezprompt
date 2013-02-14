@@ -3,6 +3,10 @@ body {
 	color: white;
 }
 
+textarea {
+	resize: none;
+}
+
 button {
 	border-style: none;
 	border-radius: 5px;
