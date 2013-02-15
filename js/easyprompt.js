@@ -1,28 +1,43 @@
-preview_text = {
+var preview_text = {
 	'element-username': 'user',
 	'element-hostname': 'host',
 	'element-fqdn': 'host.domain.com',
-	'element-abbreviatedpath': '~/dir',
+	'element-shell': 'bash',
+	'element-shellversion': '4.2',
+	'element-shellrelease': '4.2.42',
+	'element-pathtocurrentdirectory': '~/dir',
 	'element-currentdirectory': 'dir',
+	'element-date': generate_date(),
+	'element-fulltimeseconds': generate_time(false, true),
+	'element-halftimeseconds': generate_time(true, true),
+	'element-fulltime': generate_time(false, false),
+	'element-halftime': generate_time(true, false),
+	'element-promptchar': '$',
 	'element-atsymbol': '@',
 	'element-colon': ':',
-	'element-promptchar': '$',
+	'element-openbracket': '[',
+	'element-closebracket': ']',
 	'element-space': ' '
 }
 
-code_output_text = {
+var code_output_text = {
 	'element-username': '\\u',
 	'element-hostname': '\\h',
 	'element-fqdn': '\\H',
-	'element-abbreviatedpath': '\\w',
+	'element-shell': '\\s',
+	'element-shellversion': '\\v',
+	'element-shellrelease': '\\V',
+	'element-pathtocurrentdirectory': '\\w',
 	'element-currentdirectory': '\\W',
-	'element-atsymbol': '@',
-	'element-colon': ':',
+	'element-date': '\\d',
+	'element-fulltimeseconds': '\\t',
+	'element-halftimeseconds': '\\T',
+	'element-fulltime': '\\A',
+	'element-halftime': '\\@',
 	'element-promptchar': '\\\\$',
-	'element-space': ' '
 }
 
-term_fg_color_codes = {
+var term_fg_color_codes = {
 	'#000':    '30',
 	'#f00':    '31',
 	'#008000': '32',
@@ -33,7 +48,7 @@ term_fg_color_codes = {
 	'#fff':    '37'
 }
 
-term_bg_color_codes = {
+var term_bg_color_codes = {
 	'#000':    '40',
 	'#f00':    '41',
 	'#008000': '42',
@@ -82,6 +97,39 @@ function change_option_selection(option_id)
 {
 	$(".prompt-option-selected").removeClass("prompt-option-selected");
 	$("#" + option_id).addClass("prompt-option-selected");
+}
+
+//generate the current time in ddd MMM dd format (ex. Thu Feb 14)
+function generate_date()
+{
+		var date = Date().split(" ").slice(0,3);
+		var return_date = date[0];
+		for (var i = 1; i < date.length; i += 1)
+		{
+			return_date += " " + date[i];
+		}
+		return return_date;
+}
+//generate the time in multiple formats.
+function generate_time(half_hours, show_seconds)
+{
+	var today = new Date();
+
+	//get the time values
+	var hours = today.getHours();
+	var minutes = today.getMinutes();
+	var seconds = show_seconds ? today.getSeconds() : undefined;
+
+	var hours_suffix = half_hours && !show_seconds ? hours >= 12 ? " PM" : " AM" : "";
+
+	hours = hours >= 12 && half_hours ? hours - 12 : hours;
+	hours = hours < 10 ? "0" + String(hours) : String(hours);
+
+	minutes = ":" + (minutes < 10 ? "0" + String(minutes) : String(minutes));
+
+	seconds = seconds < 10 ? ":0" + String(seconds) : seconds ? ":" + String(seconds) : "";
+
+	return hours + minutes + seconds + hours_suffix;
 }
 
 function generate_element(option_name, color_fg, color_bg)
@@ -174,7 +222,9 @@ function refresh_code()
 
 	function generate_code(element_id, fg_code, bg_code)
 	{
-		var output_text = code_output_text[element_id];
+		//output the escape sequence, or the same text as in the preview
+		//if that does not exist.
+		var output_text = code_output_text[element_id] ? code_output_text[element_id] : preview_text[element_id];
 
 		var color_before = '', color_after = '';
 
