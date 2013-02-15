@@ -21,7 +21,13 @@ div.main-container {
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
+	min-height: 556px;
+	height: 100%;
 	width: 820px;
+}
+
+div.elements-tab {
+	padding: 0px !important;
 }
 
 div#elements-options {
@@ -91,7 +97,7 @@ div.main-section {
 	border-radius: 5px;
 	min-height: 60px;
 	float: none;
-	margin: 10px 0px 0px 10px;
+	margin: 0px 0px 0px 10px;
 }
 
 div.left-section{
@@ -161,7 +167,7 @@ ul#elements-list li.single-selected span{
 
 div#preview {
 	position: relative;
-	top: 45px;
+	top: 51px;
 }
 
 ul#preview-list {
@@ -187,5 +193,12 @@ div#code-output-wrapper {
 
 textarea#code-output-text {
 	width: 100%;
-	height: 100px;
+	height: 60px;
+}
+
+div#footer {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0px;
 }
