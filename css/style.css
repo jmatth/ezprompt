@@ -1,3 +1,8 @@
+@font-face {
+	font-family: cf-revolution;
+	src: url(../fonts/cf_revolution.ttf);
+}
+
 body {
 	background-color: #0078AD;
 	color: white;
@@ -25,18 +30,18 @@ div#header div#header-wrapper{
 div#header div#header-wrapper span#name{
 	position: absolute;
 	left: 0px;
+	top: 4px;
 	font-size: 40px;
 	color: #000;
-	font-family: "lucidia console";
+	font-family: cf-revolution;
 }
 
 div#header div#header-wrapper span#subtitle{
 	position: absolute;
-	left: 195px;
-	bottom: -23px;
-	font-size: 15px;
+	left: 255px;
+	bottom: -27px;
+	font-size: 18px;
 	color: #000;
-	font-family: "lucidia console";
 }
 
 textarea {
