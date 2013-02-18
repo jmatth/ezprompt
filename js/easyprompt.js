@@ -1,3 +1,6 @@
+
+/*Begin output objects*/
+
 var preview_text = {
 	'element-username': 'user',
 	'element-hostname': 'host',
@@ -59,9 +62,13 @@ var term_bg_color_codes = {
 	'#fff':    '47'
 }
 
+/*End output objects*/
+
 //Keep track of the sortable elements to assign unique ids
 //FIXME: place this somewhere nicer
-element_counter = 0;
+var element_counter = 0;
+
+/*Begin interactive calls*/
 
 function add_prompt_element (source_id)
 {
@@ -93,11 +100,9 @@ function add_prompt_element (source_id)
 	refresh_page();
 }
 
-function change_option_selection(option_id)
-{
-	$(".prompt-option-selected").removeClass("prompt-option-selected");
-	$("#" + option_id).addClass("prompt-option-selected");
-}
+/*End interactive calls*/
+
+/*Begin helper functions.*/
 
 //generate the current time in ddd MMM dd format (ex. Thu Feb 14)
 function generate_date()
@@ -110,6 +115,7 @@ function generate_date()
 		}
 		return return_date;
 }
+
 //generate the time in multiple formats.
 function generate_time(half_hours, show_seconds)
 {
@@ -132,6 +138,7 @@ function generate_time(half_hours, show_seconds)
 	return hours + minutes + seconds + hours_suffix;
 }
 
+//Generate a span to append to the preview list
 function generate_element(option_name, color_fg, color_bg)
 {
 	if(!preview_text.hasOwnProperty(option_name))
@@ -149,26 +156,7 @@ function generate_element(option_name, color_fg, color_bg)
 
 }
 
-function make_list_sortable()
-{
-	//FIXME: probably a more effecient way to do this
-	try{
-		$("#elements-list")
-		.sortable("destroy")
-	}catch(err){}
-
-	$("#elements-list")
-	.sortable({delay: 300, update: function(){refresh_page()}})
-}
-
-//make the available prompt opttions selectable one at a time.
-//also use tabs to divide the sections.
-function make_available_selectable()
-{
-	$("#elements-options").tabs();
-
-}
-
+//change the foreground or color of the currently selected element
 function change_prompt_fg(hex_color, attribute)
 {
 	try
@@ -262,26 +250,6 @@ function refresh_code()
 	}
 }
 
-function make_spectrum(element_id) {
-
-	var element_suffix = element_id.split("-");
-	element_suffix = element_suffix[element_suffix.length-1];
-
-	$(element_id).spectrum({
-		showPaletteOnly: true,
-		showPalette: true,
-		color: element_suffix === "fg" ? "white" : "black",
-		palette: [
-			['red', 'green', 'blue', 'yellow'],	
-			['cyan', 'magenta', 'black', 'white']
-		],
-		move: function(color) {
-			update_element_color(color.toHexString(), element_suffix);
-			refresh_page();
-		}
-	});
-}
-
 //update the spectrum colors to match the selected element
 function match_spectrums(element_id)
 {
@@ -323,13 +291,9 @@ function update_element_color(color, spectrum_id)
 	}catch(e){}
 }
 
-//attach event listeners to available options.
-function activate_element_options()
-{
-	$("li.prompt-option").click(function(){
-		add_prompt_element($(this).attr("id"));
-	});
-}
+/*End helper functions*/
+
+/*Begin page setup functions.*/
 
 //attach event listeners to the buttons.
 function activate_buttons()
@@ -394,6 +358,58 @@ function activate_buttons()
 	});
 }
 
+function make_list_sortable()
+{
+	//FIXME: probably a more effecient way to do this
+	try{
+		$("#elements-list")
+		.sortable("destroy")
+	}catch(err){}
+
+	$("#elements-list")
+	.sortable({delay: 300, update: function(){refresh_page()}})
+}
+
+//make the available prompt opttions selectable one at a time.
+//also use tabs to divide the sections.
+function make_available_selectable()
+{
+	$("#elements-options").tabs();
+
+}
+
+//create a spectrum color picker on the specified element.
+function make_spectrum(element_id) {
+
+	var element_suffix = element_id.split("-");
+	element_suffix = element_suffix[element_suffix.length-1];
+
+	$(element_id).spectrum({
+		showPaletteOnly: true,
+		showPalette: true,
+		color: element_suffix === "fg" ? "white" : "black",
+		palette: [
+			['red', 'green', 'blue', 'yellow'],	
+			['cyan', 'magenta', 'black', 'white']
+		],
+		move: function(color) {
+			update_element_color(color.toHexString(), element_suffix);
+			refresh_page();
+		}
+	});
+}
+
+//attach event listeners to available options.
+function activate_element_options()
+{
+	$("li.prompt-option").click(function(){
+		add_prompt_element($(this).attr("id"));
+	});
+}
+
+/*End page setup functions.*/
+
+//wrapper to regenerate the preview and output.
 function refresh_page() {
 	refresh_preview();
 	refresh_code();
