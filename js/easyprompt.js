@@ -399,11 +399,6 @@ function refresh_page() {
 	refresh_code();
 }
 
-function reset_page()
-{
-	alert("DERP");
-}
-
 $(document).ready(function()
 {
 	make_list_sortable();
