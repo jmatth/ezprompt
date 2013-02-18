@@ -206,7 +206,7 @@ function refresh_code()
 			);
 	});
 
-	$("#code-output-text").text($("#code-output-text").text() + '"');
+	$("#code-output-text").text($("#code-output-text").text() + ' "');
 
 	function generate_code(element_id, fg_code, bg_code)
 	{
