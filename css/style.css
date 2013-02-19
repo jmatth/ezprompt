@@ -213,6 +213,24 @@ div#preview {
 	top: 51px;
 }
 
+div.preview-dark {
+	background: black;
+	color: black;
+}
+
+div.preview-dark ul#preview-list{
+	color: white;
+}
+
+div.preview-light {
+	background: white;
+	color: white;
+}
+
+div.preview-light ul#preview-list{
+	color: black;
+}
+
 ul#preview-list {
 	list-style: none;
 	padding-left: 24px;

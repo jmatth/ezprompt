@@ -100,6 +100,28 @@ function add_prompt_element (source_id)
 	refresh_page();
 }
 
+//toggle the preview background color, as well as
+//the default text color to match.
+function toggle_bg()
+{
+	var preview = $("#preview");
+
+	if (preview.hasClass("preview-light"))
+	{
+		preview
+		.removeClass("preview-light")
+		.addClass("preview-dark")
+	}
+	else
+	{
+		preview
+		.removeClass("preview-dark")
+		.addClass("preview-light")
+	}
+
+	update_spectrums();
+}
+
 /*End interactive calls*/
 
 /*Begin helper functions.*/
@@ -253,8 +275,11 @@ function refresh_code()
 //update the spectrum colors to match the selected element
 function match_spectrums(element_id)
 {
-	var fg_value = $("#" + element_id).attr("option-fg");
-	var bg_value = $("#" + element_id).attr("option-bg");
+	var element = $("#" + element_id);
+	var fg_value = element.attr("option-fg");
+	var bg_value = element.attr("option-bg");
+
+	var preview_bg = $("#preview").hasClass("preview-light") ? "light" : "dark";
 
 	if(fg_value)
 	{
@@ -262,7 +287,14 @@ function match_spectrums(element_id)
 	}
 	else
 	{
-		$("#input-spectrum-fg").spectrum("set", "white");
+		if(preview_bg === "dark")
+		{
+			$("#input-spectrum-fg").spectrum("set", "white");
+		}
+		else
+		{
+			$("#input-spectrum-fg").spectrum("set", "black");
+		}
 	}
 
 	if(bg_value)
@@ -271,7 +303,14 @@ function match_spectrums(element_id)
 	}
 	else
 	{
-		$("#input-spectrum-bg").spectrum("set", "black");
+		if(preview_bg === "dark")
+		{
+			$("#input-spectrum-bg").spectrum("set", "black");
+		}
+		else
+		{
+			$("#input-spectrum-bg").spectrum("set", "white");
+		}
 	}
 
 }
@@ -384,10 +423,21 @@ function make_spectrum(element_id) {
 	var element_suffix = element_id.split("-");
 	element_suffix = element_suffix[element_suffix.length-1];
 
+	var color;
+	//is the preview background white or black?
+	if($("#preview").hasClass("preview-light"))
+	{
+		color = element_suffix === "fg" ? "black" : "white";
+	}
+	else
+	{
+		color = element_suffix === "fg" ? "white" : "black";
+	}
+
 	$(element_id).spectrum({
 		showPaletteOnly: true,
 		showPalette: true,
-		color: element_suffix === "fg" ? "white" : "black",
+		color: color,
 		palette: [
 			['red', 'green', 'blue', 'yellow'],	
 			['cyan', 'magenta', 'black', 'white']
