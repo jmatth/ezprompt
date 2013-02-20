@@ -484,6 +484,9 @@ $(document).ready(function()
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();
 
+	//add tooltips to the available options
+	$("#elements-options").children("div.elements-tab").children("ul").children("li").tooltip();
+
 	make_spectrum("#input-spectrum-bg");
 	make_spectrum("#input-spectrum-fg");
 
