@@ -282,7 +282,7 @@ function refresh_code()
 		if(output_text)
 		{
 			$("#code-output-text")
-			.text($("#code-output-text").text() + output_text);
+			.text($("#code-output-text").text() + color_before + output_text + color_after);
 		}
 
 		else
