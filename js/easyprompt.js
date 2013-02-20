@@ -20,7 +20,8 @@ var preview_text = {
 	'element-colon': ':',
 	'element-openbracket': '[',
 	'element-closebracket': ']',
-	'element-space': ' '
+	'element-space': ' ',
+	'element-returncode': '1'
 }
 
 var code_output_text = {
@@ -38,6 +39,11 @@ var code_output_text = {
 	'element-fulltime': '\\A',
 	'element-halftime': '\\@',
 	'element-promptchar': '\\\\$',
+	'element-returncode': '`nonzero_return`'
+}
+
+var code_output_pre = {
+	'element-returncode': "function nonzero_return() {\n\tRETVAL=$?\n\t[ $RETVAL -ne 0 ] && echo \"$RETVAL\"\n}\n"
 }
 
 var term_fg_color_codes = {
@@ -216,25 +222,38 @@ function refresh_preview()
 //generate the code for bashrc
 function refresh_code()
 {
+	var functions_added = [];
+
 	$("#code-output-text").text('export PS1="');
 
 	$("#elements-list").children("li").each(function(index) {
-		$("#code-output-text").text($("#code-output-text").text() +
-			generate_code(
-				$(this).attr("element-identifier"),
-				$(this).attr("option-fg"),
-				$(this).attr("option-bg")
-				)
-			);
+		append_code(
+			$(this).attr("element-identifier"),
+			$(this).attr("option-fg"),
+			$(this).attr("option-bg")
+		);
 	});
 
 	$("#code-output-text").text($("#code-output-text").text() + ' "');
 
-	function generate_code(element_id, fg_code, bg_code)
+	function append_code(element_identifier, fg_code, bg_code)
 	{
+		//insert any helper functions needed
+		if(code_output_pre[element_identifier] && functions_added.indexOf(element_identifier) == -1)
+		{
+			functions_added.push(element_identifier);
+
+			$("#code-output-text")
+			.text(code_output_pre[element_identifier] + "\n" + $("#code-output-text").text());
+		}
+		else
+		{
+			console.log("Not found");
+		}
+
 		//output the escape sequence, or the same text as in the preview
 		//if that does not exist.
-		var output_text = code_output_text[element_id] ? code_output_text[element_id] : preview_text[element_id];
+		var output_text = code_output_text[element_identifier] ? code_output_text[element_identifier] : preview_text[element_identifier];
 
 		var color_before = '', color_after = '';
 
@@ -262,12 +281,13 @@ function refresh_code()
 		
 		if(output_text)
 		{
-			return color_before + output_text + color_after;
+			$("#code-output-text")
+			.text($("#code-output-text").text() + output_text);
 		}
+
 		else
 		{
-			console.log("output_text for " + element_id + " not found.");
-			return '';
+			console.log("output_text for " + element_identifier + " not found.");
 		}
 	}
 }
