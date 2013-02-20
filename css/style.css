@@ -123,16 +123,16 @@ div#spectrum-wrapper {
 div#container-spectrum-fg {
 	position: absolute;
 	width: 100px;
-	top:0px;
-	left: 720px;
+	top: 10px;
+	left: 256px;
 	font-size: 26px;
 }
 
 div#container-spectrum-bg {
 	position: absolute;
 	width: 100px;
-	top: 40px;
-	left: 720px;
+	top: 10px;
+	left: 368px;
 	font-size: 26px;
 }
 
