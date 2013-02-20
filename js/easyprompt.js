@@ -429,14 +429,6 @@ function make_list_sortable()
 	.sortable({delay: 300, update: function(){refresh_page()}})
 }
 
-//make the available prompt opttions selectable one at a time.
-//also use tabs to divide the sections.
-function make_available_selectable()
-{
-	$("#elements-options").tabs();
-
-}
-
 //create a spectrum color picker on the specified element.
 function make_spectrum(element_id) {
 
@@ -488,7 +480,9 @@ function refresh_page() {
 $(document).ready(function()
 {
 	make_list_sortable();
-	make_available_selectable();
+
+	//separate the available sections into tabs.
+	$("#elements-options").tabs();
 
 	make_spectrum("#input-spectrum-bg");
 	make_spectrum("#input-spectrum-fg");
