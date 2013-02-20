@@ -3,6 +3,11 @@
 	src: url(../fonts/cf_revolution.ttf);
 }
 
+@font-face {
+	font-family: terminus;
+	src: url(../fonts/terminus.ttf);
+}
+
 body {
 	background-color: #0078AD;
 	color: white;
@@ -211,6 +216,7 @@ ul#elements-list li.single-selected span{
 div#preview {
 	position: relative;
 	top: 51px;
+	font-family: terminus;
 }
 
 div.preview-dark {
