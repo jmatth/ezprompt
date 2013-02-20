@@ -259,8 +259,9 @@ div#code-output-wrapper {
 }
 
 textarea#code-output-text {
-	width: 100%;
+	width: 694px;
 	height: 60px;
+	margin-bottom: -5px;
 }
 
 div#footer {
