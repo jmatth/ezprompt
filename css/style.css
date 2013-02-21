@@ -81,6 +81,10 @@ div#elements-options {
 	border-width: 0px;
 }
 
+ul#elements-options-tabs {
+	padding-left: 12px;
+}
+
 div#elements-sortable {
 	position: relative;
 	margin-top: 20px;
