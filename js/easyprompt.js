@@ -537,6 +537,9 @@ $(document).ready(function()
 	//add tooltips to the available options
 	$("#elements-options").children("div.elements-tab").children("ul").children("li").tooltip();
 
+	//add tooltips to the delete and reset buttons.
+	$("#elements-control-buttons").children("button").tooltip();
+
 	make_spectrum("#input-spectrum-bg");
 	make_spectrum("#input-spectrum-fg");
 
