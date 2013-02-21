@@ -79,7 +79,6 @@ div.elements-tab {
 
 div#elements-options {
 	border-width: 0px;
-	margin-top: 80px;
 }
 
 ul#elements-options-tabs {
@@ -148,7 +147,33 @@ div.main-section {
 	float: none;
 	width: 700px;
 	float: none;
-	margin-top: 5px;
+}
+
+div.main-section-instructions {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	float: none;
+	width: 700px;
+	float: none;
+	font-size: 23px;
+	margin-bottom: -20px;
+}
+
+div#instructions-step-one {
+	margin-top: 80px;
+}
+
+div#instructions-step-two {
+	margin-top: -10px;
+}
+
+div#instructions-step-three {
+	margin-top: -25px;
+}
+
+div#instructions-step-four {
+	margin-top: -10px;
 }
 
 div.row {
@@ -268,10 +293,10 @@ div#footer {
 	width: 97%;
 	text-align: center;
 	position: absolute;
-	top: 730px;
+	top: 800px;
 }
 
-@media all and (min-height: 780px){
+@media all and (min-height: 850px){
 	div#footer {
 		z-index: 1;
 		width: 97%;
