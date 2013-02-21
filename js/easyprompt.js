@@ -378,6 +378,7 @@ function activate_buttons()
 		try
 		{
 			$("#elements-list").children("li.single-selected").remove();
+			$("#elements-list").children(":last").addClass("single-selected");
 		}catch(e){succ=false;}
 
 		if(succ)
