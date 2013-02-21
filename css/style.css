@@ -25,7 +25,7 @@ div#header {
 }
 
 div#header div#header-wrapper{
-	width: 820px;
+	width: 700px;
 	height: 20px;
 	position: relative;
 	margin-left: auto;
@@ -107,16 +107,21 @@ div#elements-control-buttons button {
 }
 
 div#elements-control-buttons button#button-element-reset-selected {
+	float: left;
 }
 
 div#elements-control-buttons button#button-element-delete-selected {
+	float: left;
+	margin-right: 8px;
 }
 
 div#elements-control-buttons button#button-element-reset-all {
-	right: 0px;
+	float: right;
 }
 
 div#elements-control-buttons button#button-element-delete-all {
+	float: right;
+	margin-left: 8px
 }
 
 div#spectrum-wrapper {
@@ -125,19 +130,10 @@ div#spectrum-wrapper {
 	left: 5px;
 }
 
-div#container-spectrum-fg {
+div#container-spectrum {
 	position: absolute;
-	width: 100px;
 	top: 10px;
-	left: 256px;
-	font-size: 26px;
-}
-
-div#container-spectrum-bg {
-	position: absolute;
-	width: 100px;
-	top: 10px;
-	left: 368px;
+	left: 250px;
 	font-size: 26px;
 }
 
@@ -152,6 +148,7 @@ div.main-section {
 	float: none;
 	width: 700px;
 	float: none;
+	margin-top: 5px;
 }
 
 div.row {
@@ -218,7 +215,6 @@ ul#elements-list li.single-selected span{
 
 div#preview {
 	position: relative;
-	top: 51px;
 	font-family: terminus;
 }
 
@@ -258,7 +254,7 @@ li.element-preview div.handle {
 }
 
 div#code-output-wrapper {
-	top: 70px;
+	margin-top: 20px;
 }
 
 textarea#code-output-text {
@@ -272,10 +268,10 @@ div#footer {
 	width: 97%;
 	text-align: center;
 	position: absolute;
-	top: 556px;
+	top: 730px;
 }
 
-@media all and (min-height: 600px){
+@media all and (min-height: 780px){
 	div#footer {
 		z-index: 1;
 		width: 97%;
