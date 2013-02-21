@@ -79,6 +79,7 @@ div.elements-tab {
 
 div#elements-options {
 	border-width: 0px;
+	margin-top: 80px;
 }
 
 ul#elements-options-tabs {
@@ -92,10 +93,13 @@ div#elements-sortable {
 
 div#elements-control-buttons {
 	position: relative;
+	background: none;
+	border-style: none;
 }
 
 div#elements-control-buttons button {
-	position: absolute;
+	display: inline;
+	position: relative;
 	top: 10px;
 	height: 33px;
 	width: 100px;
@@ -103,19 +107,16 @@ div#elements-control-buttons button {
 }
 
 div#elements-control-buttons button#button-element-reset-selected {
-	left: 495px;
 }
 
 div#elements-control-buttons button#button-element-delete-selected {
-	left: 617px;
 }
 
 div#elements-control-buttons button#button-element-reset-all {
-	left: 10px;
+	right: 0px;
 }
 
 div#elements-control-buttons button#button-element-delete-all {
-	left: 130px;
 }
 
 div#spectrum-wrapper {
@@ -142,15 +143,13 @@ div#container-spectrum-bg {
 
 div.main-section {
 	position: relative;
+	margin-left: auto;
+	margin-right: auto;
 	border-style: solid;
 	background-color: white;
 	border-radius: 5px;
 	min-height: 60px;
 	float: none;
-	margin: 0px 0px 0px 10px;
-}
-
-div.left-section{
 	width: 700px;
 	float: none;
 }

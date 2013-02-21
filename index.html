@@ -29,112 +29,109 @@
 		</div>
 	</div>
 
-	<div class="main-container">
-		<div class="main-section left-section" id="elements-options">
-			<ul id="elements-options-tabs">
-				<li><a href="#elements-tab-basic">Basic Elements</a></li>
-				<li><a href="#elements-tab-dynamic">Dynamic Elements</a></li>
-				<li><a href="#elements-tab-times">Date &amp; Time Elements</a></li>
-				<li><a href="#elements-tab-extra">Extra Characters</a></li>
-			</ul>
+	<div class="main-section" id="elements-options">
+		<ul id="elements-options-tabs">
+			<li><a href="#elements-tab-basic">Basic Elements</a></li>
+			<li><a href="#elements-tab-dynamic">Dynamic Elements</a></li>
+			<li><a href="#elements-tab-times">Date &amp; Time Elements</a></li>
+			<li><a href="#elements-tab-extra">Extra Characters</a></li>
+		</ul>
 
-			<div class="elements-tab" id="elements-tab-basic">
-				<ul id="elements-basic">
-					<li class="ui-state-default prompt-option" id="option-username" title="The current username.">Username</li>
+		<div class="elements-tab" id="elements-tab-basic">
+			<ul id="elements-basic">
+				<li class="ui-state-default prompt-option" id="option-username" title="The current username.">Username</li>
 
-					<li class="ui-state-default prompt-option" id="option-hostname" title="The hostname of the machine.">Hostname</li>
+				<li class="ui-state-default prompt-option" id="option-hostname" title="The hostname of the machine.">Hostname</li>
 
-					<li class="ui-state-default prompt-option" id="option-fqdn" title="The Fully Qualified Domain Name of the host.">FQDN</li>
+				<li class="ui-state-default prompt-option" id="option-fqdn" title="The Fully Qualified Domain Name of the host.">FQDN</li>
 
-					<li class="ui-state-default prompt-option" id="option-shell" title="The shell being executed, i.e. 'bash'.">Shell</li>
+				<li class="ui-state-default prompt-option" id="option-shell" title="The shell being executed, i.e. 'bash'.">Shell</li>
 
-					<li class="ui-state-default prompt-option" id="option-shellversion" title="The version of bash.">Shell Version</li>
+				<li class="ui-state-default prompt-option" id="option-shellversion" title="The version of bash.">Shell Version</li>
 
-					<li class="ui-state-default prompt-option" id="option-shellrelease" title="The version of bash with patch level.">Shell Release</li>
+				<li class="ui-state-default prompt-option" id="option-shellrelease" title="The version of bash with patch level.">Shell Release</li>
 
-					<li class="ui-state-default prompt-option" id="option-pathtocurrentdirectory" title="The path to the current working directory, with $HOME abbreviated to ~.">Path To Current Directory</li>
+				<li class="ui-state-default prompt-option" id="option-pathtocurrentdirectory" title="The path to the current working directory, with $HOME abbreviated to ~.">Path To Current Directory</li>
 
-					<li class="ui-state-default prompt-option" id="option-currentdirectory" title="The current working directory, with $HOME abbreviated to ~.">Current Directory</li>
+				<li class="ui-state-default prompt-option" id="option-currentdirectory" title="The current working directory, with $HOME abbreviated to ~.">Current Directory</li>
 
-					<li class="ui-state-default prompt-option" id="option-promptchar" title="Normally $. Changes to # if logged in as root (current UID = 0).">$</li>
-				</ul>
-			</div>
-
-			<div class="elements-tab" id="elements-tab-dynamic">
-				<ul id="elements-dynamic">
-					<li class="ui-state-default prompt-option" id="option-returncode" title="The return code of the previous command if it exits non-zero. Otherwise blank.">Error Code</li>
-
-					<li class="ui-state-default prompt-option" id="option-gitstatus" title="If in a git repository, the current branch and status indicators. Otherwise blank.">Git Status</li>
-				</ul>
-			</div>
-
-			<div class="elements-tab" id="elements-tab-extra">
-				<ul id="elements-extra">
-					<li class="ui-state-default prompt-option" id="option-atsymbol">@</li>
-
-					<li class="ui-state-default prompt-option" id="option-colon">:</li>
-
-					<li class="ui-state-default prompt-option" id="option-openbracket">[</li>
-
-					<li class="ui-state-default prompt-option" id="option-closebracket">]</li>
-
-					<li class="ui-state-default prompt-option" id="option-space" title="A space character.">␣</li>
-				</ul>
-			</div>
-
-			<div class="elements-tab" id="elements-tab-times">
-				<ul id="elements-times">
-					<li class="ui-state-default prompt-option" id="option-date" title="The date in DDD MMM dd format.">Date</li>
-
-					<li class="ui-state-default prompt-option" id="option-fulltime" title="The time in 24 hour hh:mm format.">24hr Time</li>
-
-					<li class="ui-state-default prompt-option" id="option-halftime" title="The time in 12 hour hh:mm (AM/PM) format.">12hr Time</li>
-
-					<li class="ui-state-default prompt-option" id="option-fulltimeseconds" title="The time in 24 hour hh:mm:ss format.">24hr Time w/ Seconds</li>
-
-					<li class="ui-state-default prompt-option" id="option-halftimeseconds" title="The time in 12 hour hh:mm:ss format.">12hr Time w/ Seconds</li>
-				</ul>
-			</div>
-
-		</div>
-
-
-		<div class="main-section left-section" id="elements-sortable">
-
-			<ul class="sortable" id="elements-list">
-			</ul>
-
-		</div>
-
-		<div id="elements-control-buttons">
-
-			<button id="button-element-reset-selected">Reset</button>
-
-			<button id="button-element-delete-selected">Delete</button>
-
-			<div id="container-spectrum-fg">
-				FG <input type="text" id="input-spectrum-fg"/>
-			</div>
-
-			<div id="container-spectrum-bg">
-				BG <input type="text" id="input-spectrum-bg"/>
-			</div>
-
-			<button id="button-element-reset-all">Reset All</button>
-
-			<button id="button-element-delete-all">Delete All</button>
-			
-		</div>
-
-		<div class="main-section left-section preview-dark" id="preview">
-			<ul id="preview-list">
+				<li class="ui-state-default prompt-option" id="option-promptchar" title="Normally $. Changes to # if logged in as root (current UID = 0).">$</li>
 			</ul>
 		</div>
 
-		<div class="main-section left-section" id="code-output-wrapper">
-			<textarea id="code-output-text" readonly></textarea>
+		<div class="elements-tab" id="elements-tab-dynamic">
+			<ul id="elements-dynamic">
+				<li class="ui-state-default prompt-option" id="option-returncode" title="The return code of the previous command if it exits non-zero. Otherwise blank.">Error Code</li>
+
+				<li class="ui-state-default prompt-option" id="option-gitstatus" title="If in a git repository, the current branch and status indicators. Otherwise blank.">Git Status</li>
+			</ul>
 		</div>
 
+		<div class="elements-tab" id="elements-tab-extra">
+			<ul id="elements-extra">
+				<li class="ui-state-default prompt-option" id="option-atsymbol">@</li>
+
+				<li class="ui-state-default prompt-option" id="option-colon">:</li>
+
+				<li class="ui-state-default prompt-option" id="option-openbracket">[</li>
+
+				<li class="ui-state-default prompt-option" id="option-closebracket">]</li>
+
+				<li class="ui-state-default prompt-option" id="option-space" title="A space character.">␣</li>
+			</ul>
+		</div>
+
+		<div class="elements-tab" id="elements-tab-times">
+			<ul id="elements-times">
+				<li class="ui-state-default prompt-option" id="option-date" title="The date in DDD MMM dd format.">Date</li>
+
+				<li class="ui-state-default prompt-option" id="option-fulltime" title="The time in 24 hour hh:mm format.">24hr Time</li>
+
+				<li class="ui-state-default prompt-option" id="option-halftime" title="The time in 12 hour hh:mm (AM/PM) format.">12hr Time</li>
+
+				<li class="ui-state-default prompt-option" id="option-fulltimeseconds" title="The time in 24 hour hh:mm:ss format.">24hr Time w/ Seconds</li>
+
+				<li class="ui-state-default prompt-option" id="option-halftimeseconds" title="The time in 12 hour hh:mm:ss format.">12hr Time w/ Seconds</li>
+			</ul>
+		</div>
+
+	</div>
+
+
+	<div class="main-section" id="elements-sortable">
+
+		<ul class="sortable" id="elements-list">
+		</ul>
+
+	</div>
+
+	<div class="main-section" id="elements-control-buttons">
+
+		<button id="button-element-reset-selected">Reset</button>
+
+		<button id="button-element-delete-selected">Delete</button>
+
+		<div id="container-spectrum-fg">
+			FG <input type="text" id="input-spectrum-fg"/>
+		</div>
+
+		<div id="container-spectrum-bg">
+			BG <input type="text" id="input-spectrum-bg"/>
+		</div>
+
+		<button id="button-element-reset-all">Reset All</button>
+
+		<button id="button-element-delete-all">Delete All</button>
+		
+	</div>
+
+	<div class="main-section preview-dark" id="preview">
+		<ul id="preview-list">
+		</ul>
+	</div>
+
+	<div class="main-section" id="code-output-wrapper">
+		<textarea id="code-output-text" readonly></textarea>
 	</div>
 
 	<div id="footer">
