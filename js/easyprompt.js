@@ -221,7 +221,6 @@ function generate_element(option_name, color_fg, color_bg)
 {
 	if(!preview_text.hasOwnProperty(option_name))
 	{
-		console.log("Option " + option_name + " not found.");
 		return false;
 	}
 
