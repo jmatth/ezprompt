@@ -1,18 +1,3 @@
-
-		//escape special characters for custom text
-		function bash_ps1_escape(raw_str)
-		{
-			var backslash_escape_regex = /\\/g;
-			var promptchar_escape_regex = /\\\$/g;
-			var substitution_escape_regex = /[^\\](\$[{\(])/g;
-			var prompt_and_substitution_escape_regex = /(\$[{\(])/g;
-
-			return raw_str
-				.replace(backslash_escape_regex, "\\\\\\")
-				.replace(promptchar_escape_regex, "\\\\\\\\\\\\\\$")
-				.replace(substitution_escape_regex, "\\\\$1")
-				.replace(prompt_and_substitution_escape_regex, "\\\\\\$1");
-		}
 /*Begin output objects*/
 
 var preview_text = {
@@ -270,7 +255,7 @@ function refresh_preview()
 		var preview_output;
 		if (option_name === "element-custom")
 		{
-			preview_output = option_element.text();
+			preview_output = remove_evil_chars(option_element.text());
 		}
 		else if(preview_text[option_name])
 		{
@@ -324,7 +309,7 @@ function refresh_code()
 		var output_text;
 		if (element_identifier === "element-custom")
 		{
-			output_text = bash_ps1_escape(option_element.text());
+			output_text = remove_evil_chars(option_element.text());
 		}
 		else if (code_output_text[element_identifier])
 		{
@@ -364,7 +349,6 @@ function refresh_code()
 			$("#code-output-text")
 			.text($("#code-output-text").text() + color_before + output_text + color_after);
 		}
-
 	}
 }
 
@@ -427,6 +411,13 @@ function update_element_color(color, spectrum_id)
 }
 
 /*End helper functions*/
+
+//remove characters that could break the prompt
+function remove_evil_chars(raw_str)
+{
+	var evil_regex = /[\\\(\){}\$]/g;
+	return raw_str.replace(evil_regex, "");
+}
 
 /*Begin page setup functions.*/
 
@@ -535,9 +526,19 @@ function activate_element_options()
 	});
 
 	//add custom text on button click
-	$("button#custom-text-button").click(function(){
+	$("button#custom-text-button")
+	.tooltip()
+	.click(function(){
 		var input_box = $("#custom-text-input");
-		var custom_text = input_box.val();
+		var custom_text = remove_evil_chars(input_box.val());
+
+		//if we had to remove bad characters, just change the
+		//text in the box and return.
+		if (custom_text !== input_box.val())
+		{
+			input_box.val(custom_text);
+			return;
+		}
 
 		//don't do anything if it's blank
 		if (!custom_text)
