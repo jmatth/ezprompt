@@ -213,6 +213,18 @@ li.prompt-option {
 	border-radius: 3px;
 }
 
+li#option-custom {
+	height: 60px;
+	display: inline-block;
+	padding: 2px 12px 2px 10px;
+	margin: 5px
+	border-radius: 3px;
+}
+
+li#option-custom input[type=text] {
+	width: 127px;
+}
+
 li.prompt-option.single-selected {
 	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
 }

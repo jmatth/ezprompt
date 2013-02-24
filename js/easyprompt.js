@@ -1,4 +1,18 @@
 
+		//escape special characters for custom text
+		function bash_ps1_escape(raw_str)
+		{
+			var backslash_escape_regex = /\\/g;
+			var promptchar_escape_regex = /\\\$/g;
+			var substitution_escape_regex = /[^\\](\$[{\(])/g;
+			var prompt_and_substitution_escape_regex = /(\$[{\(])/g;
+
+			return raw_str
+				.replace(backslash_escape_regex, "\\\\\\")
+				.replace(promptchar_escape_regex, "\\\\\\\\\\\\\\$")
+				.replace(substitution_escape_regex, "\\\\$1")
+				.replace(prompt_and_substitution_escape_regex, "\\\\\\$1");
+		}
 /*Begin output objects*/
 
 var preview_text = {
@@ -152,7 +166,6 @@ function add_prompt_element (source_id)
 	.siblings().removeClass('single-selected');
 
 	update_spectrums();
-	make_list_sortable();
 	refresh_page();
 }
 
@@ -216,23 +229,6 @@ function generate_time(half_hours, show_seconds)
 	return hours + minutes + seconds + hours_suffix;
 }
 
-//Generate a span to append to the preview list
-function generate_element(option_name, color_fg, color_bg)
-{
-	if(!preview_text.hasOwnProperty(option_name))
-	{
-		return false;
-	}
-
-	return '<li class="element-preview" element_id="' +
-		option_name + '">' + '<span class="preview-text" style="' +
-		(typeof(color_fg) === 'undefined' ? '' : 'color:' + color_fg + ';') + 
-		(typeof(color_bg) === 'undefined' ? '' : 'background-color:' + color_bg + ';') + 
-		'">' +
-		preview_text[option_name] + '</span></li>';
-
-}
-
 //change the foreground or color of the currently selected element
 function change_prompt_fg(hex_color, attribute)
 {
@@ -261,11 +257,38 @@ function refresh_preview()
 {
 	$("#preview-list").empty();
 	$("#elements-list").children("li").each(function(index) {
-		$("#preview-list").append(generate_element(
-				$(this).attr("element-identifier"),
-				$(this).attr("option-fg"),
-				$(this).attr("option-bg")));
+		$("#preview-list").append(generate_element($(this)));
 	});
+
+	//Generate a span to append to the preview list
+	function generate_element(option_element)
+	{
+		var option_name = option_element.attr("element-identifier");
+		var color_fg = option_element.attr("option-fg");
+		var color_bg = option_element.attr("option-bg");
+
+		var preview_output;
+		if (option_name === "element-custom")
+		{
+			preview_output = option_element.text();
+		}
+		else if(preview_text[option_name])
+		{
+			preview_output = preview_text[option_name];
+		}
+		else
+		{
+			return false;
+		}
+
+		return '<li class="element-preview" element_id="' +
+			option_name + '">' + '<span class="preview-text" style="' +
+			(typeof(color_fg) === 'undefined' ? '' : 'color:' + color_fg + ';') + 
+			(typeof(color_bg) === 'undefined' ? '' : 'background-color:' + color_bg + ';') + 
+			'">' +
+			preview_output + '</span></li>';
+
+	}
 }
 
 //generate the code for bashrc
@@ -276,17 +299,17 @@ function refresh_code()
 	$("#code-output-text").text('export PS1="');
 
 	$("#elements-list").children("li").each(function(index) {
-		append_code(
-			$(this).attr("element-identifier"),
-			$(this).attr("option-fg"),
-			$(this).attr("option-bg")
-		);
+		append_code($(this));
 	});
 
 	$("#code-output-text").text($("#code-output-text").text() + ' "');
 
-	function append_code(element_identifier, fg_code, bg_code)
+	function append_code(option_element)
 	{
+		var element_identifier = option_element.attr("element-identifier");
+		var fg_code = option_element.attr("option-fg");
+		var bg_code = option_element.attr("option-bg");
+
 		//insert any helper functions needed
 		if(code_output_pre[element_identifier] && functions_added.indexOf(element_identifier) == -1)
 		{
@@ -295,14 +318,22 @@ function refresh_code()
 			$("#code-output-text")
 			.text(code_output_pre[element_identifier] + "\n" + $("#code-output-text").text());
 		}
-		else
-		{
-			console.log("Not found");
-		}
 
 		//output the escape sequence, or the same text as in the preview
-		//if that does not exist.
-		var output_text = code_output_text[element_identifier] ? code_output_text[element_identifier] : preview_text[element_identifier];
+		//if that does not exist. if custom text, used what was entered.
+		var output_text;
+		if (element_identifier === "element-custom")
+		{
+			output_text = bash_ps1_escape(option_element.text());
+		}
+		else if (code_output_text[element_identifier])
+		{
+			output_text = code_output_text[element_identifier];
+		}
+		else
+		{
+			output_text = preview_text[element_identifier];
+		}
 
 		var color_before = '', color_after = '';
 
@@ -334,10 +365,6 @@ function refresh_code()
 			.text($("#code-output-text").text() + color_before + output_text + color_after);
 		}
 
-		else
-		{
-			console.log("output_text for " + element_identifier + " not found.");
-		}
 	}
 }
 
@@ -467,18 +494,6 @@ function activate_buttons()
 	});
 }
 
-function make_list_sortable()
-{
-	//FIXME: probably a more effecient way to do this
-	try{
-		$("#elements-list")
-		.sortable("destroy");
-	}catch(err){}
-
-	$("#elements-list")
-	.sortable({delay: 300, update: function(){refresh_page();}});
-}
-
 //create a spectrum color picker on the specified element.
 function make_spectrum(element_id) {
 
@@ -514,8 +529,40 @@ function make_spectrum(element_id) {
 //attach event listeners to available options.
 function activate_element_options()
 {
+	//add the predefined elements on click.
 	$("li.prompt-option").click(function(){
 		add_prompt_element($(this).attr("id"));
+	});
+
+	//add custom text on button click
+	$("button#custom-text-button").click(function(){
+		var input_box = $("#custom-text-input");
+		var custom_text = input_box.val();
+
+		//don't do anything if it's blank
+		if (!custom_text)
+		{
+			return;
+		}
+
+		input_box.val("");
+
+		$('<li class="ui-state-default prompt-option single-selected" id="element-number-' +
+			String(element_counter++) +
+			'" element-identifier="element-custom">' +
+			custom_text +
+			'</li>')
+		.on("click.single-select", function(){
+			if (!$(this).hasClass("single-selected"))
+			{
+				$(this).addClass('single-selected').siblings().removeClass('single-selected');
+			}
+
+			match_spectrums($(this).attr("id"));
+		})
+		.appendTo("#elements-list")
+		.siblings().removeClass('single-selected');
+		refresh_page();
 	});
 }
 
@@ -529,7 +576,9 @@ function refresh_page() {
 
 $(document).ready(function()
 {
-	make_list_sortable();
+	//make the list of added elements sortable
+	$("#elements-list")
+	.sortable({delay: 300, update: function(){refresh_page();}});
 
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();
