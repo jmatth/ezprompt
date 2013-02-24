@@ -92,29 +92,15 @@ var code_output_pre = {
 		"}\n"
 };
 
-
-
-
-var term_fg_color_codes = {
-	'#000':    '30',
-	'#f00':    '31',
-	'#008000': '32',
-	'#ff0':    '33',
-	'#00f':    '34',
-	'#f0f':    '35',
-	'#0ff':    '36',
-	'#fff':    '37'
-};
-
-var term_bg_color_codes = {
-	'#000':    '40',
-	'#f00':    '41',
-	'#008000': '42',
-	'#ff0':    '43',
-	'#00f':    '44',
-	'#f0f':    '45',
-	'#0ff':    '46',
-	'#fff':    '47'
+var term_color_codes = {
+	'#000':    '0',
+	'#f00':    '1',
+	'#008000': '2',
+	'#ff0':    '3',
+	'#00f':    '4',
+	'#f0f':    '5',
+	'#0ff':    '6',
+	'#fff':    '7'
 };
 
 /*End output objects*/
@@ -329,18 +315,18 @@ function refresh_code()
 			if (fg_code && bg_code)
 			{
 				color_before = color_before +
-					term_fg_color_codes[fg_code] + ";" +
-					term_bg_color_codes[bg_code] + "m\\]";
+					"3" + term_color_codes[fg_code] + ";" +
+					"4" + term_color_codes[bg_code] + "m\\]";
 			}
 			else if(fg_code)
 			{
 				color_before = color_before +
-					term_fg_color_codes[fg_code] + "m\\]";
+					"3" + term_color_codes[fg_code] + "m\\]";
 			}
 			else if(bg_code)
 			{
 				color_before = color_before +
-					term_bg_color_codes[bg_code] + "m\\]";
+					"4" + term_color_codes[bg_code] + "m\\]";
 			}
 		}
 		
