@@ -255,7 +255,7 @@ function refresh_preview()
 		var preview_output;
 		if (option_name === "element-custom")
 		{
-			preview_output = remove_evil_chars(option_element.text());
+			preview_output = option_element.text();
 		}
 		else if(preview_text[option_name])
 		{
@@ -309,7 +309,7 @@ function refresh_code()
 		var output_text;
 		if (element_identifier === "element-custom")
 		{
-			output_text = remove_evil_chars(option_element.text());
+			output_text = option_element.text();
 		}
 		else if (code_output_text[element_identifier])
 		{
@@ -411,13 +411,6 @@ function update_element_color(color, spectrum_id)
 }
 
 /*End helper functions*/
-
-//remove characters that could break the prompt
-function remove_evil_chars(raw_str)
-{
-	var evil_regex = /[\\\(\){}\$]/g;
-	return raw_str.replace(evil_regex, "");
-}
 
 /*Begin page setup functions.*/
 
@@ -564,6 +557,14 @@ function activate_element_options()
 		.appendTo("#elements-list")
 		.siblings().removeClass('single-selected');
 		refresh_page();
+
+		//remove characters that could break the prompt
+		function remove_evil_chars(raw_str)
+		{
+			var evil_regex = /[\\\(\){}\$]/g;
+			return raw_str.replace(evil_regex, "");
+		}
+
 	});
 }
 
