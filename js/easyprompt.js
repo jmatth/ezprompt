@@ -111,16 +111,18 @@ var element_counter = 0;
 
 /*Begin interactive calls*/
 
-function add_prompt_element (source_id)
+function add_prompt_element (source_object)
 {
 	//Make sure we actually have something to add
-	if(!source_id)
+	if(!source_object)
 	{
 		return;
 	}
 
+	var source_id = source_object.attr("id");
+
 	//append a copy to the list
-	$("#"+source_id)
+	source_object
 	.clone()
 	.attr("id", "element-number-" + String(element_counter++))
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
@@ -131,12 +133,12 @@ function add_prompt_element (source_id)
 			$(this).addClass('single-selected').siblings().removeClass('single-selected');
 		}
 
-		match_spectrums($(this).attr("id"));
+		match_spectrums($(this));
 	})
 	.appendTo("#elements-list")
 	.siblings().removeClass('single-selected');
 
-	update_spectrums();
+	match_spectrums(null);
 	refresh_page();
 }
 
@@ -159,7 +161,7 @@ function toggle_bg()
 		.addClass("preview-light");
 	}
 
-	update_spectrums();
+	match_spectrums($("#elements-list").children("li.single-selected"));
 }
 
 /*End interactive calls*/
@@ -200,35 +202,13 @@ function generate_time(half_hours, show_seconds)
 	return hours + minutes + seconds + hours_suffix;
 }
 
-//change the foreground or color of the currently selected element
-function change_prompt_fg(hex_color, attribute)
-{
-	try
-	{
-		if (attribute == 'fg')
-		{
-			$("#elements")
-			.children(".ui-sortable")
-			.children(".single-selected")
-			.css("color", hex_color);
-		}
-		else
-		{
-			$("#elements")
-			.children(".ui-sortable")
-			.children(".single-selected")
-			.children("span")
-			.css("background-color", hex_color);
-		}
-	} catch (e){}
-}
-
 //generate the preview list
 function refresh_preview()
 {
-	$("#preview-list").empty();
+	var preview_list = $("#preview-list");
+	preview_list.empty();
 	$("#elements-list").children("li").each(function(index) {
-		$("#preview-list").append(generate_element($(this)));
+		preview_list.append(generate_element($(this)));
 	});
 
 	//Generate a span to append to the preview list
@@ -267,13 +247,14 @@ function refresh_code()
 {
 	var functions_added = [];
 
-	$("#code-output-text").text('export PS1="');
+	var code_output = $("#code-output-text");
+	code_output.text('export PS1="');
 
 	$("#elements-list").children("li").each(function(index) {
 		append_code($(this));
 	});
 
-	$("#code-output-text").text($("#code-output-text").text() + ' "');
+	code_output.text(code_output.text() + ' "');
 
 	function append_code(option_element)
 	{
@@ -286,8 +267,8 @@ function refresh_code()
 		{
 			functions_added.push(element_identifier);
 
-			$("#code-output-text")
-			.text(code_output_pre[element_identifier] + "\n" + $("#code-output-text").text());
+			code_output
+			.text(code_output_pre[element_identifier] + "\n" + code_output.text());
 		}
 
 		//output the escape sequence, or the same text as in the preview
@@ -332,18 +313,17 @@ function refresh_code()
 		
 		if(output_text)
 		{
-			$("#code-output-text")
-			.text($("#code-output-text").text() + color_before + output_text + color_after);
+			code_output
+			.text(code_output.text() + color_before + output_text + color_after);
 		}
 	}
 }
 
 //update the spectrum colors to match the selected element
-function match_spectrums(element_id)
+function match_spectrums(source_element)
 {
-	var element = $("#" + element_id);
-	var fg_value = element.attr("option-fg");
-	var bg_value = element.attr("option-bg");
+	var fg_value = source_element ? source_element.attr("option-fg") : null;
+	var bg_value = source_element ? source_element.attr("option-bg") : null;
 
 	var preview_bg = $("#preview").hasClass("preview-light") ? "light" : "dark";
 
@@ -379,21 +359,6 @@ function match_spectrums(element_id)
 		}
 	}
 
-}
-
-//Wrapper to match the spectrums to the currently selected element
-function update_spectrums(){
-	match_spectrums($("#elements-list").children("li.single-selected").attr("id"));
-}
-
-function update_element_color(color, spectrum_id)
-{
-	//selected_element = $("#elements-list").children("li.single-selected");
-	try{
-		$("#elements-list")
-		.children("li.single-selected")
-		.attr(spectrum_id == "fg" ? "option-fg" : "option-bg", color);
-	}catch(e){}
 }
 
 /*End helper functions*/
@@ -490,7 +455,11 @@ function make_spectrum(element_id) {
 			['cyan', 'magenta', 'black', 'white']
 		],
 		move: function(color) {
-			update_element_color(color.toHexString(), element_suffix);
+			try{
+				$("#elements-list")
+				.children("li.single-selected")
+				.attr(element_suffix == "fg" ? "option-fg" : "option-bg", color.toHexString());
+			}catch(e){}
 			refresh_page();
 		}
 	});
@@ -501,7 +470,7 @@ function activate_element_options()
 {
 	//add the predefined elements on click.
 	$("li.prompt-option").click(function(){
-		add_prompt_element($(this).attr("id"));
+		add_prompt_element($(this));
 	});
 
 	//add custom text on button click
@@ -538,7 +507,7 @@ function activate_element_options()
 				$(this).addClass('single-selected').siblings().removeClass('single-selected');
 			}
 
-			match_spectrums($(this).attr("id"));
+			match_spectrums($(this));
 		})
 		.appendTo("#elements-list")
 		.siblings().removeClass('single-selected');
@@ -566,7 +535,7 @@ $(document).ready(function()
 {
 	//make the list of added elements sortable
 	$("#elements-list")
-	.sortable({delay: 300, update: function(){refresh_page();}});
+	.sortable({delay: 300, update: refresh_page()});
 
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();
