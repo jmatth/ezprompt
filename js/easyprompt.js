@@ -535,7 +535,7 @@ $(document).ready(function()
 {
 	//make the list of added elements sortable
 	$("#elements-list")
-	.sortable({delay: 300, update: refresh_page()});
+	.sortable({delay: 300, update: function(){refresh_page();}});
 
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();
