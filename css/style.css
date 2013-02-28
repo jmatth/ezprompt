@@ -225,14 +225,6 @@ li#option-custom input[type=text] {
 	width: 127px;
 }
 
-li.prompt-option.single-selected {
-	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
-}
-
-div#elements {
-	background: black;
-}
-
 ul#elements-list {
 	list-style-type: none;
 	margin-top: 17px;
@@ -241,13 +233,36 @@ ul#elements-list {
 	padding: 0;
 }
 
-ul#elements-list li {
+ul#elements-list li.prompt-option {
 	position: relative;
 	margin: 0px 3px 3px 0;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
 }
 
-ul#elements-list li.single-selected span{
-	box-shadow: 0px -5px 2px grey;
+ul#elements-list li.prompt-option.ui-selected,
+ul#elements-list li.prompt-option.ui-selecting {
+	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
+}
+
+li.prompt-option div.handle {
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	padding: 2px 0px 2px 0px;
+	left: -21px;
+	background-color: #0078ae;
+	background-size: 335px;
+	background-position-x: 0px;
+	background-position-y: -103px;
+	top: -1px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border: 1px solid #77d5f7;
+}
+
+div#elements {
+	background: black;
 }
 
 div#preview {
@@ -284,10 +299,6 @@ li.element-preview {
 	margin-left: 0px !important;
 	margin-right: 0px !important;
 	font-size: 24px;
-}
-
-li.element-preview div.handle {
-	display: none;
 }
 
 div#code-output-wrapper {

@@ -126,17 +126,10 @@ function add_prompt_element (source_object)
 	.clone()
 	.attr("id", "element-number-" + String(element_counter++))
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
-	.addClass("single-selected")
-	.on("click.single-select", function(){
-		if (!$(this).hasClass("single-selected"))
-		{
-			$(this).addClass('single-selected').siblings().removeClass('single-selected');
-		}
-
-		match_spectrums($(this));
-	})
+	.addClass("ui-selected")
+	.prepend('<div class="handle ui-icon"></div>')
 	.appendTo("#elements-list")
-	.siblings().removeClass('single-selected');
+	.siblings().removeClass('ui-selected');
 
 	match_spectrums(null);
 	refresh_page();
@@ -161,7 +154,7 @@ function toggle_bg()
 		.addClass("preview-light");
 	}
 
-	match_spectrums($("#elements-list").children("li.single-selected"));
+	match_spectrums($("#elements-list").children("li.ui-selected"));
 }
 
 /*End interactive calls*/
@@ -371,10 +364,10 @@ function activate_buttons()
 	$("#button-element-reset-selected").on("click", function() {
 		var succ_fist=true, succ_second=true;
 		try{
-			$("#elements-list").children("li.single-selected").removeAttr("option-fg");
+			$("#elements-list").children("li.ui-selected").removeAttr("option-fg");
 		}catch(e){succ_fist = false;}
 		try{
-			$("#elements-list").children("li.single-selected").removeAttr("option-bg");
+			$("#elements-list").children("li.ui-selected").removeAttr("option-bg");
 		}catch(e){succ_second = false;}
 
 		if (succ_fist || succ_second)
@@ -388,8 +381,8 @@ function activate_buttons()
 		var succ = true;
 		try
 		{
-			$("#elements-list").children("li.single-selected").remove();
-			$("#elements-list").children(":last").addClass("single-selected");
+			$("#elements-list").children("li.ui-selected").remove();
+			$("#elements-list").children(":last").addClass("ui-selected");
 		}catch(e){succ=false;}
 
 		if(succ)
@@ -457,7 +450,7 @@ function make_spectrum(element_id) {
 		move: function(color) {
 			try{
 				$("#elements-list")
-				.children("li.single-selected")
+				.children("li.ui-selected")
 				.attr(element_suffix == "fg" ? "option-fg" : "option-bg", color.toHexString());
 			}catch(e){}
 			refresh_page();
@@ -496,21 +489,21 @@ function activate_element_options()
 
 		input_box.val("");
 
-		$('<li class="ui-state-default prompt-option single-selected" id="element-number-' +
+		$('<li class="ui-state-default prompt-option ui-selected" id="element-number-' +
 			String(element_counter++) +
 			'" element-identifier="element-custom">' +
 			custom_text +
 			'</li>')
 		.on("click.single-select", function(){
-			if (!$(this).hasClass("single-selected"))
+			if (!$(this).hasClass("ui-selected"))
 			{
-				$(this).addClass('single-selected').siblings().removeClass('single-selected');
+				$(this).addClass('ui-selected').siblings().removeClass('ui-selected');
 			}
 
 			match_spectrums($(this));
 		})
 		.appendTo("#elements-list")
-		.siblings().removeClass('single-selected');
+		.siblings().removeClass('ui-selected');
 		refresh_page();
 
 		//remove characters that could break the prompt
@@ -535,7 +528,8 @@ $(document).ready(function()
 {
 	//make the list of added elements sortable
 	$("#elements-list")
-	.sortable({delay: 300, update: function(){refresh_page();}});
+	.sortable({handle: ".handle", delay: 300, update: function(){refresh_page();}})
+	.selectable();
 
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();
