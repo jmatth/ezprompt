@@ -131,7 +131,7 @@ function add_prompt_element (source_object)
 	.appendTo("#elements-list")
 	.siblings().removeClass('ui-selected');
 
-	match_spectrums(null);
+	match_spectrums();
 	refresh_page();
 }
 
@@ -154,7 +154,7 @@ function toggle_bg()
 		.addClass("preview-light");
 	}
 
-	match_spectrums($("#elements-list").children("li.ui-selected"));
+	match_spectrums();
 }
 
 /*End interactive calls*/
@@ -313,10 +313,21 @@ function refresh_code()
 }
 
 //update the spectrum colors to match the selected element
-function match_spectrums(source_element)
+function match_spectrums()
 {
-	var fg_value = source_element ? source_element.attr("option-fg") : null;
-	var bg_value = source_element ? source_element.attr("option-bg") : null;
+	var source_element = $(".ui-selected");
+	console.log(source_element.length);
+	var fg_value, bg_value;
+	if (source_element.length !== 1)
+	{
+		fg_value = null;
+		bg_value = null;
+	}
+	else
+	{
+		var fg_value = source_element ? source_element.attr("option-fg") : null;
+		var bg_value = source_element ? source_element.attr("option-bg") : null;
+	}
 
 	var preview_bg = $("#preview").hasClass("preview-light") ? "light" : "dark";
 
@@ -351,7 +362,6 @@ function match_spectrums(source_element)
 			$("#input-spectrum-bg").spectrum("set", "white");
 		}
 	}
-
 }
 
 /*End helper functions*/
@@ -372,7 +382,7 @@ function activate_buttons()
 
 		if (succ_fist || succ_second)
 		{
-			match_spectrums(null);
+			match_spectrums();
 			refresh_page();
 		}
 	});
@@ -387,7 +397,7 @@ function activate_buttons()
 
 		if(succ)
 		{
-			match_spectrums(null);
+			match_spectrums();
 			refresh_page();
 		}
 	});
@@ -403,7 +413,7 @@ function activate_buttons()
 
 		if (succ_fist || succ_second)
 		{
-			match_spectrums(null);
+			match_spectrums();
 			refresh_page();
 		}
 	});
@@ -416,7 +426,7 @@ function activate_buttons()
 
 		if(succ)
 		{
-			match_spectrums(null);
+			match_spectrums();
 			refresh_page();
 		}
 	});
@@ -500,7 +510,7 @@ function activate_element_options()
 				$(this).addClass('ui-selected').siblings().removeClass('ui-selected');
 			}
 
-			match_spectrums($(this));
+			match_spectrums();
 		})
 		.appendTo("#elements-list")
 		.siblings().removeClass('ui-selected');
@@ -529,7 +539,7 @@ $(document).ready(function()
 	//make the list of added elements sortable
 	$("#elements-list")
 	.sortable({handle: ".handle", tolerance: "pointer", update: function(){refresh_page();}})
-	.selectable();
+	.selectable({selected: function(){match_spectrums()}});
 
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();
