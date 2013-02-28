@@ -528,7 +528,7 @@ $(document).ready(function()
 {
 	//make the list of added elements sortable
 	$("#elements-list")
-	.sortable({handle: ".handle", delay: 300, update: function(){refresh_page();}})
+	.sortable({handle: ".handle", tolerance: "pointer", update: function(){refresh_page();}})
 	.selectable();
 
 	//separate the available sections into tabs.
