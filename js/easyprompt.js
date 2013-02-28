@@ -316,7 +316,6 @@ function refresh_code()
 function match_spectrums()
 {
 	var source_element = $(".ui-selected");
-	console.log(source_element.length);
 	var fg_value, bg_value;
 	if (source_element.length !== 1)
 	{
@@ -325,8 +324,8 @@ function match_spectrums()
 	}
 	else
 	{
-		var fg_value = source_element ? source_element.attr("option-fg") : null;
-		var bg_value = source_element ? source_element.attr("option-bg") : null;
+		fg_value = source_element ? source_element.attr("option-fg") : null;
+		bg_value = source_element ? source_element.attr("option-bg") : null;
 	}
 
 	var preview_bg = $("#preview").hasClass("preview-light") ? "light" : "dark";
