@@ -329,16 +329,40 @@ function refresh_code()
 function match_spectrums()
 {
 	var source_element = $(".ui-selected");
-	var fg_value, bg_value;
-	if (source_element.length !== 1)
+	var fg_value = source_element ? source_element.attr("option-fg") : null;
+	var bg_value = source_element ? source_element.attr("option-bg") : null;
+
+	if (source_element && source_element.length > 1)
 	{
-		fg_value = null;
-		bg_value = null;
-	}
-	else
-	{
-		fg_value = source_element ? source_element.attr("option-fg") : null;
-		bg_value = source_element ? source_element.attr("option-bg") : null;
+		var previous_fg = $(source_element[0]).attr('option-fg');
+		var previous_bg = $(source_element[0]).attr('option-bg');
+		var current_fg, current_bg;
+		var check_fg = true, check_bg = true;
+		for (var i = 1; i < source_element.length; i += 1)
+		{
+			console.log("looping");
+			current_fg = $(source_element[i]).attr("option-fg") || null;
+			current_bg = $(source_element[i]).attr("option-bg") || null;
+
+			if (check_fg && current_fg != previous_fg)
+			{
+				fg_value = null;
+				check_fg = false;
+			}
+			if (check_bg && current_bg != previous_bg)
+			{
+				bg_value = null;
+				check_bg = false;
+			}
+
+			if (!check_fg && !check_bg)
+			{
+				break;
+			}
+
+			preview_fg = current_fg;
+			preview_bg = current_bg;
+		}
 	}
 
 	var preview_bg = $("#preview").hasClass("preview-light") ? "light" : "dark";
