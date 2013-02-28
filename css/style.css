@@ -250,6 +250,11 @@ ul#elements-list li.prompt-option.ui-selecting {
 	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
 }
 
+ul#elements-list li.prompt-option.ui-selecting {
+	margin-left: 0px !important;
+	border-radius: 3px;
+}
+
 li.prompt-option div.handle {
 	position: absolute;
 	height: 20px;

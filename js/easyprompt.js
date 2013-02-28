@@ -127,6 +127,19 @@ function add_prompt_element (source_object)
 	.attr("id", "element-number-" + String(element_counter++))
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
 	.addClass("ui-selected")
+	.on("click.quickselect", function() {
+		var current_element = $(this);
+		if(!current_element.hasClass("ui-selected"))
+		{
+			current_element
+			.addClass("ui-selected");
+		}
+		current_element
+		.siblings()
+		.removeClass("ui-selected");
+		
+		match_spectrums();
+	})
 	.prepend('<div class="ui-state-default ui-icon prompt-option handle"></div>')
 	.appendTo("#elements-list")
 	.siblings().removeClass('ui-selected');
@@ -537,8 +550,29 @@ $(document).ready(function()
 {
 	//make the list of added elements sortable
 	$("#elements-list")
-	.sortable({handle: ".handle", tolerance: "pointer", update: function(){refresh_page();}})
-	.selectable({selected: function(){match_spectrums()}});
+	.sortable({
+		handle: ".handle",
+		tolerance: "pointer", 
+		update: function(){refresh_page();}
+		
+	})
+	.selectable({
+		distance: 50,
+		selected: function(){
+			match_spectrums();
+
+			$("#elements-list")
+			.children("li.prompt-option")
+			.children("div.handle")
+			.css("display", "");
+		},
+		start: function(){
+			$("#elements-list")
+			.children("li.prompt-option")
+			.children("div.handle")
+			.css("display", "none");
+		}
+	});
 
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();
