@@ -236,8 +236,13 @@ ul#elements-list {
 ul#elements-list li.prompt-option {
 	position: relative;
 	margin: 0px 3px 3px 0;
+}
+
+ul#elements-list li.prompt-option:hover,
+ul#elements-list li.prompt-option.ui-sortable-helper {
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
+	margin-left: 23px;
 }
 
 ul#elements-list li.prompt-option.ui-selected,
@@ -259,6 +264,12 @@ li.prompt-option div.handle {
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
 	border: 1px solid #77d5f7;
+	display: none;
+}
+
+li.prompt-option:hover div.handle,
+li.prompt-option.ui-sortable-helper div.handle {
+	display: block;
 }
 
 div#elements {
