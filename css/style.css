@@ -272,6 +272,11 @@ li.prompt-option.ui-sortable-helper div.handle {
 	display: block;
 }
 
+/*Fix the invisible placeholder forcing other elements down.*/
+li.prompt-option.ui-sortable-placeholder {
+	height: 0px !important;
+}
+
 div#elements {
 	background: black;
 }
