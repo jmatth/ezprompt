@@ -252,7 +252,7 @@ ul#elements-list li.prompt-option.ui-selecting {
 
 li.prompt-option div.handle {
 	position: absolute;
-	height: 20px;
+	height: 21px;
 	width: 20px;
 	padding: 2px 0px 2px 0px;
 	left: -21px;
