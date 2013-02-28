@@ -127,7 +127,7 @@ function add_prompt_element (source_object)
 	.attr("id", "element-number-" + String(element_counter++))
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
 	.addClass("ui-selected")
-	.prepend('<div class="handle ui-icon"></div>')
+	.prepend('<div class="ui-state-default ui-icon prompt-option handle"></div>')
 	.appendTo("#elements-list")
 	.siblings().removeClass('ui-selected');
 

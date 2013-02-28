@@ -252,7 +252,7 @@ ul#elements-list li.prompt-option.ui-selecting {
 
 li.prompt-option div.handle {
 	position: absolute;
-	height: 21px;
+	height: 20px;
 	width: 20px;
 	padding: 2px 0px 2px 0px;
 	left: -21px;
@@ -263,7 +263,6 @@ li.prompt-option div.handle {
 	top: -1px;
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
-	border: 1px solid #77d5f7;
 	display: none;
 }
 
