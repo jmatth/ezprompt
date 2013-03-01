@@ -153,18 +153,27 @@ function add_prompt_element (source_object)
 function toggle_bg()
 {
 	var preview = $("#preview");
+	var bg_switch = $("#switch-toggle-bg");
 
 	if (preview.hasClass("preview-light"))
 	{
 		preview
 		.removeClass("preview-light")
 		.addClass("preview-dark");
+
+		bg_switch
+		.removeClass("switch-toggle-bg-light")
+		.addClass("switch-toggle-bg-dark")
 	}
 	else
 	{
 		preview
 		.removeClass("preview-dark")
 		.addClass("preview-light");
+
+		bg_switch
+		.removeClass("switch-toggle-bg-dark")
+		.addClass("switch-toggle-bg-light")
 	}
 
 	match_spectrums();
@@ -596,6 +605,8 @@ $(document).ready(function()
 			.css("display", "none");
 		}
 	});
+
+	$("#switch-toggle-bg").on("click", toggle_bg);
 
 	//separate the available sections into tabs.
 	$("#elements-options").tabs();

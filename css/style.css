@@ -290,6 +290,26 @@ div#preview {
 	font-family: terminus;
 }
 
+div#preview div#switch-toggle-bg {
+	position: absolute;
+	right: -65px;
+	top: 0px;
+	height: 70px;
+	width: 50px;
+	background: transparent url(images/light-switch.png) no-repeat;
+	background-size: auto 60px;
+	/*background-color: transparent;*/
+	/*background-image: url(images/light-switch.png);*/
+}
+
+div#preview div.switch-toggle-bg-dark {
+	background-position-x: 0px !important;
+}
+
+div#preview div.switch-toggle-bg-light {
+	background-position-x: -52px !important;
+}
+
 div.preview-dark {
 	background: black;
 	color: black;
