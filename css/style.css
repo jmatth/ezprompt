@@ -298,8 +298,7 @@ div#preview div#switch-toggle-bg {
 	width: 50px;
 	background: transparent url(images/light-switch.png) no-repeat;
 	background-size: auto 60px;
-	/*background-color: transparent;*/
-	/*background-image: url(images/light-switch.png);*/
+	cursor: pointer;
 }
 
 div#preview div.switch-toggle-bg-dark {
