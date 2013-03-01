@@ -340,7 +340,6 @@ function match_spectrums()
 		var check_fg = true, check_bg = true;
 		for (var i = 1; i < source_element.length; i += 1)
 		{
-			console.log("looping");
 			current_fg = $(source_element[i]).attr("option-fg") || null;
 			current_bg = $(source_element[i]).attr("option-bg") || null;
 
