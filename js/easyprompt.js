@@ -127,19 +127,6 @@ function add_prompt_element (source_object)
 	.attr("id", "element-number-" + String(element_counter++))
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
 	.addClass("ui-selected")
-	.on("click.quickselect", function() {
-		var current_element = $(this);
-		if(!current_element.hasClass("ui-selected"))
-		{
-			current_element
-			.addClass("ui-selected");
-		}
-		current_element
-		.siblings()
-		.removeClass("ui-selected");
-		
-		match_spectrums();
-	})
 	.hover(function() {
 		if (!$("div.ui-selectable-helper").length)
 		{
@@ -598,7 +585,6 @@ $(document).ready(function()
 		
 	})
 	.selectable({
-		distance: 50,
 		stop: function(){
 			match_spectrums();
 
