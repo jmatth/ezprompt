@@ -128,6 +128,8 @@ function add_prompt_element (source_object)
 	.attr("element-identifier", "element-" + source_id.split("-")[1])
 	.addClass("ui-selected")
 	.hover(function() {
+		//FIXME: there may be a better way to find if there is a select operation currently going on
+		//this is currently searching the DOM to see if the div for the "lasso" exists.
 		if (!$("div.ui-selectable-helper").length)
 		{
 			$(this).addClass("prompt-option-hover");
