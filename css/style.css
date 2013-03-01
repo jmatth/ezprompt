@@ -238,21 +238,16 @@ ul#elements-list li.prompt-option {
 	margin: 0px 3px 3px 0;
 }
 
-ul#elements-list li.prompt-option:hover,
-ul#elements-list li.prompt-option.ui-sortable-helper {
+ul#elements-list li.prompt-option-hover,
+ul#elements-list li.prompt-option-sticky-hover {
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
-	margin-left: 23px;
+	margin-left: 23px !important;
 }
 
 ul#elements-list li.prompt-option.ui-selected,
 ul#elements-list li.prompt-option.ui-selecting {
 	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
-}
-
-ul#elements-list li.prompt-option.ui-selecting {
-	margin-left: 0px !important;
-	border-radius: 3px;
 }
 
 li.prompt-option div.handle {
@@ -271,8 +266,8 @@ li.prompt-option div.handle {
 	display: none;
 }
 
-li.prompt-option:hover div.handle,
-li.prompt-option.ui-sortable-helper div.handle {
+li.prompt-option-hover div.handle,
+li.prompt-option-sticky-hover div.handle {
 	display: block;
 }
 

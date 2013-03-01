@@ -140,6 +140,15 @@ function add_prompt_element (source_object)
 		
 		match_spectrums();
 	})
+	.hover(function() {
+		if (!$("div.ui-selectable-helper").length)
+		{
+			$(this).addClass("prompt-option-hover");
+		}
+	},
+	function() {
+		$(this).removeClass("prompt-option-hover");
+	})
 	.prepend('<div class="ui-state-default ui-icon prompt-option handle"></div>')
 	.appendTo("#elements-list")
 	.siblings().removeClass('ui-selected');
@@ -163,7 +172,7 @@ function toggle_bg()
 
 		bg_switch
 		.removeClass("switch-toggle-bg-light")
-		.addClass("switch-toggle-bg-dark")
+		.addClass("switch-toggle-bg-dark");
 	}
 	else
 	{
@@ -173,7 +182,7 @@ function toggle_bg()
 
 		bg_switch
 		.removeClass("switch-toggle-bg-dark")
-		.addClass("switch-toggle-bg-light")
+		.addClass("switch-toggle-bg-light");
 	}
 
 	match_spectrums();
@@ -590,19 +599,22 @@ $(document).ready(function()
 	})
 	.selectable({
 		distance: 50,
-		selected: function(){
+		stop: function(){
 			match_spectrums();
 
 			$("#elements-list")
 			.children("li.prompt-option")
-			.children("div.handle")
-			.css("display", "");
+			.removeClass("prompt-option-sticky-hover");
 		},
 		start: function(){
 			$("#elements-list")
 			.children("li.prompt-option")
-			.children("div.handle")
-			.css("display", "none");
+			.each(function() {
+				if ($(this).hasClass("prompt-option-hover"))
+				{
+					$(this).addClass("prompt-option-sticky-hover");
+				}
+			});
 		}
 	});
 
