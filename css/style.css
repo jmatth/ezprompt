@@ -346,20 +346,29 @@ textarea#code-output-text {
 }
 
 div#footer {
-	z-index: 1;
-	width: 97%;
+	position: relative;
+	width: 400px;
 	text-align: center;
-	position: absolute;
-	top: 800px;
+	font-size: x-small;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	padding: 10px;
+	background: #FFFFFF;
+	border-radius: 5px;
 }
 
-@media all and (min-height: 850px){
-	div#footer {
-		z-index: 1;
-		width: 97%;
-		text-align: center;
-		position: absolute;
-		top: auto;
-		bottom: 0px;
-	}
+div#footer p {
+	font-size: 9pt;
+	margin: 5px 0px;
+	color: black;
+}
+
+div#footer a {
+	text-decoration: none;
+	color: #0A4256;
+}
+
+div#footer a:hover {
+	text-decoration: underline;
 }
