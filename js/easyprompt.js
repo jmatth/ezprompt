@@ -15,10 +15,6 @@ var preview_text = {
 	'element-fulltime': generate_time(false, false),
 	'element-halftime': generate_time(true, false),
 	'element-promptchar': '$',
-	'element-atsymbol': '@',
-	'element-colon': ':',
-	'element-openbracket': '[',
-	'element-closebracket': ']',
 	'element-space': ' ',
 	'element-returncode': '1',
 	'element-gitstatus': '[master]'
@@ -231,19 +227,7 @@ function refresh_preview()
 		var color_fg = option_element.attr("option-fg");
 		var color_bg = option_element.attr("option-bg");
 
-		var preview_output;
-		if (option_name === "element-custom")
-		{
-			preview_output = option_element.text();
-		}
-		else if(preview_text[option_name])
-		{
-			preview_output = preview_text[option_name];
-		}
-		else
-		{
-			return false;
-		}
+		var preview_output = preview_text[option_name] || option_element.text();
 
 		return '<li class="element-preview" element_id="' +
 			option_name + '">' + '<span class="preview-text" style="' +
@@ -287,17 +271,17 @@ function refresh_code()
 		//output the escape sequence, or the same text as in the preview
 		//if that does not exist. if custom text, used what was entered.
 		var output_text;
-		if (element_identifier === "element-custom")
-		{
-			output_text = option_element.text();
-		}
-		else if (code_output_text[element_identifier])
+		if (code_output_text[element_identifier])
 		{
 			output_text = code_output_text[element_identifier];
 		}
-		else
+		else if (preview_text[element_identifier])
 		{
 			output_text = preview_text[element_identifier];
+		}
+		else
+		{
+			output_text = option_element.text();
 		}
 
 		var color_before = '', color_after = '';
