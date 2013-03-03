@@ -319,7 +319,7 @@ function refresh_code()
 //update the spectrum colors to match the selected element
 function match_spectrums()
 {
-	var source_element = $(".ui-selected");
+	var source_element = $("#elements-list").children("li.ui-selected");
 	var fg_value = source_element ? source_element.attr("option-fg") : null;
 	var bg_value = source_element ? source_element.attr("option-bg") : null;
 
@@ -498,7 +498,7 @@ function make_spectrum(element_id) {
 function activate_element_options()
 {
 	//add the predefined elements on click.
-	$("li.prompt-option").click(function(){
+	$("li.prompt-option-origin").click(function(){
 		add_prompt_element($(this));
 	});
 
