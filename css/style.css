@@ -1,374 +1,374 @@
 @font-face {
-	font-family: cf-revolution;
-	src: url(../fonts/cf_revolution.ttf);
+    font-family: cf-revolution;
+    src: url(../fonts/cf_revolution.ttf);
 }
 
 @font-face {
-	font-family: terminus;
-	src: url(../fonts/terminus.ttf);
+    font-family: terminus;
+    src: url(../fonts/terminus.ttf);
 }
 
 body {
-	background-color: #0078AD;
-	color: white;
+    background-color: #0078AD;
+    color: white;
 }
 
 div#header {
-	width: 100%;
-	height: 55px;
-	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	text-align: center;
-	box-shadow: 0px 5px 15px #000;
+    width: 100%;
+    height: 55px;
+    background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    box-shadow: 0px 5px 15px #000;
 }
 
 div#header div#header-wrapper{
-	width: 700px;
-	height: 20px;
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
+    width: 700px;
+    height: 20px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div#header div#header-wrapper span#name{
-	position: absolute;
-	left: 0px;
-	top: 4px;
-	font-size: 40px;
-	color: #000;
-	font-family: cf-revolution;
+    position: absolute;
+    left: 0px;
+    top: 4px;
+    font-size: 40px;
+    color: #000;
+    font-family: cf-revolution;
 }
 
 div#header div#header-wrapper span#subtitle{
-	position: absolute;
-	left: 255px;
-	bottom: -27px;
-	font-size: 18px;
-	color: #000;
+    position: absolute;
+    left: 255px;
+    bottom: -27px;
+    font-size: 18px;
+    color: #000;
 }
 
 textarea {
-	resize: none;
+    resize: none;
 }
 
 button {
-	border-style: none;
-	border-radius: 5px;
-	background-color: #dfdfdf;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #dfdfdf;
 }
 
 button:active {
-	background-color: #b5b5b5;
+    background-color: #b5b5b5;
 }
 
 div.main-container {
-	z-index: 5;
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 66px;
-	min-height: 488px;
-	width: 820px;
+    z-index: 5;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 66px;
+    min-height: 488px;
+    width: 820px;
 }
 
 div.elements-tab {
-	padding: 0px !important;
+    padding: 0px !important;
 }
 
 div#elements-options {
-	border-width: 0px;
+    border-width: 0px;
 }
 
 ul#elements-options-tabs {
-	padding-left: 22px;
+    padding-left: 22px;
 }
 
 div#elements-sortable {
-	position: relative;
-	margin-top: 20px;
+    position: relative;
+    margin-top: 20px;
 }
 
 div#elements-control-buttons {
-	position: relative;
-	background: none;
-	border-style: none;
+    position: relative;
+    background: none;
+    border-style: none;
 }
 
 div#elements-control-buttons button {
-	display: inline;
-	position: relative;
-	top: 10px;
-	height: 33px;
-	width: 100px;
-	font-size: 16px;
+    display: inline;
+    position: relative;
+    top: 10px;
+    height: 33px;
+    width: 100px;
+    font-size: 16px;
 }
 
 div#elements-control-buttons button#button-element-reset-selected {
-	float: left;
+    float: left;
 }
 
 div#elements-control-buttons button#button-element-delete-selected {
-	float: left;
-	margin-right: 8px;
+    float: left;
+    margin-right: 8px;
 }
 
 div#elements-control-buttons button#button-element-reset-all {
-	float: right;
+    float: right;
 }
 
 div#elements-control-buttons button#button-element-delete-all {
-	float: right;
-	margin-left: 8px
+    float: right;
+    margin-left: 8px
 }
 
 div#spectrum-wrapper {
-	position: relative;
-	top: -75px;
-	left: 5px;
+    position: relative;
+    top: -75px;
+    left: 5px;
 }
 
 div#container-spectrum {
-	position: absolute;
-	top: 10px;
-	left: 250px;
-	font-size: 26px;
+    position: absolute;
+    top: 10px;
+    left: 250px;
+    font-size: 26px;
 }
 
 div.main-section {
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	border-style: solid;
-	background-color: white;
-	border-radius: 5px;
-	min-height: 60px;
-	float: none;
-	width: 700px;
-	float: none;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    background-color: white;
+    border-radius: 5px;
+    min-height: 60px;
+    float: none;
+    width: 700px;
+    float: none;
 }
 
 div.main-section-instructions {
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	float: none;
-	width: 700px;
-	float: none;
-	font-size: 23px;
-	margin-bottom: -20px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    width: 700px;
+    float: none;
+    font-size: 23px;
+    margin-bottom: -20px;
 }
 
 div#instructions-step-one {
-	margin-top: 80px;
+    margin-top: 80px;
 }
 
 div#instructions-step-two {
-	margin-top: -10px;
+    margin-top: -10px;
 }
 
 div#instructions-step-three {
-	margin-top: -25px;
+    margin-top: -25px;
 }
 
 div#instructions-step-four {
-	margin-top: -10px;
+    margin-top: -10px;
 }
 
 div.row {
-	float: none;
-	width: 1200px;
-	min-height: 100px;
-	margin-left: auto;
-	margin-right: auto;
+    float: none;
+    width: 1200px;
+    min-height: 100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.right-section {
-	float: none;
-	margin: 10px 10px 10px 75px;
+    float: none;
+    margin: 10px 10px 10px 75px;
 }
 
 div.swatches {
-	float: none;
-	border-width: 0px;
-	margin: 10px 10px 10px 75px;
+    float: none;
+    border-width: 0px;
+    margin: 10px 10px 10px 75px;
 }
 
 div#swatches-fg {
 }
 
 li.border-hidden {
-	border-width: 0px;
-	margin-left: 0 !important;
-	margin-right: 0 !important;
+    border-width: 0px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 li.prompt-option {
-	height: 20px;
-	display: inline-block;
-	cursor: pointer;
-	padding: 2px 10px 2px 10px;
-	margin: 5px;
-	border-radius: 3px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 2px 10px 2px 10px;
+    margin: 5px;
+    border-radius: 3px;
 }
 
 li#option-custom {
-	height: 60px;
-	display: inline-block;
-	padding: 2px 12px 2px 10px;
-	margin: 5px
-	border-radius: 3px;
+    height: 60px;
+    display: inline-block;
+    padding: 2px 12px 2px 10px;
+    margin: 5px
+    border-radius: 3px;
 }
 
 li#option-custom input[type=text] {
-	width: 127px;
+    width: 127px;
 }
 
 ul#elements-list {
-	list-style-type: none;
-	margin-top: 17px;
-	margin-bottom: 0px;
-	margin-left: 20px;
-	padding: 0;
+    list-style-type: none;
+    margin-top: 17px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    padding: 0;
 }
 
 ul#elements-list li.prompt-option {
-	position: relative;
-	margin: 0px 3px 3px 0;
+    position: relative;
+    margin: 0px 3px 3px 0;
 }
 
 ul#elements-list li.prompt-option-hover,
 ul#elements-list li.prompt-option-sticky-hover {
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
-	margin-left: 23px !important;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin-left: 23px !important;
 }
 
 ul#elements-list li.prompt-option.ui-selected,
 ul#elements-list li.prompt-option.ui-selecting {
-	background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
+    background: #6eac2c url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x;
 }
 
 li.prompt-option div.handle {
-	position: absolute;
-	height: 20px;
-	width: 20px;
-	padding: 2px 0px 2px 0px;
-	left: -21px;
-	background-color: #0078ae;
-	background-size: 335px;
-	background-position-x: 0px;
-	background-position-y: -103px;
-	top: -1px;
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
-	display: none;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    padding: 2px 0px 2px 0px;
+    left: -21px;
+    background-color: #0078ae;
+    background-size: 335px;
+    background-position-x: 0px;
+    background-position-y: -103px;
+    top: -1px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: none;
 }
 
 li.prompt-option-hover div.handle,
 li.prompt-option-sticky-hover div.handle {
-	display: block;
+    display: block;
 }
 
 /*Fix the invisible placeholder forcing other elements down.*/
 li.prompt-option.ui-sortable-placeholder {
-	height: 0px !important;
+    height: 0px !important;
 }
 
 div#elements {
-	background: black;
+    background: black;
 }
 
 div#preview {
-	position: relative;
-	font-family: terminus;
+    position: relative;
+    font-family: terminus;
 }
 
 div#preview div#switch-toggle-bg {
-	position: absolute;
-	right: -65px;
-	top: 0px;
-	height: 70px;
-	width: 50px;
-	background: transparent url(images/light-switch.png) no-repeat;
-	background-size: auto 60px;
-	cursor: pointer;
+    position: absolute;
+    right: -65px;
+    top: 0px;
+    height: 70px;
+    width: 50px;
+    background: transparent url(images/light-switch.png) no-repeat;
+    background-size: auto 60px;
+    cursor: pointer;
 }
 
 div#preview div.switch-toggle-bg-dark {
-	background-position-x: 0px !important;
+    background-position-x: 0px !important;
 }
 
 div#preview div.switch-toggle-bg-light {
-	background-position-x: -52px !important;
+    background-position-x: -52px !important;
 }
 
 div.preview-dark {
-	background: black;
-	color: black;
+    background: black;
+    color: black;
 }
 
 div.preview-dark ul#preview-list{
-	color: white;
+    color: white;
 }
 
 div.preview-light {
-	background: white;
-	color: white;
+    background: white;
+    color: white;
 }
 
 div.preview-light ul#preview-list{
-	color: black;
+    color: black;
 }
 
 ul#preview-list {
-	list-style: none;
-	padding-left: 24px;
+    list-style: none;
+    padding-left: 24px;
 }
 
 li.element-preview {
-	display: inline;
-	border-width: 0px;
-	margin-left: 0px !important;
-	margin-right: 0px !important;
-	font-size: 24px;
+    display: inline;
+    border-width: 0px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    font-size: 24px;
 }
 
 div#code-output-wrapper {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 textarea#code-output-text {
-	width: 694px;
-	height: 180px;
-	margin-bottom: -5px;
+    width: 694px;
+    height: 180px;
+    margin-bottom: -5px;
 }
 
 div#footer {
-	position: relative;
-	width: 400px;
-	text-align: center;
-	font-size: x-small;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 40px;
-	padding: 10px;
-	background: #FFFFFF;
-	border-radius: 5px;
+    position: relative;
+    width: 400px;
+    text-align: center;
+    font-size: x-small;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    padding: 10px;
+    background: #FFFFFF;
+    border-radius: 5px;
 }
 
 div#footer p {
-	font-size: 9pt;
-	margin: 5px 0px;
-	color: black;
+    font-size: 9pt;
+    margin: 5px 0px;
+    color: black;
 }
 
 div#footer a {
-	text-decoration: none;
-	color: #0A4256;
+    text-decoration: none;
+    color: #0A4256;
 }
 
 div#footer a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
