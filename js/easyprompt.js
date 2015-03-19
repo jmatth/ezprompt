@@ -16,6 +16,7 @@ var preview_text = {
     'element-halftime': generate_time(true, false),
     'element-promptchar': '$',
     'element-space': ' ',
+    'element-newline': '\\n',
     'element-returncode': '1',
     'element-gitstatus': '[master]'
 };
@@ -229,13 +230,16 @@ function refresh_preview()
 
         var preview_output = preview_text[option_name] || option_element.text();
 
+        if (preview_output == preview_text['element-newline']) {
+            return '<br />';
+        }
+
         return '<li class="element-preview" element_id="' +
             option_name + '">' + '<span class="preview-text" style="' +
             (typeof(color_fg) === 'undefined' ? '' : 'color:' + color_fg + ';') + 
             (typeof(color_bg) === 'undefined' ? '' : 'background-color:' + color_bg + ';') + 
             '">' +
             preview_output + '</span></li>';
-
     }
 }
 
