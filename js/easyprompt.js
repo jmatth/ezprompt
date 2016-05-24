@@ -1,91 +1,119 @@
 /*Begin output objects*/
 
-var preview_text = {
-    'element-username': 'user',
-    'element-hostname': 'host',
-    'element-fqdn': 'host.domain.com',
-    'element-shell': 'bash',
-    'element-shellversion': '4.2',
-    'element-shellrelease': '4.2.42',
-    'element-pathtocurrentdirectory': '~/dir',
-    'element-currentdirectory': 'dir',
-    'element-date': generate_date(),
-    'element-fulltimeseconds': generate_time(false, true),
-    'element-halftimeseconds': generate_time(true, true),
-    'element-fulltime': generate_time(false, false),
-    'element-halftime': generate_time(true, false),
-    'element-promptchar': '$',
-    'element-space': ' ',
-    'element-returncode': '1',
-    'element-gitstatus': '[master]'
-};
-
-var code_output_text = {
-    'element-username': '\\u',
-    'element-hostname': '\\h',
-    'element-fqdn': '\\H',
-    'element-shell': '\\s',
-    'element-shellversion': '\\v',
-    'element-shellrelease': '\\V',
-    'element-pathtocurrentdirectory': '\\w',
-    'element-currentdirectory': '\\W',
-    'element-date': '\\d',
-    'element-fulltimeseconds': '\\t',
-    'element-halftimeseconds': '\\T',
-    'element-fulltime': '\\A',
-    'element-halftime': '\\@',
-    'element-promptchar': '\\\\$',
-    'element-returncode': '\\`nonzero_return\\`',
-    'element-gitstatus': '\\`parse_git_branch\\`'
-};
-
-var code_output_pre = {
-    'element-returncode': "function nonzero_return() {\n\tRETVAL=$?\n\t[ $RETVAL -ne 0 ] && echo \"$RETVAL\"\n}\n",
-    'element-gitstatus': "# get current branch in git repo\n"+
-        "function parse_git_branch() {\n"+
-        "\tBRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/'`\n"+
-        "\tif [ ! \"${BRANCH}\" == \"\" ]\n"+
-        "\tthen\n"+
-        "\t\tSTAT=`parse_git_dirty`\n"+
-        "\t\techo \"[${BRANCH}${STAT}]\"\n"+
-        "\telse\n"+
-        "\t\techo \"\"\n"+
-        "\tfi\n"+
-        "}\n\n"+
-        "# get current status of git repo\n"+
-        "function parse_git_dirty {\n"+
-        "\tstatus=`git status 2>&1 | tee`\n"+
-        "\tdirty=`echo -n \"${status}\" 2> /dev/null | grep \"modified:\" &> /dev/null; echo \"$?\"`\n"+
-        "\tuntracked=`echo -n \"${status}\" 2> /dev/null | grep \"Untracked files\" &> /dev/null; echo \"$?\"`\n"+
-        "\tahead=`echo -n \"${status}\" 2> /dev/null | grep \"Your branch is ahead of\" &> /dev/null; echo \"$?\"`\n"+
-        "\tnewfile=`echo -n \"${status}\" 2> /dev/null | grep \"new file:\" &> /dev/null; echo \"$?\"`\n"+
-        "\trenamed=`echo -n \"${status}\" 2> /dev/null | grep \"renamed:\" &> /dev/null; echo \"$?\"`\n"+
-        "\tdeleted=`echo -n \"${status}\" 2> /dev/null | grep \"deleted:\" &> /dev/null; echo \"$?\"`\n"+
-        "\tbits=''\n"+
-        "\tif [ \"${renamed}\" == \"0\" ]; then\n"+
-        "\t\tbits=\">${bits}\"\n"+
-        "\tfi\n"+
-        "\tif [ \"${ahead}\" == \"0\" ]; then\n"+
-        "\t\tbits=\"*${bits}\"\n"+
-        "\tfi\n"+
-        "\tif [ \"${newfile}\" == \"0\" ]; then\n"+
-        "\t\tbits=\"+${bits}\"\n"+
-        "\tfi\n"+
-        "\tif [ \"${untracked}\" == \"0\" ]; then\n"+
-        "\t\tbits=\"?${bits}\"\n"+
-        "\tfi\n"+
-        "\tif [ \"${deleted}\" == \"0\" ]; then\n"+
-        "\t\tbits=\"x${bits}\"\n"+
-        "\tfi\n"+
-        "\tif [ \"${dirty}\" == \"0\" ]; then\n"+
-        "\t\tbits=\"!${bits}\"\n"+
-        "\tfi\n"+
-        "\tif [ ! \"${bits}\" == \"\" ]; then\n"+
-        "\t\techo \" ${bits}\"\n"+
-        "\telse\n"+
-        "\t\techo \"\"\n"+
-        "\tfi\n"+
-        "}\n"
+var elements = {
+    currentdirectory: {
+        output: "\\W",
+        preview: "dir"
+    },
+    date: {
+        output: "\\d",
+        preview: generate_date()
+    },
+    fqdn: {
+        output: "\\H",
+        preview: "host.domain.com"
+    },
+    fulltime: {
+        output: "\\A",
+        preview: generate_time(false, false)
+    },
+    fulltimeseconds: {
+        output: "\\t",
+        preview: generate_time(false, true)
+    },
+    halftime: {
+        output: "\\@",
+        preview: generate_time(true, false)
+    },
+    halftimeseconds: {
+        output: "\\T",
+        preview: generate_time(true, true)
+    },
+    hostname: {
+        output: "\\h",
+        preview: "host"
+    },
+    pathtocurrentdirectory: {
+        output: "\\w",
+        preview: "~/dir"
+    },
+    promptchar: {
+        output: "\\\\$",
+        preview: "$"
+    },
+    returncode: {
+        output: "\\`nonzero_return\\`",
+        pre: "function nonzero_return() {\n\tRETVAL=$?\n\t[ $RETVAL -ne 0 ] && echo \"$RETVAL\"\n}\n",
+        preview: "1"
+    },
+    shell: {
+        output: "\\s",
+        preview: "bash"
+    },
+    shellrelease: {
+        output: "\\V",
+        preview: "4.2.42"
+    },
+    shellversion: {
+        output: "\\v",
+        preview: "4.2"
+    },
+    space: {
+        preview: " "
+    },
+    username: {
+        output: "\\u",
+        preview: "user"
+    },
+    gitstatus: {
+        output: "\\`parse_git_branch\\`",
+        preview: "[master]",
+        pre: "# get current branch in git repo\n"+
+            "function parse_git_branch() {\n"+
+            "\tBRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/'`\n"+
+            "\tif [ ! \"${BRANCH}\" == \"\" ]\n"+
+            "\tthen\n"+
+            "\t\tSTAT=`parse_git_dirty`\n"+
+            "\t\techo \"[${BRANCH}${STAT}]\"\n"+
+            "\telse\n"+
+            "\t\techo \"\"\n"+
+            "\tfi\n"+
+            "}\n\n"+
+            "# get current status of git repo\n"+
+            "function parse_git_dirty {\n"+
+            "\tstatus=`git status 2>&1 | tee`\n"+
+            "\tdirty=`echo -n \"${status}\" 2> /dev/null | grep \"modified:\" &> /dev/null; echo \"$?\"`\n"+
+            "\tuntracked=`echo -n \"${status}\" 2> /dev/null | grep \"Untracked files\" &> /dev/null; echo \"$?\"`\n"+
+            "\tahead=`echo -n \"${status}\" 2> /dev/null | grep \"Your branch is ahead of\" &> /dev/null; echo \"$?\"`\n"+
+            "\tnewfile=`echo -n \"${status}\" 2> /dev/null | grep \"new file:\" &> /dev/null; echo \"$?\"`\n"+
+            "\trenamed=`echo -n \"${status}\" 2> /dev/null | grep \"renamed:\" &> /dev/null; echo \"$?\"`\n"+
+            "\tdeleted=`echo -n \"${status}\" 2> /dev/null | grep \"deleted:\" &> /dev/null; echo \"$?\"`\n"+
+            "\tbits=''\n"+
+            "\tif [ \"${renamed}\" == \"0\" ]; then\n"+
+            "\t\tbits=\">${bits}\"\n"+
+            "\tfi\n"+
+            "\tif [ \"${ahead}\" == \"0\" ]; then\n"+
+            "\t\tbits=\"*${bits}\"\n"+
+            "\tfi\n"+
+            "\tif [ \"${newfile}\" == \"0\" ]; then\n"+
+            "\t\tbits=\"+${bits}\"\n"+
+            "\tfi\n"+
+            "\tif [ \"${untracked}\" == \"0\" ]; then\n"+
+            "\t\tbits=\"?${bits}\"\n"+
+            "\tfi\n"+
+            "\tif [ \"${deleted}\" == \"0\" ]; then\n"+
+            "\t\tbits=\"x${bits}\"\n"+
+            "\tfi\n"+
+            "\tif [ \"${dirty}\" == \"0\" ]; then\n"+
+            "\t\tbits=\"!${bits}\"\n"+
+            "\tfi\n"+
+            "\tif [ ! \"${bits}\" == \"\" ]; then\n"+
+            "\t\techo \" ${bits}\"\n"+
+            "\telse\n"+
+            "\t\techo \"\"\n"+
+            "\tfi\n"+
+            "}\n"
+    },
 };
 
 var term_color_codes = {
@@ -121,7 +149,7 @@ function add_prompt_element (source_object)
     source_object
     .clone()
     .attr("id", "element-number-" + String(element_counter++))
-    .attr("element-identifier", "element-" + source_id.split("-")[1])
+    .attr("element-identifier", source_id.split("-")[1])
     .addClass("ui-selected")
     .hover(function() {
         //FIXME: there may be a better way to find if there is a select operation currently going on
@@ -227,12 +255,14 @@ function refresh_preview()
         var color_fg = option_element.attr("option-fg");
         var color_bg = option_element.attr("option-bg");
 
-        var preview_output = preview_text[option_name] || option_element.text();
+        var preview_output = elements[option_name] ?
+            elements[option_name].preview :
+            option_element.text();
 
         return '<li class="element-preview" element_id="' +
             option_name + '">' + '<span class="preview-text" style="' +
-            (typeof(color_fg) === 'undefined' ? '' : 'color:' + color_fg + ';') + 
-            (typeof(color_bg) === 'undefined' ? '' : 'background-color:' + color_bg + ';') + 
+            (typeof(color_fg) === 'undefined' ? '' : 'color:' + color_fg + ';') +
+            (typeof(color_bg) === 'undefined' ? '' : 'background-color:' + color_bg + ';') +
             '">' +
             preview_output + '</span></li>';
 
@@ -258,29 +288,29 @@ function refresh_code()
         var element_identifier = option_element.attr("element-identifier");
         var fg_code = option_element.attr("option-fg");
         var bg_code = option_element.attr("option-bg");
+        var element = elements[element_identifier];
 
         //insert any helper functions needed
-        if(code_output_pre[element_identifier] && functions_added.indexOf(element_identifier) == -1)
+        if(element && element.pre && functions_added.indexOf(element_identifier) == -1)
         {
             functions_added.push(element_identifier);
 
-            code_output
-            .text(code_output_pre[element_identifier] + "\n" + code_output.text());
+            code_output.text(element.pre + "\n" + code_output.text());
         }
 
         //output the escape sequence, or the same text as in the preview
         //if that does not exist. if custom text, used what was entered.
         var output_text;
-        if (code_output_text[element_identifier])
-        {
-            output_text = code_output_text[element_identifier];
-        }
-        else if (preview_text[element_identifier])
-        {
-            output_text = preview_text[element_identifier];
-        }
-        else
-        {
+        if (element) {
+            if (element.output) {
+                output_text = element.output;
+            } else if (element.preview) {
+                output_text = element.preview;
+            } else {
+                console.log("ERROR: empty element (" + element_identifier + ")");
+                return;
+            }
+        } else {
             output_text = option_element.text();
         }
 
@@ -307,7 +337,7 @@ function refresh_code()
                     "4" + term_color_codes[bg_code] + "m\\]";
             }
         }
-        
+
         if(output_text)
         {
             code_output
@@ -480,7 +510,7 @@ function make_spectrum(element_id) {
         showPalette: true,
         color: color,
         palette: [
-            ['red', 'green', 'blue', 'yellow'], 
+            ['red', 'green', 'blue', 'yellow'],
             ['cyan', 'magenta', 'black', 'white']
         ],
         move: function(color) {
@@ -566,9 +596,9 @@ $(document).ready(function()
     $("#elements-list")
     .sortable({
         handle: ".handle",
-        tolerance: "pointer", 
+        tolerance: "pointer",
         update: function(){refresh_page();}
-        
+
     })
     .selectable({
         stop: function(){
