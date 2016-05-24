@@ -288,29 +288,29 @@ function refresh_code()
         var element_identifier = option_element.attr("element-identifier");
         var fg_code = option_element.attr("option-fg");
         var bg_code = option_element.attr("option-bg");
+        var element = elements[element_identifier];
 
         //insert any helper functions needed
-        if(elements[element_identifier].pre && functions_added.indexOf(element_identifier) == -1)
+        if(element && element.pre && functions_added.indexOf(element_identifier) == -1)
         {
             functions_added.push(element_identifier);
 
-            code_output
-            .text(elements[element_identifier].pre + "\n" + code_output.text());
+            code_output.text(element.pre + "\n" + code_output.text());
         }
 
         //output the escape sequence, or the same text as in the preview
         //if that does not exist. if custom text, used what was entered.
         var output_text;
-        if (elements[element_identifier].output)
-        {
-            output_text = elements[element_identifier].output;
-        }
-        else if (elements[element_identifier].preview)
-        {
-            output_text = elements[element_identifier].preview;
-        }
-        else
-        {
+        if (element) {
+            if (element.output) {
+                output_text = element.output;
+            } else if (element.preview) {
+                output_text = element.preview;
+            } else {
+                console.log("ERROR: empty element (" + element_identifier + ")");
+                return;
+            }
+        } else {
             output_text = option_element.text();
         }
 
