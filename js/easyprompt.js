@@ -2,71 +2,119 @@
 
 var elements = {
     currentdirectory: {
-        output: "\\W",
+        output: {
+            bash: "\\W",
+            mksh: "\"'$(basename ${PWD/${HOME}/~})'\""
+        },
         preview: "dir"
     },
+    pathtocurrentdirectory: {
+        output: {
+            bash: "\\w",
+            mksh: "\"'${PWD/${HOME}/~}'\""
+        },
+        preview: "~/dir"
+    },
     date: {
-        output: "\\d",
+        output: {
+            bash: "\\d",
+            mksh: "\"'$(date \"+%a %b %d\")'\""
+        },
         preview: generate_date()
     },
+    hostname: {
+        output: {
+            bash: "\\h",
+            mksh: "$(hostname -s)"
+        },
+        preview: "host"
+    },
     fqdn: {
-        output: "\\H",
+        output: {
+            bash: "\\H",
+            mksh: "$(hostname -f)"
+        },
         preview: "host.domain.com"
     },
     fulltime: {
-        output: "\\A",
+        output: {
+            bash: "\\A",
+            mksh: "\"'$(date +%R)'\""
+        },
         preview: generate_time(false, false)
     },
     fulltimeseconds: {
-        output: "\\t",
+        output: {
+            bash: "\\t",
+            mksh: "\"'$(date +%T)'\""
+        },
         preview: generate_time(false, true)
     },
     halftime: {
-        output: "\\@",
+        output: {
+            bash: "\\@",
+            mksh: "\"'$(date '+%I:%M %p')'\""
+        },
         preview: generate_time(true, false)
     },
     halftimeseconds: {
-        output: "\\T",
+        output: {
+            bash: "\\T",
+            mksh: "\"'$(date +%r)'\""
+        },
         preview: generate_time(true, true)
     },
-    hostname: {
-        output: "\\h",
-        preview: "host"
-    },
-    pathtocurrentdirectory: {
-        output: "\\w",
-        preview: "~/dir"
-    },
     promptchar: {
-        output: "\\\\$",
+        output: {
+            bash: "\\\\$",
+            mksh: "$(if (( USER_ID  )); then print \\$; else print \\#; fi)"
+        },
         preview: "$"
     },
     returncode: {
-        output: "\\`nonzero_return\\`",
+        output: {
+            bash: "\\`nonzero_return\\`",
+            mksh: "\"'$(nonzero_return)'\""
+        },
         pre: "function nonzero_return() {\n\tRETVAL=$?\n\t[ $RETVAL -ne 0 ] && echo \"$RETVAL\"\n}\n",
         preview: "1"
     },
     shell: {
-        output: "\\s",
+        output: {
+            bash: "\\s",
+            mksh: "mksh"
+        },
         preview: "bash"
     },
     shellrelease: {
-        output: "\\V",
+        output: {
+            bash: "\\V",
+            mksh: "${KSH_VERSION##* }"
+        },
         preview: "4.2.42"
     },
     shellversion: {
-        output: "\\v",
+        output: {
+            bash: "\\v",
+            mksh: "${KSH_VERSION##* }"
+        },
         preview: "4.2"
     },
     space: {
         preview: " "
     },
     username: {
-        output: "\\u",
+        output: {
+            bash: "\\u",
+            mksh: "${USER:=$(id -un)}"
+        },
         preview: "user"
     },
     gitstatus: {
-        output: "\\`parse_git_branch\\`",
+        output: {
+            bash: "\\`parse_git_branch\\`",
+            mksh: ""
+        },
         preview: "[master]",
         pre: "# get current branch in git repo\n"+
             "function parse_git_branch() {\n"+
@@ -124,14 +172,32 @@ var term_color_codes = {
     '#00f':    '4',
     '#f0f':    '5',
     '#0ff':    '6',
-    '#fff':    '7'
+    '#fff':    '7',
 };
+
+var ansi_escape = "\\e["
+
+var shells = {
+    bash: {
+        start: '"',
+        end: '"',
+        start_escape: "\\[",
+        end_escape: "\\]"
+    },
+    mksh: {
+        start: "$'\\1\\r'\"",
+        end: '"',
+        start_escape: "\"$'\\1",
+        end_escape: "\\1'\""
+    }
+}
 
 /*End output objects*/
 
 //Keep track of the sortable elements to assign unique ids
 //FIXME: place this somewhere nicer
 var element_counter = 0;
+var output_shell = 'bash';
 
 /*Begin interactive calls*/
 
@@ -275,13 +341,13 @@ function refresh_code()
     var functions_added = [];
 
     var code_output = $("#code-output-text");
-    code_output.text('export PS1="');
+    code_output.text('export PS1=' + shells[output_shell].start);
 
     $("#elements-list").children("li").each(function(index) {
         append_code($(this));
     });
 
-    code_output.text(code_output.text() + ' "');
+    code_output.text(code_output.text() + ' ' + shells[output_shell].end);
 
     function append_code(option_element)
     {
@@ -303,7 +369,7 @@ function refresh_code()
         var output_text;
         if (element) {
             if (element.output) {
-                output_text = element.output;
+                output_text = element.output[output_shell]
             } else if (element.preview) {
                 output_text = element.preview;
             } else {
@@ -315,33 +381,33 @@ function refresh_code()
         }
 
         var color_before = '', color_after = '';
+        var reset_color = shells[output_shell].start_escape + ansi_escape + 'm' + shells[output_shell].end_escape;
 
         if (fg_code || bg_code)
         {
-            color_before = "\\[\\e[";
-            color_after = "\\[\\e[m\\]";
+            color_before = shells[output_shell].start_escape + ansi_escape;
+            color_after = reset_color;
             if (fg_code && bg_code)
             {
                 color_before = color_before +
                     "3" + term_color_codes[fg_code] + ";" +
-                    "4" + term_color_codes[bg_code] + "m\\]";
+                    "4" + term_color_codes[bg_code] + "m" + shells[output_shell].end_escape;
             }
             else if(fg_code)
             {
                 color_before = color_before +
-                    "3" + term_color_codes[fg_code] + "m\\]";
+                    "3" + term_color_codes[fg_code] + "m" + shells[output_shell].end_escape;
             }
             else if(bg_code)
             {
                 color_before = color_before +
-                    "4" + term_color_codes[bg_code] + "m\\]";
+                    "4" + term_color_codes[bg_code] + "m" + shells[output_shell].end_escape;
             }
         }
 
         if(output_text)
         {
-            code_output
-            .text(code_output.text() + color_before + output_text + color_after);
+            code_output.text(code_output.text() + color_before + output_text + color_after);
         }
     }
 }
