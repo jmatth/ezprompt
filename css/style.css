@@ -372,3 +372,8 @@ div#footer a {
 div#footer a:hover {
     text-decoration: underline;
 }
+
+div#instructions-step-four ul {
+    list-style-type: none;
+    padding: 0;
+}

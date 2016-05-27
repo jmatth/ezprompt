@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-  <title>Easy Bash Prompt Generator</title>
+  <title>Easy Shell Prompt Generator</title>
 
   <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
   <link rel="stylesheet" href="css/spectrum.css" type="text/css" media="all" />
@@ -25,7 +25,7 @@
   <div id="header">
     <div id="header-wrapper">
       <span id="name">EzPrompt</span>
-      <span id="subtitle">Easy Bash PS1 Generator</span>
+      <span id="subtitle">Easy PS1 Generator</span>
     </div>
   </div>
 
@@ -51,9 +51,9 @@
 
         <li class="ui-state-default prompt-option-origin prompt-option" id="option-shell" title="The shell being executed, i.e. 'bash'.">Shell</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellversion" title="The version of bash.">Shell Version</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellversion" title="The shell version.">Shell Version</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellrelease" title="The version of bash with patch level.">Shell Release</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellrelease" title="The shell version with patch level.">Shell Release</li>
 
         <li class="ui-state-default prompt-option-origin prompt-option" id="option-pathtocurrentdirectory" title="The path to the current working directory, with $HOME abbreviated to ~.">Path To Current Directory</li>
 
@@ -152,7 +152,15 @@
   </div>
 
   <div id="instructions-step-four" class="main-section-instructions">
-    <p>4.) Copy and paste the code into your bashrc.</p>
+    <ul id="output-shell-options">
+      <li>
+        <label for="output-shell">4.) Copy and paste the code into your</label>
+        <select name="output-shell" id="output-shell" onchange="change_output_shell();" size="1">
+          <option value="bash">~/.bashrc</option>
+          <option value="mksh">~/.mkshrc</option>
+        </select>
+      </li>
+    </ul>
   </div>
 
   <div class="main-section" id="code-output-wrapper">

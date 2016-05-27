@@ -53,7 +53,7 @@ var elements = {
     halftime: {
         output: {
             bash: "\\@",
-            mksh: "\"'$(date '+%I:%M %p')'\""
+            mksh: "\"'$(date \"+%I:%M %p\")'\""
         },
         preview: generate_time(true, false)
     },
@@ -82,14 +82,14 @@ var elements = {
     shell: {
         output: {
             bash: "\\s",
-            mksh: "mksh"
+            mksh: "$0"
         },
         preview: "bash"
     },
     shellrelease: {
         output: {
             bash: "\\V",
-            mksh: "${KSH_VERSION##* }"
+            mksh: "$(dirname ${KSH_VERSION##* })"
         },
         preview: "4.2.42"
     },
@@ -201,7 +201,7 @@ var output_shell = 'bash';
 
 /*Begin interactive calls*/
 
-function add_prompt_element (source_object)
+function add_prompt_element(source_object)
 {
     //Make sure we actually have something to add
     if(!source_object)
@@ -654,6 +654,11 @@ function activate_element_options()
 function refresh_page() {
     refresh_preview();
     refresh_code();
+}
+
+function change_output_shell() {
+    output_shell = $("#output-shell").val();
+    refresh_page();
 }
 
 $(document).ready(function()
