@@ -59,7 +59,8 @@ var elements = {
         preview: "4.2"
     },
     space: {
-        preview: " "
+        output: " ",
+        preview: "&nbsp;"
     },
     username: {
         output: "\\u",
