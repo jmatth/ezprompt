@@ -158,10 +158,12 @@ function add_prompt_element (source_object)
         if (!$("div.ui-selectable-helper").length)
         {
             $(this).addClass("prompt-option-hover");
+			$(this).find(".handle").hide().delay(600).fadeIn(50);
         }
     },
     function() {
         $(this).removeClass("prompt-option-hover");
+		$(this).find(".handle").fadeOut("fast");
     })
     .prepend('<div class="ui-state-default ui-icon prompt-option handle"></div>')
     .appendTo("#elements-list")
@@ -596,7 +598,12 @@ $(document).ready(function()
     //make the list of added elements sortable
     $("#elements-list")
     .sortable({
+		containment: "#elements-sortable",
+		cursor: "move",
+		forceHelperSize: true,
         handle: ".handle",
+		opacity: 0.75,
+		revert: 50,
         tolerance: "pointer",
         update: function(){refresh_page();}
 
@@ -634,6 +641,7 @@ $(document).ready(function()
 
     make_spectrum("#input-spectrum-bg");
     make_spectrum("#input-spectrum-fg");
+	$(".sp-replacer, .sp-palette-container, button").addClass("ui-state-default");
 
     activate_element_options();
     activate_buttons();
