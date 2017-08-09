@@ -82,6 +82,7 @@ var elements = {
             "}\n\n"+
             "# get current status of git repo\n"+
             "function parse_git_dirty {\n"+
+            "\tLANG=en\n"+
             "\tstatus=`git status 2>&1 | tee`\n"+
             "\tdirty=`echo -n \"${status}\" 2> /dev/null | grep \"modified:\" &> /dev/null; echo \"$?\"`\n"+
             "\tuntracked=`echo -n \"${status}\" 2> /dev/null | grep \"Untracked files\" &> /dev/null; echo \"$?\"`\n"+
