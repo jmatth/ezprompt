@@ -540,6 +540,15 @@ function activate_element_options()
         var input_box = $("#custom-text-input");
         var custom_text = remove_evil_chars(input_box.val());
 
+        // if a user types a space,
+        // call add_prompt_element with $('#option-space') and return
+        if (custom_text === ' ')
+        {
+            add_prompt_element($('#option-space'));
+            return;
+        }
+
+        
         //if we had to remove bad characters, just change the
         //text in the box and return.
         if (custom_text !== input_box.val())
