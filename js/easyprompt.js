@@ -44,8 +44,7 @@ var elements = {
         preview: "$"
     },
     returncode: {
-        output: "\\`nonzero_return\\`",
-        pre: "function nonzero_return() {\n\tRETVAL=$?\n\t[ $RETVAL -ne 0 ] && echo \"$RETVAL\"\n}\n",
+        output: "\\?",
         preview: "1"
     },
     shell: {
@@ -141,7 +140,7 @@ function componentToHex(c) {
 }
 
 function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    return ("#" + componentToHex(r) + componentToHex(g) + componentToHex(b)).toUpperCase();
 }
 
 function colorIdToHex(color_id) {
@@ -390,15 +389,32 @@ function refresh_code() {
 
             code_output.text(element.pre + "\n" + code_output.text());
         }
+
+        var color_before = '',
+            color_after = '';
         if (previous) {
-            var prev_fg_code = previous.attr("option-fg");
-            var prev_bg_code = previous.attr("option-bg");
-
+            var prev_fg = previous.attr("option-fg");
+            var prev_bg = previous.attr("option-bg");
+            if (prev_fg === fg_code) {
+                fg_code = null;
+            }
+            else if (!fg_code) {
+                color_before = "\\[\\033[39m\\]";
+            }
+            if (prev_bg === bg_code) {
+                bg_code = null;
+            }
+            else if (!bg_code) {
+                if (color_before !== "")
+                    color_before = "\\[\\033[m\\]";
+                else
+                    color_before = "\\[\\033[49m\\]";
+            }
         }
-
-        if (next) {
-
-        }
+        if (next)
+            color_after = "";
+        else
+            color_after = "\\[\\033[m\\]";
 
         //output the escape sequence, or the same text as in the preview
         //if that does not exist. if custom text, used what was entered.
@@ -416,12 +432,10 @@ function refresh_code() {
             output_text = option_element.text();
         }
 
-        var color_before = '',
-            color_after = '';
+
 
         if (fg_code || bg_code) {
-            color_before = "\\[\\033[";
-            color_after = "\\[\\033[m\\]";
+            color_before += "\\[\\033[";
             if (fg_code) {
                 color_before += buildColorString("3", "9", generateColorData(fg_code));
                 if (bg_code)
@@ -603,12 +617,14 @@ function make_spectrum(element_id) {
         togglePaletteOnly: true,
         showAlpha: false,
         allowEmpty: false,
+        preferredFormat: "hex",
         palette: pallet,
         move: function (color) {
             try {
+                var rgb = color.toRgb();
                 $("#elements-list")
                     .children("li.ui-selected")
-                    .attr(element_suffix == "fg" ? "option-fg" : "option-bg", color.toHexString().toUpperCase());
+                    .attr(element_suffix == "fg" ? "option-fg" : "option-bg", rgbToHex(rgb.r, rgb.g, rgb.b));
             } catch (e) { }
             refresh_page();
         }
@@ -656,6 +672,17 @@ function activate_element_options() {
                     match_spectrums();
                 })
                 .appendTo("#elements-list")
+                .hover(function () {
+                    //FIXME: there may be a better way to find if there is a select operation currently going on
+                    //this is currently searching the DOM to see if the div for the "lasso" exists.
+                    if (!$("div.ui-selectable-helper").length) {
+                        $(this).addClass("prompt-option-hover");
+                    }
+                },
+                    function () {
+                        $(this).removeClass("prompt-option-hover");
+                    })
+                .prepend('<div class="ui-state-default ui-icon prompt-option handle"></div>')
                 .siblings().removeClass('ui-selected');
             refresh_page();
 
