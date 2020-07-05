@@ -375,7 +375,7 @@ function refresh_code() {
         append_code($(this), $(this).prev(), $(this).next());
     });
 
-    code_output.text(code_output.text() + ' "');
+    code_output.text(code_output.text() + '\\[\\033[m\\] "');
 
     function append_code(option_element, previous, next) {
         var element_identifier = option_element.attr("element-identifier");
@@ -411,10 +411,6 @@ function refresh_code() {
                     color_before = "\\[\\033[49m\\]";
             }
         }
-        if (next)
-            color_after = "";
-        else
-            color_after = "\\[\\033[m\\]";
 
         //output the escape sequence, or the same text as in the preview
         //if that does not exist. if custom text, used what was entered.
