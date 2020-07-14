@@ -2,7 +2,44 @@
 
 //nearestColor = require("./nearest-color/nearestColor");
 
+var custom_element_items = [
+    {
+        name: "text",
+        text: "Custom text:",
+        tooltip: "Create custom text element. Cannot contain \$(){}.",
+        regex: new RegExp("^[^\\\(\){}\$]*$")
+    },
+    {
+        name: "variable",
+        text: "Variable value:",
+        tooltip: "Create custom variable element. Must start with a-z, A-Z or _.  Valid character are a-z, A-Z, 0-9, and _",
+        regex: new RegExp("^([a-zA-Z_][a-zA-Z0-9_]*)?$"),
+        prependText: "${",
+        appendText: "}"
+    },
+    {
+        name: "command",
+        text: "Command output:",
+        tooltip: "Create custom command element. Use with caution, there is no validation and running time of the command affects prompt speed.",
+        prependText: "$(",
+        appendText: ")"
+    },
+    {
+        name: "raw",
+        text: "Raw text:",
+        tooltip: "Create custom text element. Use with caution, there is no validation and you must escape everything yourself.  May not display properly"
+    }
+];
+var ascii = [
+
+];
 var elements = {
+    custom_variable: {
+        beforeOutput: "\\"
+    },
+    custom_command: {
+        beforeOutput: "\\"
+    },
     currentdirectory: {
         output: "\\W",
         preview: "dir"
@@ -59,16 +96,12 @@ var elements = {
         output: "\\v",
         preview: "4.2"
     },
-    space: {
-        output: " ",
-        preview: "&nbsp;"
-    },
     username: {
         output: "\\u",
         preview: "user"
     },
     gitstatus: {
-        output: "\\`parse_git_branch\\`",
+        output: "\\\$(parse_git_branch)",
         preview: "[master]",
         pre: "# get current branch in git repo\n" +
             "function parse_git_branch() {\n" +
@@ -321,7 +354,7 @@ function refresh_preview() {
         var color_fg = option_element.attr("option-fg");
         var color_bg = option_element.attr("option-bg");
 
-        var preview_output = elements[option_name] ?
+        var preview_output = elements[option_name] && elements[option_name].preview ?
             elements[option_name].preview :
             option_element.text();
 
@@ -363,6 +396,7 @@ function buildColorString(baseID, bbaseID, color_data) {
         result += ";" + baseID + "8;2" + ";" + color_data.true_color.r.toString() + ";" + color_data.true_color.g.toString() + ";" + color_data.true_color.b.toString();
     return result;
 }
+
 
 //generate the code for bashrc
 function refresh_code() {
@@ -420,6 +454,8 @@ function refresh_code() {
                 output_text = element.output;
             } else if (element.preview) {
                 output_text = element.preview;
+            } else if (element.beforeOutput) {
+                output_text = element.beforeOutput + option_element.text();
             } else {
                 console.log("ERROR: empty element (" + element_identifier + ")");
                 return;
@@ -596,7 +632,7 @@ function make_spectrum(element_id) {
         color = element_suffix === "fg" ? "white" : "black";
     }
     var pallet = [];
-    var row_size = 10;
+    var row_size = 16;
     var color_keys = Object.keys(term_color_codes);
     for (var i = 0; i < color_keys.length / row_size; i++) {
         var row = [];
@@ -609,11 +645,15 @@ function make_spectrum(element_id) {
     $(element_id).spectrum({
         showPaletteOnly: false,
         showPalette: true,
+        showSelectionPalette: false,
+        showInput: true,
         color: color,
-        togglePaletteOnly: true,
+        showButtons: false,
+        togglePaletteOnly: false,
         showAlpha: false,
+        type: "component",
         allowEmpty: false,
-        preferredFormat: "hex",
+        preferredFormat: "rgb",
         palette: pallet,
         move: function (color) {
             try {
@@ -634,61 +674,60 @@ function activate_element_options() {
         add_prompt_element($(this));
     });
 
-    //add custom text on button click
-    $("button#custom-text-button")
-        .tooltip()
-        .click(function () {
-            var input_box = $("#custom-text-input");
-            var custom_text = remove_evil_chars(input_box.val());
+    custom_element_items.forEach(function (item) {
 
-            //if we had to remove bad characters, just change the
-            //text in the box and return.
-            if (custom_text !== input_box.val()) {
-                input_box.val(custom_text);
-                return;
-            }
-
-            //don't do anything if it's blank
-            if (!custom_text) {
-                return;
-            }
-
-            input_box.val("");
-
-            $('<li class="ui-state-default prompt-option ui-selected" id="element-number-' +
-                String(element_counter++) +
-                '" element-identifier="element-custom">' +
-                custom_text +
-                '</li>')
-                .on("click.single-select", function () {
-                    if (!$(this).hasClass("ui-selected")) {
-                        $(this).addClass('ui-selected').siblings().removeClass('ui-selected');
+        if (item.regex) {
+            $("input#custom-" + item.name + "-input")
+                .on('keypress', function (event) {
+                    var regex = item.regex;
+                    var key_typed = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                    if (!regex.test($("input#custom-" + item.name + "-input").val() + key_typed)) {
+                        event.preventDefault();
+                        return false;
                     }
+                });
+        }
+        $("button#custom-" + item.name + "-button")
+            .tooltip()
+            .click(function () {
+                var input_box = $("#custom-" + item.name + "-input");
 
-                    match_spectrums();
-                })
-                .appendTo("#elements-list")
-                .hover(function () {
-                    //FIXME: there may be a better way to find if there is a select operation currently going on
-                    //this is currently searching the DOM to see if the div for the "lasso" exists.
-                    if (!$("div.ui-selectable-helper").length) {
-                        $(this).addClass("prompt-option-hover");
-                    }
-                },
-                    function () {
-                        $(this).removeClass("prompt-option-hover");
+                //don't do anything if it's blank
+                if (!input_box.val()) {
+                    return;
+                }
+                var custom_text = (item.prependText ? item.prependText : "") + input_box.val() + (item.appendText ? item.appendText : "");
+
+                input_box.val("");
+
+                $('<li class="ui-state-default prompt-option ui-selected" id="element-number-' +
+                    String(element_counter++) +
+                    '" element-identifier=custom_' + item.name + '>' +
+                    custom_text +
+                    '</li>')
+                    .on("click.single-select", function () {
+                        if (!$(this).hasClass("ui-selected")) {
+                            $(this).addClass('ui-selected').siblings().removeClass('ui-selected');
+                        }
+
+                        match_spectrums();
                     })
-                .prepend('<div class="ui-state-default ui-icon prompt-option handle"></div>')
-                .siblings().removeClass('ui-selected');
-            refresh_page();
-
-            //remove characters that could break the prompt
-            function remove_evil_chars(raw_str) {
-                var evil_regex = /[\\\(\){}\$]/g;
-                return raw_str.replace(evil_regex, "");
-            }
-
-        });
+                    .appendTo("#elements-list")
+                    .hover(function () {
+                        //FIXME: there may be a better way to find if there is a select operation currently going on
+                        //this is currently searching the DOM to see if the div for the "lasso" exists.
+                        if (!$("div.ui-selectable-helper").length) {
+                            $(this).addClass("prompt-option-hover");
+                        }
+                    },
+                        function () {
+                            $(this).removeClass("prompt-option-hover");
+                        })
+                    .prepend('<div class="ui-state-default ui-icon prompt-option handle"></div>')
+                    .siblings().removeClass('ui-selected');
+                refresh_page();
+            });
+    });
 }
 
 /*End page setup functions.*/
@@ -700,7 +739,6 @@ function refresh_page() {
 }
 
 $(document).ready(function () {
-
     $.ajaxSetup({
         'beforeSend': function (xhr) {
             if (xhr.overrideMimeType)
@@ -709,11 +747,24 @@ $(document).ready(function () {
     });
     $.getJSON("data/nerdfont.json", function (data) {
         var items = [];
+        custom_element_items.forEach(function (item) {
+            /*
+            '<li class="ui-state-default option-custom-inp" id="option-custom-txt">' + value.text. + '<br />' +
+            '   <input type="text" id="custom-' + key + '-input" />' +
+            '   <button id="custom-' + key + '-button" title="'+value.tooltip+'">+</button>' +
+            '</li>';
+            */
+            var element = '<li class="ui-state-default option-custom-inp prompt-option-origin prompt-option ui-nf" id="option-custom-' + item.name + '">' + item.text + '<br />' +
+                '<input type="text" id="custom-' + item.name + '-input ui-nf" />&nbsp;' +
+                '<button id="custom-' + item.name + '-button ui-nf" title="' + (item.tooltip ? item.tooltip : "") + '">+</button>' +
+                '</li>';
+            items.push(element);
+        });
+        items.push("<br />");
         $.each(data, function (key, val) {
             //<li class="ui-state-default prompt-option-origin prompt-option" id="option-hyphen">-</li>
-            items.push("<li class='ui-state-default prompt-option-origin prompt-option ui-nf' id='option-" + val + "' title='" + key + "'>" + val + "</li> ");
+            items.push("<li class='ui-state-default prompt-option-origin prompt-option ui-nf' id='option-" + val + "' title='" + key + "'>" + val + "</li>");
         });
-
         $("#elements-extra").append(items);
         //make the list of added elements sortable
         $("#elements-list")

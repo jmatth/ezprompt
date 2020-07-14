@@ -196,8 +196,6 @@ div.swatches {
     margin: 10px 10px 10px 75px;
 }
 
-div#swatches-fg {}
-
 li.border-hidden {
     border-width: 0px;
     margin-left: 0 !important;
@@ -212,20 +210,22 @@ li.prompt-option {
     font-family: 'Caskaydia Cove Nerd Font';
     height: 20px;
     display: inline-block;
+    white-space: pre;
     cursor: pointer;
     padding: 2px 10px 2px 10px;
     margin: 5px;
     border-radius: 3px;
 }
 
-li#option-custom {
+li.option-custom-inp {
     height: 60px;
     display: inline-block;
     padding: 2px 12px 2px 10px;
-    margin: 5px border-radius: 3px;
+    margin: 5px;
+    border-radius: 3px;
 }
 
-li#option-custom input[type=text] {
+li.option-custom-inp input[type=text] {
     width: 127px;
 }
 
@@ -287,6 +287,10 @@ div#elements {
 div#preview {
     position: relative;
     font-family: 'Caskaydia Cove Nerd Font';
+}
+
+preview-text {
+    white-space: pre-wrap;
 }
 
 div#preview div#switch-toggle-bg {

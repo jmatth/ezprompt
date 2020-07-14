@@ -7,12 +7,12 @@
   <title>Easy Bash Prompt Generator</title>
 
   <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="css/spectrum.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="css/spectrum.new.css" type="text/css" media="all" />
   <link rel="stylesheet" href="css/start/jquery-ui-1.10.1.custom.css" />
   <!-- jquery base, jquery ui, custom javascript -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
   <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
-  <script src="js/spectrum-min.js"></script>
+  <script src="js/spectrum.min.js"></script>
   <script src="js/nearest-color/nearestColor.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/easyprompt.js" type="text/javascript" charset="utf-8"></script>
 
@@ -86,20 +86,27 @@
 
     <div class="elements-tab" style="overflow:auto; max-height: 300px;" id="elements-tab-extra">
       <ul id="elements-extra">
-        <li class="ui-state-default" id="option-custom">Enter custom text:<br /><input type="text"
-            id="custom-text-input" />
+        <!--
+        <li class="ui-state-default option-custom-inp" id="option-custom-txt">Enter text:<br />
+          <input type="text" id="custom-text-input" />
           <button id="custom-text-button"
-            title="Create custom text element. Forbidden characters are \$(){}.">+</button></li>
-        <br />
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-atsymbol">@</li>
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-colon">:</li>
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-openbracket">[</li>
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-closebracket">]</li>
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-hyphen">-</li>
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-underscore">_</li>
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-star">*</li>
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-space" title="A space character.">␣
+            title="Create custom text element. Forbidden characters are \$(){}.">+</button>
         </li>
+        <li class="ui-state-default option-custom-inp" id="option-custom-variable">Enter variable name:<br />
+          <input type="text" id="custom-variable-input" />
+          <button id="custom-variable-button"
+            title="Create custom variable element. Must start with a-z, A-Z or _.  Valid character are a-z, A-Z, 0-9, and _">+</button>
+        </li>
+        <li class="ui-state-default option-custom-inp" id="option-custom-command">Enter command:<br />
+          <input type="text" id="custom-command-input" />
+          <button id="custom-command-button"
+            title="Create custom command element.  Runtime must be short.">+</button>
+        </li>
+        <li class="ui-state-default option-custom-inp" id="option-custom-raw">Enter raw text:<br />
+          <input type="text" id="custom-command-input" />
+          <button id="custom-raw-button" title="Includes text exactly, use with caution">+</button>
+        </li>
+        <br />-->
       </ul>
 
     </div>
