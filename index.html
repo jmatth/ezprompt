@@ -1,4 +1,3 @@
-<!-- vim: set ts=2 sw=2 expandtab: -->
 <!DOCTYPE HTML>
 
 <head>
@@ -7,11 +6,40 @@
   <title>Easy Bash Prompt Generator</title>
 
   <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="css/spectrum.new.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="css/start/jquery-ui-1.10.1.custom.css" />
-  <!-- jquery base, jquery ui, custom javascript -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
-  <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
+  <link rel="stylesheet" href="css/spectrum.css" type="text/css" media="all" />
+  <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
+  <!-- CDN COPIES OF STANDARD JQUERY THEMES (all of these are available in v1.8.16) -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/black-tie/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/blitzer/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.css" type="text/css"
+    rel="stylesheet" />
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/dark-hive/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/dot-luv/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/eggplant/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/excite-bike/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/flick/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/humanity/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/mint-choc/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/overcast/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/pepper-grinder/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/redmond/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/start/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/swanky-purse/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/trontastic/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-darkness/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/vader/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="js/spectrum.min.js"></script>
   <script src="js/nearest-color/nearestColor.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/easyprompt.js" type="text/javascript" charset="utf-8"></script>
@@ -182,10 +210,13 @@
     <textarea style="font-family: 'Caskaydia Cove Nerd Font';" id="code-output-text" readonly></textarea>
   </div>
   <div id="footer">
-    <p>&copy; 2013 <a href="http://jmatthews.us">Josh Matthews</a></p>
+    <p>Updated code: &copy; 2020 <a href="http://kins.dev">Scott Atkins</a></p>
+    <p>Original code: &copy; 2013 <a href="http://jmatthews.us">Josh Matthews</a></p>
     <p>Built using: <a href="http://jquery.org/">jQuery UI</a> &bull; <a
-        href="http://bgrins.github.com/spectrum/">Spectrum</a> &bull;
-      <a href="http://www.dafont.com/cf-revolution.font">CF Revolution</a> &bull; <a
-        href="http://terminus-font.sourceforge.net/">Terminus</a></p>
+        href="https://seballot.github.io/spectrum/">Spectrum
+        (Fork)</a> </p>
+    <p>
+      <a href="https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode/complete">Nerd Fonts:
+        Caskaydia Cove</a> &bull; <a href="https://github.com/dtao/nearest-color">Nearest Color</a></p>
   </div>
 </body>

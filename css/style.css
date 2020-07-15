@@ -100,8 +100,6 @@ div#elements-control-buttons button {
     display: inline;
     position: relative;
     top: 10px;
-    height: 33px;
-    width: 100px;
     font-size: 16px;
 }
 
@@ -256,15 +254,14 @@ ul#elements-list li.prompt-option.ui-selecting {
 
 li.prompt-option div.handle {
     position: absolute;
-    height: 20px;
+    height: 20.18px;
     width: 20px;
     padding: 2px 0px 2px 0px;
-    left: -21px;
-    background-color: #0078ae;
+    left: -19px;
     background-size: 335px;
     background-position-x: 0px;
-    background-position-y: -103px;
-    top: -1px;
+    background-position-y: -104px;
+    top: 3px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     display: none;

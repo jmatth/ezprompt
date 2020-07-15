@@ -103,51 +103,53 @@ var elements = {
     gitstatus: {
         output: "\\\$(parse_git_branch)",
         preview: "[master]",
-        pre: "# get current branch in git repo\n" +
-            "function parse_git_branch() {\n" +
-            "\tBRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/'`\n" +
-            "\tif [ ! \"${BRANCH}\" == \"\" ]\n" +
-            "\tthen\n" +
-            "\t\tSTAT=`parse_git_dirty`\n" +
-            "\t\techo \"[${BRANCH}${STAT}]\"\n" +
-            "\telse\n" +
-            "\t\techo \"\"\n" +
-            "\tfi\n" +
-            "}\n\n" +
-            "# get current status of git repo\n" +
-            "function parse_git_dirty {\n" +
-            "\tstatus=`git status 2>&1 | tee`\n" +
-            "\tdirty=`echo -n \"${status}\" 2> /dev/null | grep \"modified:\" &> /dev/null; echo \"$?\"`\n" +
-            "\tuntracked=`echo -n \"${status}\" 2> /dev/null | grep \"Untracked files\" &> /dev/null; echo \"$?\"`\n" +
-            "\tahead=`echo -n \"${status}\" 2> /dev/null | grep \"Your branch is ahead of\" &> /dev/null; echo \"$?\"`\n" +
-            "\tnewfile=`echo -n \"${status}\" 2> /dev/null | grep \"new file:\" &> /dev/null; echo \"$?\"`\n" +
-            "\trenamed=`echo -n \"${status}\" 2> /dev/null | grep \"renamed:\" &> /dev/null; echo \"$?\"`\n" +
-            "\tdeleted=`echo -n \"${status}\" 2> /dev/null | grep \"deleted:\" &> /dev/null; echo \"$?\"`\n" +
-            "\tbits=''\n" +
-            "\tif [ \"${renamed}\" == \"0\" ]; then\n" +
-            "\t\tbits=\">${bits}\"\n" +
-            "\tfi\n" +
-            "\tif [ \"${ahead}\" == \"0\" ]; then\n" +
-            "\t\tbits=\"*${bits}\"\n" +
-            "\tfi\n" +
-            "\tif [ \"${newfile}\" == \"0\" ]; then\n" +
-            "\t\tbits=\"+${bits}\"\n" +
-            "\tfi\n" +
-            "\tif [ \"${untracked}\" == \"0\" ]; then\n" +
-            "\t\tbits=\"?${bits}\"\n" +
-            "\tfi\n" +
-            "\tif [ \"${deleted}\" == \"0\" ]; then\n" +
-            "\t\tbits=\"x${bits}\"\n" +
-            "\tfi\n" +
-            "\tif [ \"${dirty}\" == \"0\" ]; then\n" +
-            "\t\tbits=\"!${bits}\"\n" +
-            "\tfi\n" +
-            "\tif [ ! \"${bits}\" == \"\" ]; then\n" +
-            "\t\techo \" ${bits}\"\n" +
-            "\telse\n" +
-            "\t\techo \"\"\n" +
-            "\tfi\n" +
-            "}\n"
+        pre: ["# This code needs to be replaced",
+            "# get current branch in git repo",
+            "function parse_git_branch() {",
+            "\tBRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/'`",
+            "\tif [ ! \"${BRANCH}\" == \"\" ]",
+            "\tthen",
+            "\t\tSTAT=`parse_git_dirty`",
+            "\t\techo \"[${BRANCH}${STAT}]\"",
+            "\telse",
+            "\t\techo \"\"",
+            "\tfi",
+            "}",
+            "",
+            "# get current status of git repo",
+            "function parse_git_dirty {",
+            "\tstatus=`git status 2>&1 | tee`",
+            "\tdirty=`echo -n \"${status}\" 2> /dev/null | grep \"modified:\" &> /dev/null; echo \"$?\"`",
+            "\tuntracked=`echo -n \"${status}\" 2> /dev/null | grep \"Untracked files\" &> /dev/null; echo \"$?\"`",
+            "\tahead=`echo -n \"${status}\" 2> /dev/null | grep \"Your branch is ahead of\" &> /dev/null; echo \"$?\"`",
+            "\tnewfile=`echo -n \"${status}\" 2> /dev/null | grep \"new file:\" &> /dev/null; echo \"$?\"`",
+            "\trenamed=`echo -n \"${status}\" 2> /dev/null | grep \"renamed:\" &> /dev/null; echo \"$?\"`",
+            "\tdeleted=`echo -n \"${status}\" 2> /dev/null | grep \"deleted:\" &> /dev/null; echo \"$?\"`",
+            "\tbits=''",
+            "\tif [ \"${renamed}\" == \"0\" ]; then",
+            "\t\tbits=\">${bits}\"",
+            "\tfi",
+            "\tif [ \"${ahead}\" == \"0\" ]; then",
+            "\t\tbits=\"*${bits}\"",
+            "\tfi",
+            "\tif [ \"${newfile}\" == \"0\" ]; then",
+            "\t\tbits=\"+${bits}\"",
+            "\tfi",
+            "\tif [ \"${untracked}\" == \"0\" ]; then",
+            "\t\tbits=\"?${bits}\"",
+            "\tfi",
+            "\tif [ \"${deleted}\" == \"0\" ]; then",
+            "\t\tbits=\"x${bits}\"",
+            "\tfi",
+            "\tif [ \"${dirty}\" == \"0\" ]; then",
+            "\t\tbits=\"!${bits}\"",
+            "\tfi",
+            "\tif [ ! \"${bits}\" == \"\" ]; then",
+            "\t\techo \" ${bits}\"",
+            "\telse",
+            "\t\techo \"\"",
+            "\tfi",
+            "}"].join("\n")
     },
 };
 
@@ -754,9 +756,9 @@ $(document).ready(function () {
             '   <button id="custom-' + key + '-button" title="'+value.tooltip+'">+</button>' +
             '</li>';
             */
-            var element = '<li class="ui-state-default option-custom-inp prompt-option-origin prompt-option ui-nf" id="option-custom-' + item.name + '">' + item.text + '<br />' +
-                '<input type="text" id="custom-' + item.name + '-input ui-nf" />&nbsp;' +
-                '<button id="custom-' + item.name + '-button ui-nf" title="' + (item.tooltip ? item.tooltip : "") + '">+</button>' +
+            var element = '<li class="ui-state-default option-custom-inp prompt-option ui-nf" id="option-custom-' + item.name + '">' + item.text + '<br />' +
+                '<input type="text" class="ui-nf" id="custom-' + item.name + '-input" />&nbsp;' +
+                '<button class="ui-nf" id="custom-' + item.name + '-button" title="' + (item.tooltip ? item.tooltip : "") + '">+</button>' +
                 '</li>';
             items.push(element);
         });
