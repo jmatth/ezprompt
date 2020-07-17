@@ -1,6 +1,49 @@
 /*Begin output objects*/
 
 //nearestColor = require("./nearest-color/nearestColor");
+var bash_vars = [
+    "BASH",
+    "BASH_ENV",
+    "BASH_SUBSHELL",
+    "BASHPID",
+    "BASH_VERSION",
+    "CDPATH",
+    "DIRSTACK",
+    "EDITOR",
+    "EUID",
+    "GROUPS",
+    "HOME",
+    "HOSTNAME",
+    "HOSTTYPE",
+    "IGNOREEOF",
+    "MACHTYPE",
+    "OLDPWD",
+    "OSTYPE",
+    "PATH",
+    "PIPESTATUS",
+    "PPID",
+    "PWD",
+    "REPLY",
+    "SHELLOPTS",
+    "SHLVL",
+    "TMOUT",
+    "UID"
+];
+
+var pyprompt_vars = [
+    "PP_UPTIME",
+    "PP_GIT_CWD",
+    "PP_CWD",
+    "PP_PWD"
+];
+
+var autocomplete = {
+    variable: [],
+    text: [],
+    command: [],
+    raw: []
+};
+autocomplete.variable = bash_vars.concat(pyprompt_vars);
 
 var custom_element_items = [
     {
@@ -688,6 +731,9 @@ function activate_element_options() {
                         return false;
                     }
                 });
+            $("input#custom-" + item.name + "-input").autocomplete({
+                source: autocomplete[item.name]
+            });
         }
         $("button#custom-" + item.name + "-button")
             .tooltip()
