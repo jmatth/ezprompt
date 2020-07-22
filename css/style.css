@@ -94,31 +94,27 @@ div#elements-control-buttons {
     position: relative;
     background: none;
     border-style: none;
+    align-items: baseline;
+    display: flex;
 }
 
 div#elements-control-buttons button {
     display: inline;
     position: relative;
-    top: 10px;
-    font-size: 16px;
-}
-
-div#elements-control-buttons button#button-element-reset-selected {
-    float: left;
+    /*! top: 16px; */
+    font-size: 20px;
 }
 
 div#elements-control-buttons button#button-element-delete-selected {
-    float: left;
+    /*! float: left; */
     margin-right: 8px;
 }
 
-div#elements-control-buttons button#button-element-reset-all {
-    float: right;
-}
-
 div#elements-control-buttons button#button-element-delete-all {
-    float: right;
-    margin-left: 8px
+    /*! float: inline-end; */
+    margin-right: 8px;
+    /*! display: inline-flex; */
+    /*! flex-direction: row; */
 }
 
 div#spectrum-wrapper {
@@ -128,10 +124,10 @@ div#spectrum-wrapper {
 }
 
 div#container-spectrum {
-    position: absolute;
-    top: 10px;
-    left: 250px;
     font-size: 26px;
+    display: inline;
+    display: inline-block;
+    padding-top: 5px;
 }
 
 div.main-section {
@@ -381,4 +377,34 @@ div#footer a {
 
 div#footer a:hover {
     text-decoration: underline;
+}
+
+div.replacer_valign {
+    vertical-align: bottom;
+}
+
+span.flex_space {
+    display: inline-flex;
+    flex: auto;
+}
+
+a.color_link:link {
+    color: white;
+}
+
+a.color_link:visited {
+    color: white;
+}
+
+a.color_link:active {
+    color: greenyellow;
+}
+
+/* overriding jquery-ui.css | http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.css */
+
+div.ui-widget-shadow {
+    /* -webkit-box-shadow: -7px -7px 7px #000000; */
+    /* box-shadow: -7px -7px 7px #000000; */
+    -webkit-box-shadow: 2px 2px 7px #000000;
+    box-shadow: 2px 2px 7px #000;
 }

@@ -289,17 +289,30 @@ function colorIdToHex(color_id) {
 }
 
 var base_colors = [];
-for (var i = 0; i < 16; i++)
-    base_colors.push(colorIdToHex(i).toUpperCase());
-
 var term_color_codes = {};
-for (var i = 0; i < 256; i++) {
-    color = colorIdToHex(i).toUpperCase();
-    if ((term_color_codes.hasOwnProperty(color)))
-        continue;
-    term_color_codes[color] = i;
-}
+var palette = [];
 
+function populatePalettes() {
+    var i;
+    for (i = 0; i < 16; i++)
+        base_colors.push(colorIdToHex(i).toUpperCase());
+
+    for (i = 0; i < 256; i++) {
+        color = colorIdToHex(i).toUpperCase();
+        if ((term_color_codes.hasOwnProperty(color)))
+            continue;
+        term_color_codes[color] = i;
+    }
+    var row_size = 256;
+    var color_keys = Object.keys(term_color_codes);
+    for (i = 0; i < color_keys.length / row_size; i++) {
+        var row = [];
+        for (var j = 0; j < row_size && (i * row_size + j) < 256; j++) {
+            row.push(color_keys[i * row_size + j]);
+        }
+        palette.push(row);
+    }
+}
 
 //Keep track of the sortable elements to assign unique ids
 //FIXME: place this somewhere nicer
@@ -692,16 +705,7 @@ function make_spectrum(element_id) {
     } else {
         color = element_suffix === "fg" ? "white" : "black";
     }
-    var pallet = [];
-    var row_size = 16;
-    var color_keys = Object.keys(term_color_codes);
-    for (var i = 0; i < color_keys.length / row_size; i++) {
-        var row = [];
-        for (var j = 0; j < row_size && (i * row_size + j) < 256; j++) {
-            row.push(color_keys[i * row_size + j]);
-        }
-        pallet.push(row);
-    }
+
 
     $(element_id).spectrum({
         showPaletteOnly: false,
@@ -710,12 +714,13 @@ function make_spectrum(element_id) {
         showInput: true,
         color: color,
         showButtons: false,
-        togglePaletteOnly: false,
+        togglePaletteOnly: true,
         showAlpha: false,
         type: "component",
         allowEmpty: false,
         preferredFormat: "rgb",
-        palette: pallet,
+        replacerClassName: "replacer_valign",
+        palette: palette,
         move: function (color) {
             try {
                 var rgb = color.toRgb();
@@ -801,6 +806,10 @@ function refresh_page() {
     refresh_preview();
     refresh_code();
     localStorage.setItem("prompt_data", $("#elements-list").html());
+    //#input-spectrum-bg
+
+    $("#input-spectrum-fg-link").prop("href", "https://rgb.to/" + $("#input-spectrum-fg").spectrum("get").toHex());
+    $("#input-spectrum-bg-link").prop("href", "https://rgb.to/" + $("#input-spectrum-bg").spectrum("get").toHex());
 }
 
 $(document).ready(function () {
@@ -870,10 +879,10 @@ $(document).ready(function () {
 
         //add tooltips to the delete and reset buttons.
         $("#elements-control-buttons").children("button").tooltip();
+        populatePalettes();
 
         make_spectrum("#input-spectrum-bg");
         make_spectrum("#input-spectrum-fg");
-
         activate_element_options();
         activate_buttons();
         $("#elements-list").html(localStorage.getItem("prompt_data"));
