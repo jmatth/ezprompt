@@ -3,6 +3,7 @@
 - <https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences>
 - <https://www.man7.org/linux/man-pages/man4/console_codes.4.html>
 - <https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb>
+- <https://terminalguide.namepad.de/seq/>
 
 ```text
 ╔══════════╦════════════════════════════════╦═════════════════════════════════════════════════════════════════════════╗

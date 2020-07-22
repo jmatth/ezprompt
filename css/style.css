@@ -286,7 +286,7 @@ div#preview {
     font-family: 'Caskaydia Cove Nerd Font';
 }
 
-preview-text {
+span.preview-text {
     white-space: pre-wrap;
 }
 
