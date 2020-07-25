@@ -1,4 +1,10 @@
 /*Begin output objects*/
+var preview_types = [
+    "tc",
+    "extended",
+    "base"
+];
+
 
 //nearestColor = require("./nearest-color/nearestColor");
 var bash_vars = [
@@ -293,30 +299,24 @@ var term_color_codes = {};
 var palette = [];
 
 function populatePalettes() {
-    var i;
-    for (i = 0; i < 16; i++)
-        base_colors.push(colorIdToHex(i).toUpperCase());
-
+    var colorArray = [];
+    for (i = 0; i < 256; i++) {
+        color = colorIdToHex(i).toUpperCase();
+        colorArray.push(color);
+    }
+    palette.push(colorArray.slice(0, 16));
+    for (i = 0; i < 6; i++) {
+        palette.push(colorArray.slice(i * 36 + 16, i * 36 + 36 + 16));
+    }
+    palette.push(colorArray.slice(232, 256));
+    base_colors = colorArray.slice(0, 16);
     for (i = 0; i < 256; i++) {
         color = colorIdToHex(i).toUpperCase();
         if ((term_color_codes.hasOwnProperty(color)))
             continue;
         term_color_codes[color] = i;
     }
-    var row_size = 256;
-    var color_keys = Object.keys(term_color_codes);
-    for (i = 0; i < color_keys.length / row_size; i++) {
-        var row = [];
-        for (var j = 0; j < row_size && (i * row_size + j) < 256; j++) {
-            row.push(color_keys[i * row_size + j]);
-        }
-        palette.push(row);
-    }
 }
-
-//Keep track of the sortable elements to assign unique ids
-//FIXME: place this somewhere nicer
-var element_counter = 0;
 
 /*Begin interactive calls*/
 
@@ -331,7 +331,8 @@ function add_prompt_element(source_object) {
     //append a copy to the list
     source_object
         .clone()
-        .attr("id", "element-number-" + String(element_counter++))
+        .removeAttr("id")
+        .uniqueId()
         .attr("element-identifier", source_id.split("-")[1])
         .addClass("ui-selected")
         .hover(function () {
@@ -355,27 +356,29 @@ function add_prompt_element(source_object) {
 //toggle the preview background color, as well as
 //the default text color to match.
 function toggle_bg() {
-    var preview = $("#preview");
-    var bg_switch = $("#switch-toggle-bg");
 
-    if (preview.hasClass("preview-light")) {
-        preview
-            .removeClass("preview-light")
-            .addClass("preview-dark");
+    preview_types.forEach(function (id) {
+        var preview = $("#preview-" + id);
+        var bg_switch = $("#switch-toggle-bg-" + id);
 
-        bg_switch
-            .removeClass("switch-toggle-bg-light")
-            .addClass("switch-toggle-bg-dark");
-    } else {
-        preview
-            .removeClass("preview-dark")
-            .addClass("preview-light");
+        if (preview.hasClass("preview-light")) {
+            preview
+                .removeClass("preview-light")
+                .addClass("preview-dark");
 
-        bg_switch
-            .removeClass("switch-toggle-bg-dark")
-            .addClass("switch-toggle-bg-light");
-    }
+            bg_switch
+                .removeClass("switch-toggle-bg-light")
+                .addClass("switch-toggle-bg-dark");
+        } else {
+            preview
+                .removeClass("preview-dark")
+                .addClass("preview-light");
 
+            bg_switch
+                .removeClass("switch-toggle-bg-dark")
+                .addClass("switch-toggle-bg-light");
+        }
+    });
     match_spectrums();
 }
 
@@ -414,9 +417,31 @@ function generate_time(half_hours, show_seconds) {
     return hours + minutes + seconds + hours_suffix;
 }
 
+function generateColorData(color) {
+    var result = {
+        base: null,
+        extended: null,
+        true_color: null
+    };
+    if (color) {
+        var baseColor = nearestColor.from(base_colors);
+        var color_base = baseColor(color).toUpperCase();
+        result.base = term_color_codes[color_base];
+        if (color_base == color)
+            return result;
+        var extendColor = nearestColor.from(Object.keys(term_color_codes));
+        var color_extended = extendColor(color).toUpperCase();
+        result.extended = term_color_codes[color_extended];
+        if (color_extended == color)
+            return result;
+        result.true_color = hexToRgb(color);
+    }
+    return result;
+}
+
 //generate the preview list
-function refresh_preview() {
-    var preview_list = $("#preview-list");
+function refresh_preview(id) {
+    var preview_list = $("#preview-list-" + id);
     preview_list.empty();
     $("#elements-list").children("li").each(function (index) {
         preview_list.append(generate_element($(this)));
@@ -427,6 +452,16 @@ function refresh_preview() {
         var option_name = option_element.attr("element-identifier");
         var color_fg = option_element.attr("option-fg");
         var color_bg = option_element.attr("option-bg");
+        if (id !== "tc") {
+            var fg_colorData = generateColorData(color_fg);
+            var bg_colorData = generateColorData(color_bg);
+            color_fg = (fg_colorData.base != null ? colorIdToHex(fg_colorData.base) : null);
+            color_bg = (bg_colorData.base != null ? colorIdToHex(bg_colorData.base) : null);
+            if (id === "extended") {
+                color_fg = (fg_colorData.extended != null ? colorIdToHex(fg_colorData.extended) : color_fg);
+                color_bg = (bg_colorData.extended != null ? colorIdToHex(bg_colorData.extended) : color_bg);
+            }
+        }
 
         var preview_output = elements[option_name] && elements[option_name].preview ?
             elements[option_name].preview :
@@ -434,36 +469,21 @@ function refresh_preview() {
 
         return '<li class="element-preview" element_id="' +
             option_name + '">' + '<span class="preview-text" style="' +
-            (typeof (color_fg) === 'undefined' ? '' : 'color:' + color_fg + ';') +
-            (typeof (color_bg) === 'undefined' ? '' : 'background-color:' + color_bg + ';') +
+            (color_fg ? 'color:' + color_fg + ';' : '') +
+            (color_bg ? 'background-color:' + color_bg + ';' : '') +
             '">' +
             preview_output + '</span></li>';
 
     }
 }
 
-function generateColorData(color) {
-    var baseColor = nearestColor.from(base_colors);
-    var result = {};
-    var color_base = baseColor(color).toUpperCase();
-    result.base = term_color_codes[color_base];
-    if (color_base == color)
-        return result;
-    var extendColor = nearestColor.from(Object.keys(term_color_codes));
-    var color_extended = extendColor(color).toUpperCase();
-    result.extended = term_color_codes[color_extended];
-    if (color_extended == color)
-        return result;
-    result.true_color = hexToRgb(color);
-    return result;
-}
 
-function buildColorString(baseID, bbaseID, color_data) {
+function buildColorString(baseID, boldBaseID, color_data) {
     var result = "";
     if (color_data.base < 8)
         result += baseID.toString() + color_data.base.toString();
     else
-        result += bbaseID.toString() + (color_data.base - 8).toString();
+        result += boldBaseID.toString() + (color_data.base - 8).toString();
     if (color_data.extended)
         result += ";" + baseID + "8;5;" + color_data.extended.toString();
     if (color_data.true_color)
@@ -594,7 +614,7 @@ function match_spectrums() {
         }
     }
 
-    var preview_bg = $("#preview").hasClass("preview-light") ? "light" : "dark";
+    var preview_bg = $("#preview-tc").hasClass("preview-light") ? "light" : "dark";
 
     if (fg_value) {
         $("#input-spectrum-fg").spectrum("set", fg_value);
@@ -700,7 +720,7 @@ function make_spectrum(element_id) {
 
     var color;
     //is the preview background white or black?
-    if ($("#preview").hasClass("preview-light")) {
+    if ($("#preview-tc").hasClass("preview-light")) {
         color = element_suffix === "fg" ? "black" : "white";
     } else {
         color = element_suffix === "fg" ? "white" : "black";
@@ -714,7 +734,7 @@ function make_spectrum(element_id) {
         showInput: true,
         color: color,
         showButtons: false,
-        togglePaletteOnly: true,
+        togglePaletteOnly: false,
         showAlpha: false,
         type: "component",
         allowEmpty: false,
@@ -769,11 +789,10 @@ function activate_element_options() {
 
                 input_box.val("");
 
-                $('<li class="ui-state-default prompt-option ui-selected" id="element-number-' +
-                    String(element_counter++) +
-                    '" element-identifier=custom_' + item.name + '>' +
+                $('<li class="ui-state-default prompt-option ui-selected" element-identifier=custom_' + item.name + '>' +
                     custom_text +
                     '</li>')
+                    .uniqueId()
                     .on("click.single-select", function () {
                         if (!$(this).hasClass("ui-selected")) {
                             $(this).addClass('ui-selected').siblings().removeClass('ui-selected');
@@ -803,7 +822,8 @@ function activate_element_options() {
 
 //wrapper to regenerate the preview and output.
 function refresh_page() {
-    refresh_preview();
+
+    preview_types.forEach(function (item) { refresh_preview(item); });
     refresh_code();
     localStorage.setItem("prompt_data", $("#elements-list").html());
     //#input-spectrum-bg
@@ -868,8 +888,9 @@ $(document).ready(function () {
                         });
                 }
             });
-
-        $("#switch-toggle-bg").on("click", toggle_bg);
+        preview_types.forEach(function (item) {
+            $("#switch-toggle-bg-" + item).on("click", toggle_bg);
+        });
 
         //separate the available sections into tabs.
         $("#elements-options").tabs();
@@ -886,6 +907,7 @@ $(document).ready(function () {
         activate_element_options();
         activate_buttons();
         $("#elements-list").html(localStorage.getItem("prompt_data"));
+        match_spectrums();
         refresh_page();
 
     });

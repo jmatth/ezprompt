@@ -200,6 +200,7 @@
           type="text" id="input-spectrum-bg" /></span>
     </div>
     <span class="flex_space"></span>
+    <span class="flex_space"></span>
     <button id="button-element-delete-all" title="Delete all elements.">Delete All</button>
 
     <button id="button-element-reset-all" title="Remove color codes from all elements.">Reset All</button>
@@ -208,14 +209,39 @@
 
   <div id="instructions-step-three" class="main-section-instructions">
     <p>3.) Preview the output.</p>
+    <p>24-bit Colors</p>
   </div>
 
-  <div class="main-section preview-dark" id="preview">
-    <ul id="preview-list">
+  <div class="main-section preview-dark preview" id="preview-tc">
+    <ul id="preview-list-tc" class="preview-list">
     </ul>
 
-    <div id="switch-toggle-bg" class="switch-toggle-bg-dark" style='-moz-user-select: none;-webkit-user-select: none;'
-      onselectstart='return false;'>
+    <div id="switch-toggle-bg-tc" class="switch-toggle-bg switch-toggle-bg-dark"
+      style='-moz-user-select: none;-webkit-user-select: none;' onselectstart='return false;'>
+    </div>
+  </div>
+  <div class="main-section-instructions">
+    <p>256 Colors</p>
+  </div>
+
+  <div class="main-section preview-dark preview" id="preview-extended">
+    <ul id="preview-list-extended" class="preview-list">
+    </ul>
+
+    <div id="switch-toggle-bg-extended" class="switch-toggle-bg switch-toggle-bg-dark"
+      style='-moz-user-select: none;-webkit-user-select: none;' onselectstart='return false;'>
+    </div>
+  </div>
+  <div class="main-section-instructions">
+    <p>16 Colors</p>
+  </div>
+
+  <div class="main-section preview-dark preview" id="preview-base">
+    <ul id="preview-list-base" class="preview-list">
+    </ul>
+
+    <div id="switch-toggle-bg-base" class="switch-toggle-bg switch-toggle-bg-dark"
+      style='-moz-user-select: none;-webkit-user-select: none;' onselectstart='return false;'>
     </div>
   </div>
 

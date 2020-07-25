@@ -234,6 +234,7 @@ ul#elements-list {
 ul#elements-list li.prompt-option {
     position: relative;
     margin: 0px 3px 3px 0;
+    margin-left: 23px !important;
 }
 
 ul#elements-list li.prompt-option-hover,
@@ -260,7 +261,7 @@ li.prompt-option div.handle {
     top: 3px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    display: none;
+    display: block;
 }
 
 li.prompt-option-hover div.handle,
@@ -277,7 +278,7 @@ div#elements {
     background: black;
 }
 
-div#preview {
+div.preview {
     position: relative;
     font-family: 'Caskaydia Cove Nerd Font';
 }
@@ -286,7 +287,7 @@ span.preview-text {
     white-space: pre-wrap;
 }
 
-div#preview div#switch-toggle-bg {
+div.preview div.switch-toggle-bg {
     position: absolute;
     right: -65px;
     top: 0px;
@@ -297,11 +298,11 @@ div#preview div#switch-toggle-bg {
     cursor: pointer;
 }
 
-div#preview div.switch-toggle-bg-dark {
+div.preview div.switch-toggle-bg-dark {
     background-position-x: 0px !important;
 }
 
-div#preview div.switch-toggle-bg-light {
+div.preview div.switch-toggle-bg-light {
     background-position-x: -52px !important;
 }
 
@@ -310,7 +311,7 @@ div.preview-dark {
     color: black;
 }
 
-div.preview-dark ul#preview-list {
+div.preview-dark ul.preview-list {
     color: white;
 }
 
@@ -319,11 +320,11 @@ div.preview-light {
     color: white;
 }
 
-div.preview-light ul#preview-list {
+div.preview-light ul.preview-list {
     color: black;
 }
 
-ul#preview-list {
+ul.preview-list {
     list-style: none;
     padding-left: 24px;
 }
@@ -407,4 +408,12 @@ div.ui-widget-shadow {
     /* box-shadow: -7px -7px 7px #000000; */
     -webkit-box-shadow: 2px 2px 7px #000000;
     box-shadow: 2px 2px 7px #000;
+}
+
+div.sp-picker-container {
+    width: auto;
+}
+
+div.sp-palette {
+    max-width: 740px;
 }
