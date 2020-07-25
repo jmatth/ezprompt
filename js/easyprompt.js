@@ -36,13 +36,6 @@ var bash_vars = [
     "UID"
 ];
 
-var pyprompt_vars = [
-    "PP_UPTIME",
-    "PP_GIT_CWD",
-    "PP_CWD",
-    "PP_PWD"
-];
-
 var autocomplete = {
     variable: [],
     text: [],
@@ -148,22 +141,6 @@ var elements = {
     username: {
         output: "\\u",
         preview: "user"
-    },
-    pyprompt_gitcwd: {
-        output: "\\\${PP_gitcwd}",
-        preview: "  Master 1 12"
-    },
-    pyprompt_uptime: {
-        output: "\\\${PP_uptime}",
-        preview: " 1.9 Weeks"
-    },
-    pyprompt_path: {
-        output: "\\\${PP_path}",
-        preview: " .steamsteam...commonPortal 2bin"
-    },
-    pyprompt_user: {
-        output: "\\\${PP_user}",
-        preview: " user  Machine"
     },
     gitstatus: {
         output: "\\\$(parse_git_branch)",
