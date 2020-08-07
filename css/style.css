@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: terminus;
-    src: url(../fonts/terminus.ttf);
+    font-family: 'Caskaydia Cove Nerd Font';
+    src: url(../fonts/cc_nf_windows.ttf);
 }
 
 body {
@@ -24,7 +24,7 @@ div#header {
     box-shadow: 0px 5px 15px #000;
 }
 
-div#header div#header-wrapper{
+div#header div#header-wrapper {
     width: 700px;
     height: 20px;
     position: relative;
@@ -32,7 +32,7 @@ div#header div#header-wrapper{
     margin-right: auto;
 }
 
-div#header div#header-wrapper span#name{
+div#header div#header-wrapper span#name {
     position: absolute;
     left: 0px;
     top: 4px;
@@ -41,7 +41,7 @@ div#header div#header-wrapper span#name{
     font-family: cf-revolution;
 }
 
-div#header div#header-wrapper span#subtitle{
+div#header div#header-wrapper span#subtitle {
     position: absolute;
     left: 255px;
     bottom: -27px;
@@ -94,33 +94,27 @@ div#elements-control-buttons {
     position: relative;
     background: none;
     border-style: none;
+    align-items: baseline;
+    display: flex;
 }
 
 div#elements-control-buttons button {
     display: inline;
     position: relative;
-    top: 10px;
-    height: 33px;
-    width: 100px;
-    font-size: 16px;
-}
-
-div#elements-control-buttons button#button-element-reset-selected {
-    float: left;
+    /*! top: 16px; */
+    font-size: 20px;
 }
 
 div#elements-control-buttons button#button-element-delete-selected {
-    float: left;
+    /*! float: left; */
     margin-right: 8px;
 }
 
-div#elements-control-buttons button#button-element-reset-all {
-    float: right;
-}
-
 div#elements-control-buttons button#button-element-delete-all {
-    float: right;
-    margin-left: 8px
+    /*! float: inline-end; */
+    margin-right: 8px;
+    /*! display: inline-flex; */
+    /*! flex-direction: row; */
 }
 
 div#spectrum-wrapper {
@@ -130,10 +124,10 @@ div#spectrum-wrapper {
 }
 
 div#container-spectrum {
-    position: absolute;
-    top: 10px;
-    left: 250px;
     font-size: 26px;
+    display: inline;
+    display: inline-block;
+    padding-top: 5px;
 }
 
 div.main-section {
@@ -145,7 +139,8 @@ div.main-section {
     border-radius: 5px;
     min-height: 60px;
     float: none;
-    width: 700px;
+    min-width: 700px;
+    max-width: 90%;
     float: none;
 }
 
@@ -154,8 +149,8 @@ div.main-section-instructions {
     margin-left: auto;
     margin-right: auto;
     float: none;
-    width: 700px;
-    float: none;
+    min-width: 700px;
+    max-width: 90%;
     font-size: 23px;
     margin-bottom: -20px;
 }
@@ -195,33 +190,36 @@ div.swatches {
     margin: 10px 10px 10px 75px;
 }
 
-div#swatches-fg {
-}
-
 li.border-hidden {
     border-width: 0px;
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
 
+ul li.prompt-option.prompt-option-origin {
+    padding-right: 15px;
+}
+
 li.prompt-option {
+    font-family: 'Caskaydia Cove Nerd Font';
     height: 20px;
     display: inline-block;
+    white-space: pre;
     cursor: pointer;
     padding: 2px 10px 2px 10px;
     margin: 5px;
     border-radius: 3px;
 }
 
-li#option-custom {
+li.option-custom-inp {
     height: 60px;
     display: inline-block;
     padding: 2px 12px 2px 10px;
-    margin: 5px
+    margin: 5px;
     border-radius: 3px;
 }
 
-li#option-custom input[type=text] {
+li.option-custom-inp input[type=text] {
     width: 127px;
 }
 
@@ -236,6 +234,7 @@ ul#elements-list {
 ul#elements-list li.prompt-option {
     position: relative;
     margin: 0px 3px 3px 0;
+    margin-left: 23px !important;
 }
 
 ul#elements-list li.prompt-option-hover,
@@ -252,18 +251,17 @@ ul#elements-list li.prompt-option.ui-selecting {
 
 li.prompt-option div.handle {
     position: absolute;
-    height: 20px;
+    height: 20.18px;
     width: 20px;
     padding: 2px 0px 2px 0px;
-    left: -21px;
-    background-color: #0078ae;
+    left: -19px;
     background-size: 335px;
     background-position-x: 0px;
-    background-position-y: -103px;
-    top: -1px;
+    background-position-y: -104px;
+    top: 3px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    display: none;
+    display: block;
 }
 
 li.prompt-option-hover div.handle,
@@ -280,12 +278,16 @@ div#elements {
     background: black;
 }
 
-div#preview {
+div.preview {
     position: relative;
-    font-family: terminus;
+    font-family: 'Caskaydia Cove Nerd Font';
 }
 
-div#preview div#switch-toggle-bg {
+span.preview-text {
+    white-space: pre-wrap;
+}
+
+div.preview div.switch-toggle-bg {
     position: absolute;
     right: -65px;
     top: 0px;
@@ -296,11 +298,11 @@ div#preview div#switch-toggle-bg {
     cursor: pointer;
 }
 
-div#preview div.switch-toggle-bg-dark {
+div.preview div.switch-toggle-bg-dark {
     background-position-x: 0px !important;
 }
 
-div#preview div.switch-toggle-bg-light {
+div.preview div.switch-toggle-bg-light {
     background-position-x: -52px !important;
 }
 
@@ -309,7 +311,7 @@ div.preview-dark {
     color: black;
 }
 
-div.preview-dark ul#preview-list{
+div.preview-dark ul.preview-list {
     color: white;
 }
 
@@ -318,11 +320,11 @@ div.preview-light {
     color: white;
 }
 
-div.preview-light ul#preview-list{
+div.preview-light ul.preview-list {
     color: black;
 }
 
-ul#preview-list {
+ul.preview-list {
     list-style: none;
     padding-left: 24px;
 }
@@ -340,9 +342,14 @@ div#code-output-wrapper {
 }
 
 textarea#code-output-text {
-    width: 694px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
     height: 180px;
-    margin-bottom: -5px;
 }
 
 div#footer {
@@ -371,4 +378,42 @@ div#footer a {
 
 div#footer a:hover {
     text-decoration: underline;
+}
+
+div.replacer_valign {
+    vertical-align: bottom;
+}
+
+span.flex_space {
+    display: inline-flex;
+    flex: auto;
+}
+
+a.color_link:link {
+    color: white;
+}
+
+a.color_link:visited {
+    color: white;
+}
+
+a.color_link:active {
+    color: greenyellow;
+}
+
+/* overriding jquery-ui.css | http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.css */
+
+div.ui-widget-shadow {
+    /* -webkit-box-shadow: -7px -7px 7px #000000; */
+    /* box-shadow: -7px -7px 7px #000000; */
+    -webkit-box-shadow: 2px 2px 7px #000000;
+    box-shadow: 2px 2px 7px #000;
+}
+
+div.sp-picker-container {
+    width: auto;
+}
+
+div.sp-palette {
+    max-width: 740px;
 }

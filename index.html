@@ -1,4 +1,3 @@
-<!-- vim: set ts=2 sw=2 expandtab: -->
 <!DOCTYPE HTML>
 
 <head>
@@ -6,20 +5,54 @@
 
   <title>Easy Bash Prompt Generator</title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="css/spectrum.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="css/start/jquery-ui-1.10.1.custom.css" />
-<!-- jquery base, jquery ui, custom javascript -->
-  <script src="js/jquery-1.9.1.min.js"></script>
-  <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
-  <script src="js/spectrum-min.js"></script>
+  <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
+  <!-- CDN COPIES OF STANDARD JQUERY THEMES (all of these are available in v1.8.16) -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/black-tie/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/blitzer/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.css" type="text/css"
+    rel="stylesheet" />
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/dark-hive/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/dot-luv/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/eggplant/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/excite-bike/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/flick/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/hot-sneaks/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/humanity/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/mint-choc/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/overcast/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/pepper-grinder/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/redmond/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/start/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/sunny/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/swanky-purse/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/trontastic/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-darkness/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/vader/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css" type="text/css" rel="stylesheet">
+
+  <!--<script src="js/spectrum.js"></script>
+  <link href="css/spectrum.css" type="text/css" rel="stylesheet" />-->
+  <script src="js/nearest-color/nearestColor.js" type="text/javascript" charset="utf-8"></script>
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
   <script src="js/easyprompt.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
 
 <body>
   <a href="https://github.com/jmatth/ezprompt">
-    <img style="position:absolute; top:0; right:0; border:0; z-index: 999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+    <img style="position:absolute; top:0; right:0; border:0; z-index: 999;"
+      src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
   </a>
   <div id="beta"></div>
   <div id="header">
@@ -38,74 +71,72 @@
       <li><a href="#elements-tab-basic">Basic Elements</a></li>
       <li><a href="#elements-tab-status">Status Elements</a></li>
       <li><a href="#elements-tab-times">Date &amp; Time Elements</a></li>
+      <!-- WIP <li><a href="#elements-tab-pyprompt">PyPrompt</a></li>-->
       <li><a href="#elements-tab-extra">Extra Characters</a></li>
     </ul>
 
     <div class="elements-tab" id="elements-tab-basic">
       <ul id="elements-basic">
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-username" title="The current username.">Username</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-username"
+          title="The current username.">Username</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-hostname" title="The hostname of the machine.">Hostname</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-hostname"
+          title="The hostname of the machine.">Hostname</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-fqdn" title="The Fully Qualified Domain Name of the host.">FQDN</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-fqdn"
+          title="The Fully Qualified Domain Name of the host.">FQDN</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shell" title="The shell being executed, i.e. 'bash'.">Shell</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shell"
+          title="The shell being executed, i.e. 'bash'.">Shell</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellversion" title="The version of bash.">Shell Version</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellversion"
+          title="The version of bash.">Shell Version</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellrelease" title="The version of bash with patch level.">Shell Release</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-shellrelease"
+          title="The version of bash with patch level.">Shell Release</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-pathtocurrentdirectory" title="The path to the current working directory, with $HOME abbreviated to ~.">Path To Current Directory</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-pathtocurrentdirectory"
+          title="The path to the current working directory, with $HOME abbreviated to ~.">Path To Current Directory</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-currentdirectory" title="The current working directory, with $HOME abbreviated to ~.">Current Directory</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-currentdirectory"
+          title="The current working directory, with $HOME abbreviated to ~.">Current Directory</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-promptchar" title="Normally $. Changes to # if logged in as root (current UID = 0).">$</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-promptchar"
+          title="Normally $. Changes to # if logged in as root (current UID = 0).">$</li>
       </ul>
     </div>
 
     <div class="elements-tab" id="elements-tab-status">
       <ul id="elements-status">
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-returncode" title="The return code of the previous command if it exits non-zero. Otherwise blank.">Error Code</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-returncode"
+          title="The return code of the previous command if it exits non-zero. Otherwise blank.">Error Code</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-gitstatus" title="If in a git repository, the current branch and status indicators. Otherwise blank.">Git Status</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-gitstatus"
+          title="If in a git repository, the current branch and status indicators. Otherwise blank.">Git Status</li>
       </ul>
     </div>
 
-    <div class="elements-tab" id="elements-tab-extra">
+    <div class="elements-tab" style="overflow:auto; max-height: 300px;" id="elements-tab-extra">
       <ul id="elements-extra">
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-atsymbol">@</li>
-
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-colon">:</li>
-
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-openbracket">[</li>
-
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-closebracket">]</li>
-
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-hyphen">-</li>
-
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-underscore">_</li>
-
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-star">*</li>
-
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-space" title="A space character.">␣</li>
-
-        <br />
-
-        <li class="ui-state-default" id="option-custom">Enter custom text:<br /><input type="text"id="custom-text-input"/> <button id="custom-text-button" title="Create custom text element. Forbidden characters are \$(){}.">+</button></li>
       </ul>
     </div>
 
     <div class="elements-tab" id="elements-tab-times">
       <ul id="elements-times">
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-date" title="The date in DDD MMM dd format.">Date</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-date"
+          title="The date in DDD MMM dd format.">Date</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-fulltime" title="The time in 24 hour hh:mm format.">24hr Time</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-fulltime"
+          title="The time in 24 hour hh:mm format.">24hr Time</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-halftime" title="The time in 12 hour hh:mm (AM/PM) format.">12hr Time</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-halftime"
+          title="The time in 12 hour hh:mm (AM/PM) format.">12hr Time</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-fulltimeseconds" title="The time in 24 hour hh:mm:ss format.">24hr Time w/ Seconds</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-fulltimeseconds"
+          title="The time in 24 hour hh:mm:ss format.">24hr Time w/ Seconds</li>
 
-        <li class="ui-state-default prompt-option-origin prompt-option" id="option-halftimeseconds" title="The time in 12 hour hh:mm:ss format.">12hr Time w/ Seconds</li>
+        <li class="ui-state-default prompt-option-origin prompt-option" id="option-halftimeseconds"
+          title="The time in 12 hour hh:mm:ss format.">12hr Time w/ Seconds</li>
       </ul>
     </div>
 
@@ -126,13 +157,17 @@
 
     <button id="button-element-delete-selected" title="Delete the currently selected element.">Delete</button>
 
-    <button id="button-element-reset-selected" title="Remove color codes from the currently selected element.">Reset</button>
-
+    <button id="button-element-reset-selected"
+      title="Remove color codes from the currently selected element.">Reset</button>
+    <span class="flex_space"></span>
     <div id="container-spectrum">
-      <span>FG <input type="text" id="input-spectrum-fg"/></span>
-      <span>BG <input type="text" id="input-spectrum-bg"/></span>
+      <span><a id="input-spectrum-fg-link" class="color_link" target="_new" href="https://www.google.com">FG</a> <input
+          type="text" id="input-spectrum-fg" /></span>
+      <span><a id="input-spectrum-bg-link" class="color_link" target="_new" href="https://www.google.com">BG</a> <input
+          type="text" id="input-spectrum-bg" /></span>
     </div>
-
+    <span class="flex_space"></span>
+    <span class="flex_space"></span>
     <button id="button-element-delete-all" title="Delete all elements.">Delete All</button>
 
     <button id="button-element-reset-all" title="Remove color codes from all elements.">Reset All</button>
@@ -141,13 +176,39 @@
 
   <div id="instructions-step-three" class="main-section-instructions">
     <p>3.) Preview the output.</p>
+    <p>24-bit Colors</p>
   </div>
 
-  <div class="main-section preview-dark" id="preview">
-    <ul id="preview-list">
+  <div class="main-section preview-dark preview" id="preview-tc">
+    <ul id="preview-list-tc" class="preview-list">
     </ul>
 
-    <div id="switch-toggle-bg" class="switch-toggle-bg-dark" style='-moz-user-select: none;-webkit-user-select: none;' onselectstart='return false;'>
+    <div id="switch-toggle-bg-tc" class="switch-toggle-bg switch-toggle-bg-dark"
+      style='-moz-user-select: none;-webkit-user-select: none;' onselectstart='return false;'>
+    </div>
+  </div>
+  <div class="main-section-instructions">
+    <p>256 Colors</p>
+  </div>
+
+  <div class="main-section preview-dark preview" id="preview-extended">
+    <ul id="preview-list-extended" class="preview-list">
+    </ul>
+
+    <div id="switch-toggle-bg-extended" class="switch-toggle-bg switch-toggle-bg-dark"
+      style='-moz-user-select: none;-webkit-user-select: none;' onselectstart='return false;'>
+    </div>
+  </div>
+  <div class="main-section-instructions">
+    <p>16 Colors</p>
+  </div>
+
+  <div class="main-section preview-dark preview" id="preview-base">
+    <ul id="preview-list-base" class="preview-list">
+    </ul>
+
+    <div id="switch-toggle-bg-base" class="switch-toggle-bg switch-toggle-bg-dark"
+      style='-moz-user-select: none;-webkit-user-select: none;' onselectstart='return false;'>
     </div>
   </div>
 
@@ -156,11 +217,15 @@
   </div>
 
   <div class="main-section" id="code-output-wrapper">
-    <textarea id="code-output-text" readonly></textarea>
+    <textarea style="font-family: 'Caskaydia Cove Nerd Font';" id="code-output-text" readonly></textarea>
   </div>
   <div id="footer">
-      <p>&copy; 2013 <a href="http://jmatthews.us">Josh Matthews</a></p>
-      <p>Built using: <a href="http://jquery.org/">jQuery UI</a> &bull; <a href="http://bgrins.github.com/spectrum/">Spectrum</a> &bull;
-      <a href="http://www.dafont.com/cf-revolution.font">CF Revolution</a> &bull; <a href="http://terminus-font.sourceforge.net/">Terminus</a></p>
+    <p>Updated code: &copy; 2020 <a href="https:/git.kins.dev">Scott Atkins</a></p>
+    <p>Original code: &copy; 2013 <a href="https://jmatthews.us">Josh Matthews</a></p>
+    <p>Built using: <a href="https://jquery.org/">jQuery UI</a> &bull; <a
+        href="https://github.com/bgrins/spectrum">Spectrum</a> </p>
+    <p>
+      <a href="https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode/complete">Nerd Fonts:
+        Caskaydia Cove</a> &bull; <a href="https://github.com/dtao/nearest-color">Nearest Color</a></p>
   </div>
 </body>
