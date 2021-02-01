@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -23,6 +23,20 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <template v-slot:append>
+        <v-divider/>
+        <v-list subheader>
+          <v-subheader>Settings</v-subheader>
+          <v-list-item>
+            <v-switch
+              class="mt-0 pt-0"
+              label="Dark Mode"
+              hide-details
+              v-model="darkMode"
+              />
+          </v-list-item>
+        </v-list>
+      </template>
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="clipped"
@@ -58,7 +72,7 @@
       </v-btn>
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container fluid>
         <nuxt />
       </v-container>
     </v-main>
@@ -83,7 +97,7 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>EZPrompt &copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -105,13 +119,28 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: '/inspire'
-        }
+        },
+        {
+          icon: 'mdi-console',
+          title: 'EzPrompt',
+          to: '/prompt'
+        },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
+      title: 'Vuetify.js',
+    };
+  },
+  computed: {
+    darkMode: {
+      get () {
+        return this.$vuetify.theme.dark;
+      },
+      set (isDark) {
+        this.$vuetify.theme.dark = isDark;
+      },
+    },
+  },
 }
 </script>
